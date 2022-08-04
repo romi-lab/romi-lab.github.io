@@ -166,9 +166,11 @@ a {
 #romi_icon_bar{
 	width: 18vw;
 }
+.card{
+	border: 3px solid #F3F3F3;
+}
 .card_wrapper{
-	margin-bottom: 1%;
-	/*width: auto;*/
+	margin-bottom: 3%;
 }
 .card-text{
 	height: auto;
@@ -275,6 +277,7 @@ a {
 	}
 	.link_div{
 		margin: auto;
+		padding-top: 6vw;
 	}	
 	#intro{
 		height: 35vh;
