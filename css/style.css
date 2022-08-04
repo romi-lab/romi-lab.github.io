@@ -349,6 +349,9 @@ a {
 	#romi_icon_bar{
 		width: 13vw;
 	}	
+	#intro h2{
+		font-size: 150%;
+	}
 
 
 }
