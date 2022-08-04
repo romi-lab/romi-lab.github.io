@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ME31002 Lab Session 2</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+</head>
+
+<body>
+<div class="wrapper">
+    <nav id="sidebar">
+
+        <ul class="list-unstyled components">
+            <p>Menu</p>
+
+            <li>
+                <a href="Functions.html">Functions</a>
+            </li>
+            <li>
+                <a href="SystemModeling.html">Systems Modeling</a>
+            </li>
+            <li>
+                <a href="SystemAnalysis.html">System Analysis</a>
+            </li>
+            <li>
+                <a href="Simulation.html">Simulation</a>
+            </li>
+            <li>
+                <a href="LabReport.html">Lab Report</a>
+            </li>
+
+        </ul>
+    </nav>
+    <div class="container-fluid">
+        <div class="row header top">
+            <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <i class="fa fa-bars"></i>
+                <!-- <span>Menu</span> -->
+            </button>
+            <div class="col-10 col-xl-auto h2Div" onclick="location.href='index.html';">
+                <h2>ME31002 Lab 2 -- Lab Report</h2>
+            </div>
+
+        </div>
+        </br>
+        <div class="row justify-content-md-center editor">
+            <div class="col-12 col-xl-8 mainContent">
+                <h4>
+                    Lab Report
+                </h4>
+                Individual Report</br>
+                Due date: Thursday, 10 Mar. 2022, 23:59</br>
+                Include: Code, figures, and anything you think it is important :)</br>
+                <hr>
+                <h5>
+                    Question 1
+                </h5>
+                Given the following dynamic system $\ddot{x}+2\dot{x}+10x=t^2$ with initial conditions
+                $x(0)=0$ and $\dot x(0)=0$, and $t$ is the time, manually calculate the Laplace transformation and represent
+                it in Matlab/Ocatve. Calculate the Laplace transformation's partial fraction decomposition (i.e. [r, p, k])
+                by Matlab/Octave and write down the complete form (i.e. the function) in your lab report.
+                </br></br>
+                <h5>
+                    Question 2
+                </h5>
+                Compute the transfer function of the following block diagram and analyze the stability using Matlab/Octave.
+                </br></br>
+                <div class="col-12 col-xl-10">
+                    <pre>
+                        <img src="pic/lr1.jpg" width="450" height="150">
+                    </pre>
+                </div>
+                <h5>
+                    Question 3
+                </h5>
+                Given the following transfer function, calculate the step response, impulse response and the time response
+                with a square wave input of period 8s with amplitude 1;
+                </br></br>
+                $$G(s)=\frac{16}{s^2+3s+16}$$
+                </br>
+                Hint: the syntax of generating square wave in Matlab is
+                <div class="codeClass">
+                    <code><pre>
+                        f = square(T);
+                    </pre></code>
+                </div>
+                For example, to generate a square wave of period 1s with amplitude 1, we can use the following scripts.
+                <div class="codeClass">
+                    <code><pre>
+                        t = 0:0.001:10;
+                        f = square(2*pi*t);
+                        plot(t,f);
+                    </pre></code>
+                </div>
+                Note that if you are using Octave, you need to add "pkg load signal;" at the beginning of the script.
+                Run the scripts, we can get the figure of the square wave;
+                </br></br>
+                <div class="col-12 col-xl-10">
+                    <pre>
+                        <img src="pic/lr2.jpg" width="400" height="300">
+                    </pre>
+                </div>
+                <h5>
+                    Question 4
+                </h5>
+                Consider the following mass-damper-spring system, we can depict it with an ODE
+                $m\ddot{x}+c\dot x+kx=f$.
+                 </br></br>
+                <div class="col-12 col-xl-10">
+                    <pre>
+                        <img src="pic/lr3.jpg" width="400" height="200">
+                    </pre>
+                </div>
+                Suppose we have $m=1$, $c=2$, $k=1$, $\dot x(0)=0$ and $x(0)=0$, create a simulation to show the response of $x$
+                under a constant force $f=1$.
+                </br></br>
+                Hint: For a given second-order system $\ddot{x}+b\dot{x}+cx=u$, denote
+                $x_1=x, x_2=\dot{x}$, then the system can be rewritten as
+                </br></br>
+                $$\left\{\begin{aligned}
+                    & \dot x_1=x_2\\
+                    & \dot x_2 = -bx_2-cx_1+u
+                \end{aligned}\right.$$
+                </br></br>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col col-md-2 prev">
+                <p><a href="Simulation.html"> &#10094; Back </a></p>
+            </div>
+        </div>
+        <div class="backToTop">
+            <p><a href="#top">Back to Top</a></p>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/code.js"></script>
+</body>
+</html>

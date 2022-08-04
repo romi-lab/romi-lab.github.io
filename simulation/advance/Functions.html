@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>ME31002 Lab Session 2</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div class="wrapper">
+    <nav id="sidebar">
+
+        <ul class="list-unstyled components">
+            <p>Menu</p>
+
+            <li>
+                <a href="Functions.html">Functions</a>
+            </li>
+            <li>
+                <a href="SystemModeling.html">Systems Modeling</a>
+            </li>
+            <li>
+                <a href="SystemAnalysis.html">System Analysis</a>
+            </li>
+            <li>
+                <a href="Simulation.html">Simulation</a>
+            </li>
+            <li>
+                <a href="LabReport.html">Lab Report</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container-fluid">
+        <div class="row header">
+            <button class="btn btn-info" id="sidebarCollapse" type="button">
+                <i class="fa fa-bars"></i>
+                <!-- <span>Menu</span> -->
+            </button>
+            <div class="col-10 col-xl-auto h2Div" onclick="location.href='index.html';">
+                <h2>ME31002 Lab Session 2 -- Functions</h2>
+            </div>
+
+        </div>
+        </br>
+        <div class="row justify-content-md-center editor">
+            <div class="col-12 col-xl-8 mainContent">
+                <div>
+                    <h4>
+                        General Functions
+                    </h4>
+                    <hr>
+                    <p>
+                        A function is a group of statements that together perform a task.
+                        In MATLAB, functions are defined in separate files.
+                        The name of the file and of the function should be the same.
+                    </p>
+                    <p>
+                        Functions operate on variables within their own workspace,
+                        which is also called the local workspace,
+                        separate from the workspace you access at the MATLAB command prompt
+                        which is called the base workspace.
+                    </p>
+                    <p>
+                        Functions can accept more than one input arguments and may return more than one output
+                        arguments.
+                    </p>
+                    <p>
+                        Syntax of a function statement is
+                        <div class="codeClass"><code><pre>
+                            function [out1,out2, ..., outN] = myfun(in1,in2,in3, ..., inN)
+                        </pre></code></div>
+                    </p>
+                    <p>
+                        Note that, in general, the name of the function should be the same as the name of the file.
+                        Let's
+                        see the following example. The function named "mymax" takes five numbers as argument and returns
+                        the maximum of the numbers.
+                        <div class="codeClass"><pre><code>
+                            function max = mymax(n1, n2, n3, n4, n5)
+
+                            % This function calculates the maximum of the
+                            % five numbers given as input
+
+                                max =  n1;
+                                if(n2 > max)
+                                    max = n2;
+                                end
+                                if(n3 > max)
+                                    max = n3;
+                                end
+                                if(n4 > max)
+                                    max = n4;
+                                end
+                                if(n5 > max)
+                                    max = n5;
+                                end
+                            end
+                        </code></pre></div>
+                    <p>
+                        The first line of a function starts with the keyword function. It gives the name of the function
+                        and order of arguments. In our example, the mymax function has five input arguments and one
+                        output argument.
+                    </p>
+                    <p>
+                        The comment lines that come right after the function statement provide the help text. These
+                        lines are printed when you type
+                        <div class="codeClass"><code><pre>
+                            help mymax
+                        </pre></code></div>
+                        MATLAB will execute the above statement and return the following result
+                        <div class="codeClass"><code><pre>
+                            This function calculates the maximum of the
+                            five numbers given as input
+                        </pre></code></div>
+                        You can call the function as
+                        <div class="codeClass"><code><pre>
+                            mymax(34, 78, 89, 23, 11)
+                        </pre></code></div>
+                        MATLAB will execute the above statement and return the following result
+                        <div class="codeClass"><code><pre>
+                            ans = 89
+                        </pre></code></div>
+                    </p>
+                    <h4>
+                        Anonymous Functions
+                    </h4>
+                    <hr>
+                    <p>
+                        An anonymous function is like an inline function in traditional programming languages, defined
+                        within a single MATLAB statement. It consists of a single MATLAB expression and any number of
+                        input and output arguments.
+                        </br></br>
+                        You can define an anonymous function right at the MATLAB command line or within a function or
+                        script. This way you can create simple functions without having to create a file for them.
+                        </br></br>
+                        The syntax for creating an anonymous function from an expression is
+                        <div class="codeClass"><code><pre>
+                            f = @(arglist)expression
+                        </pre></code></div>
+                        Let's see the following example. The anonymous function named "power“ takes two numbers as input
+                        and return first number raised to the power of the second number. Create a script file and type
+                        the following code in it
+                        <div class="codeClass"><code><pre>
+                            power = @(x, n) x.^n;
+                            result1 = power(7, 3)
+                            result2 = power(49, 0.5)
+                            result3 = power(10, -10)
+                            result4 = power (4.5, 1.5)
+                        </pre></code></div>
+                        When you run the file, it displays
+                        <div class="codeClass"><code><pre>
+                            result1 = 343
+                            result2 = 7
+                            result3 = 1.0000e-10
+                            result4 =  9.5459
+                        </pre></code></div>
+                    </p>
+                    <h4>
+                        Primary and  Sub-Functions
+                    </h4>
+                    <hr>
+                    <p>
+                        Any function other than an anonymous function must be defined within a file. Each function file
+                        contains a required primary function that appears first and any number of optional sub-functions
+                        that comes after the primary function and used by it.
+                        </br></br>
+                        Primary functions can be called from outside the file that defines them, either from command
+                        line or from other functions, but sub-functions cannot be called from command line or other
+                        functions, outside the function file.
+                        </br></br>
+                        Sub-functions are visible only to the primary function and other sub-functions within the
+                        function file that defines them.
+                        </br></br>
+                        Let's see an example that contains a primary function and a sub-function. The primary named
+                        "quadratic" calculates the roots of a quadratic equation. It takes three inputs, the quadratic
+                        co-efficient, the linear co-efficient and the constant term, then returns the roots. The sub-function
+                        named "disc" calculates the discriminant.
+                        <div class="codeClass"><code><pre>
+                            function [x1,x2] = quadratic(a,b,c)
+
+                            %this function returns the roots of
+                            % a quadratic equation.
+                            % It takes 3 input arguments
+                            % which are the co-efficients of x2, x and the
+                            %constant term
+                            % It returns the roots
+
+                                d = disc(a,b,c);
+                                x1 = (-b + d) / (2*a);
+                                x2 = (-b - d) / (2*a);
+                            end   % end of quadratic
+
+                            function dis = disc(a,b,c)
+                            %function calculates the discriminant
+
+                                dis = sqrt(b^2 - 4*a*c);
+                            end   % end of sub-function
+                        </pre></code></div>
+                        You can call the above function from command prompt as
+                        <div class="codeClass">
+                            <code><pre>
+                                quadratic(2,4,-4)
+                            </pre></code>
+                        </div>
+                        MATLAB will execute the above statement and return the following result
+                        <div class="codeClass">
+                            <code><pre>
+                                ans = 0.7321
+                            </pre></code>
+                        </div>
+                    </p>
+                    <h4>
+                        Nested Functions
+                    </h4>
+                    <hr>
+                    <p>
+                        You can define functions within the body of another function. These are called nested functions.
+                        A nested function contains any or all of the components of any other function.
+                        </br></br>
+                        Nested functions are defined within the scope of another function and they share access to the
+                        containing function's workspace.
+                        </br></br>
+                        A nested function follows the following syntax
+                        <div class="codeClass">
+                            <code><pre>
+                                function x = A(p1, p2)
+                                    ...
+                                    B(p2)
+                                    function y = B(p3)
+                                        ...
+                                    end
+                                    ...
+                                end
+                            </pre></code>
+                        </div>
+                        Let's rewrite the function "quadratic", from previous example, however, this time the "disc"
+                        function will be a nested function. Create a function file quadratic2.m and type the following
+                        code in it
+                        <div class="codeClass">
+                            <code><pre>
+                                function [x1,x2] = quadratic2(a,b,c)
+                                    function disc  % nested function
+                                        d = sqrt(b^2 - 4*a*c);
+                                    end   % end of function disc
+
+                                    disc;
+                                    x1 = (-b + d) / (2*a);
+                                    x2 = (-b - d) / (2*a);
+                                end   % end of function quadratic2
+                            </pre></code>
+                        </div>
+                        You can call the above function from command prompt as
+                        <div class="codeClass">
+                            <code><pre>
+                                quadratic2(2,4,-4)
+                            </pre></code>
+                        </div>
+                        MATLAB will execute the above statement and return the following result
+                        <div class="codeClass">
+                            <code><pre>
+                                ans = 0.73205
+                            </pre></code>
+                        </div>
+                    </p>
+                    <h4>
+                        Private Functions
+                    </h4>
+                    <hr>
+                    <p>
+                        A private function is a primary function that is visible only to a limited group of other
+                        functions. If you do not want to expose the implementation of a function(s), you can create them
+                        as private functions.
+                        </br></br>
+                        Private functions reside in subfolders with the special name private.They are visible only to
+                        functions in the parent folder.
+                        </br></br>
+                        Let us rewrite the "quadratic" function again. This time, however, the "disc" function calculating
+                        the discriminant, will be a private function.
+                        </br></br>
+                        Create a subfolder named private in working directory. Store the following function file disc.m
+                        in it
+                        <div class="codeClass">
+                            <code><pre>
+                                function dis = disc(a,b,c)
+                                %function calculates the discriminant
+
+                                    dis = sqrt(b^2 - 4*a*c);
+                                end   % end of sub-function
+                            </pre></code>
+                        </div>
+                        Create a function quadratic3.m in your working directory and type the following code in it
+                        <div class="codeClass">
+                            <code><pre>
+                                function [x1,x2] = quadratic3(a,b,c)
+
+                                %this function returns the roots of
+                                % a quadratic equation.
+                                % It takes 3 input arguments
+                                % which are the co-efficients of x2, x and the
+                                %constant term
+                                % It returns the roots
+
+                                    d = disc(a,b,c);
+                                    x1 = (-b + d) / (2*a);
+                                    x2 = (-b - d) / (2*a);
+                                end   % end of quadratic
+                            </pre></code>
+                        </div>
+                        You can call the above function from command prompt as
+                        <div class="codeClass">
+                            <code><pre>
+                                quadratic3(2,4,-4)
+                            </pre></code>
+                        </div>
+                        MATLAB will execute the above statement and return the following result
+                        <div class="codeClass">
+                            <code><pre>
+                                ans = 0.73205
+                            </pre></code>
+                        </div>
+                    </p>
+                    <h4>
+                        Global Variables
+                    </h4>
+                    <hr>
+                    <p>
+                        Global variables can be shared by more than one function. For this, you need to declare the
+                        variable as global in all the functions.
+                        </br></br>
+                        If you want to access that variable from the base workspace, then declare the variable at the
+                        command line.
+                        </br></br>
+                        The global declaration must occur before the variable is actually used in a function. It is a
+                        good practice to use capital letters for the names of global variables to distinguish them from
+                        other variables.
+                        </br></br>
+                        Now let's see an example. Let us create a function file named average.m and type the following
+                        code in it.
+                        <div class="codeClass">
+                            <code><pre>
+                                function avg = average(nums)
+                                    global TOTAL
+                                    avg = sum(nums)/TOTAL;
+                                end
+                            </pre></code>
+                        </div>
+                        Create a script file and type the following code in it.
+                        <div class="codeClass">
+                            <code><pre>
+                                global TOTAL
+                                TOTAL = 10;
+                                n = [34, 45, 25, 45, 33, 19, 40, 34, 38, 42];
+                                av = average(n)
+                            </pre></code>
+                        </div>
+                        When you run the file, it will display the following result.
+                        <div class="codeClass">
+                            <code><pre>
+                                av = 35.500
+                            </pre></code>
+                        </div>
+                    </p>
+                </div>
+                </br>
+
+
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col col-md-2 prev">
+            </div>
+            <div class="col"></div>
+            <div class="col col-md-2 next">
+                <p><a href="SystemModeling.html">Next &#10095; </a></p>
+            </div>
+        </div>
+        <div class="backToTop">
+            <p><a href="#top">Back to Top</a></p>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="js/code.js" type="text/javascript"></script>
+</body>
+</html>

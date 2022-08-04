@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ME31002 Lab Session 2</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+</head>
+
+<body>
+<div class="wrapper">
+    <nav id="sidebar">
+
+        <ul class="list-unstyled components">
+            <p>Menu</p>
+
+            <li>
+                <a href="Functions.html">Functions</a>
+            </li>
+            <li>
+                <a href="SystemModeling.html">Systems Modeling</a>
+            </li>
+            <li>
+                <a href="SystemAnalysis.html">System Analysis</a>
+            </li>
+            <li>
+                <a href="Simulation.html">Simulation</a>
+            </li>
+            <li>
+                <a href="LabReport.html">Lab Report</a>
+            </li>
+        </ul>
+    </nav>
+	<div class="container-fluid">
+        <div class="row header">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fa fa-bars"></i>
+                        <!-- <span>Menu</span> -->
+                    </button>
+                    <div class="col-10 col-xl-auto h2Div" onclick="location.href='index.html';">
+                        <h2>ME31002 Lab Session 2 -- System Analysis</h2>
+                    </div>
+
+        </div>
+        </br>
+        <div class="row justify-content-md-center editor">
+            <div class="col-12 col-xl-8 mainContent">
+                <div>
+                    <h4>
+                        Usage in Octave
+                    </h4>
+                    <hr>
+                    To use the functions "step", "impulse", "lsim", "pole", and "pzmap" in Octave, you need to load the
+                    control package firstly. You can add the following script to the beginning of your code to solve it.
+                    <div class="codeClass">
+                        <code><pre>
+                            pkg load control;
+                        </pre></code>
+                    </div>
+                    <h4>
+                        Time Responses
+                    </h4>
+                    <hr>
+                    <p>
+                        The time response represents how the state of a dynamic system changes in time when subjected to
+                        a particular input, such as step response, impulse response and initial condition response. For
+                        some systems, we can analytically find a closed-form solution. However, for most systems, the
+                        closed-form analytical solutions are hard to find, which brings difficulties to the analysis of their
+                        time responses. Fortunately, Matlab provides powerful tools for analyzing the time responses of
+                        dynamic systems.
+                        </br></br>
+                        <h5>
+                            Step Response
+                        </h5>
+                        The step response of dynamic system is calculated by function "step" in Matlab. The syntax is as
+                        follows:
+                        <div class="codeClass">
+                            <code><pre>
+                                t = 0:dT:T;
+                                step(sys, t);
+                            </pre></code>
+                        </div>
+                        where "dT" is the time step for simulation, "T" is the stop time of the simulation, and "sys" is
+                        the transfer function. Note that "t" is an optional argument. If you have the numerators and
+                        denominators of the transfer function, you can also use the following script to get the step response.
+                        <div class="codeClass">
+                            <code><pre>
+                                t = 0:dT:T;
+                                step(num, den, t);
+                            </pre></code>
+                        </div>
+                        After you run the script, a figure with the step response will be shown to you. Sometimes, we want
+                        to save the simulation data for further analysis, then the following syntax can be used.
+                        <div class="codeClass">
+                            <code><pre>
+                                t = 0:dT:T;
+                                [y, t] = step(sys, t); or [y, t] = step(num, den, t);
+                                plot(t, y);
+                            </pre></code>
+                        </div>
+                        In this case, the response data of the dynamic system will be saved to vector "y", but there will
+                        not be a figure showing the step response. Therefore, we need to call the "plot" function to draw
+                        the step response. With data "y" and "t", we can calculate the rise time, peak time, maximum overshoot,
+                        and settling time of the step response. The syntax is
+                        <div class="codeClass">
+                            <code><pre>
+                                stepinfo(y, t); or stepinfo(sys);
+                            </pre></code>
+                        </div>
+                        The function will return a structure containing the information of the step response. Note that
+                        this function is not available in Octave.
+                        </br></br>
+                        Let's see an example. Calculate the step response of the following system.
+                        </br></br>
+                        $$G(s)=\frac{1}{s^2+0.6s+1}$$
+                        </br>
+                        Create a new file and type the following script in it.
+                        <div class="codeClass">
+                            <code><pre>
+                                s = tf('s');
+                                sys = 1/(s^2+0.6*s+1);
+
+                                t = 0:0.001:30;
+                                [y, t] = step(sys, t);
+                                plot(t, y);
+                                stepinfo(y, t)
+                            </pre></code>
+                        </div>
+                        Run the file, and you can get the figure and the step response information in the command window.
+                        </br></br>
+                        <div class="col-12 col-xl">
+                            <pre>
+                            <img src="pic/sa2.jpg" width="400" height="300"> <img src="pic/sa3.jpg" width="180" height="200">
+                            </pre>
+                        </div>
+                        <h5>
+                            Impulse Response
+                        </h5>
+                        The impulse response of dynamic system is calculated by function "impulse" in Matlab. The syntax is
+                        similar to that of step response:
+                        <div class="codeClass">
+                            <code><pre>
+                                t = 0:dt:T;
+                                [y, t] = impulse(sys, t); or [y, t] = impulse(num, den, t);
+                                plot(t, y);
+                            </pre></code>
+                        </div>
+                        Let's use the previous example to see the impulse response.Create a new file and type the following
+                        script in it.
+                        <div class="codeClass">
+                            <code><pre>
+                                s = tf('s');
+                                sys = 1/(s^2+0.6*s+1);
+
+                                t = 0:0.001:30;
+                                [y, t] = impulse(sys, t);
+                                plot(t, y);
+                            </pre></code>
+                        </div>
+                        Run the file, and you can get the figure showing the impulse response.
+                        </br></br>
+                        <div class="col-12 col-xl">
+                            <pre>
+                            <img src="pic/sa4.jpg" width="400" height="300">
+                            </pre>
+                        </div>
+                        <h5>
+                            Arbitrary Input Response
+                        </h5>
+                        The arbitrary input response of dynamic system is calculated by function "lsim" in Matlab. The
+                        syntax is as following
+                        <div class="codeClass">
+                            <code><pre>
+                                t = 0:dt:T;
+                                [y, t] = lsim(sys, u, t); or [y, t] = lsim(num, den, u, t);
+                                plot(t, y);
+                            </pre></code>
+                        </div>
+                        where "u" is the predefined input.
+                        </br></br>
+                        Let's use the previous example again to see the time response with a sin input signal.Create a new file
+                        and type the following script in it.
+                        <div class="codeClass">
+                            <code><pre>
+                                s = tf('s');
+                                sys = 1/(s^2+0.6*s+1);
+
+                                t = 0:0.001:30;
+                                [y, t] = lsim(sys, sin(t), t);
+                                plot(t, y);
+                            </pre></code>
+                        </div>
+                        Run the file, and you can get the figure showing the impulse response.
+                        </br></br>
+                        <div class="col-12 col-xl">
+                            <pre>
+                            <img src="pic/sa5.jpg" width="400" height="300">
+                            </pre>
+                        </div>
+                    </p>
+                    <h4>
+                        Stability Analysis
+                    </h4>
+                    <hr>
+                    <p>
+                        As we all know, stability analysis of the dynamic systems is one of the most important problems
+                        in linear systems and control. There are many ways to analyze the stability. Matlab provides great
+                        tools for stability analysis.
+                        <h5>
+                        Stability Analysis Based on Poles' locations
+                        </h5>
+                        One intuitive way to analyze the stability of systems is to calculate the poles and make the analysis
+                        based on their locations. Basically, there are two methods to calculate the poles in Matlab.
+                        </br></br>
+                        The first method is to use the function "roots". The syntax is as following
+                        <div class="codeClass">
+                            <code><pre>
+                                den = [denominators];
+                                roots(den)
+                            </pre></code>
+                        </div>
+                        To use this method, we only need to know the denominators of the transfer functions.
+                        </br></br>
+                        Let's use the previous example to do the stability analysis. Type the following script in the
+                        command window
+                        <div class="codeClass">
+                            <code><pre>
+                                den = [1, 0.6, 1];
+                                roots(den)
+                            </pre></code>
+                        </div>
+                        Run the script, and you will see the following results in the command window.
+                        </br></br>
+                        <div class="col-12 col-xl-6">
+                            <pre>
+                            <img src="pic/sa6.jpg" width="180" height="80">
+                            </pre>
+                        </div>
+                        If we have the complete transfer function of the system, we can also use the second method. The
+                        Syntax is as following:
+                        <div class="codeClass">
+                            <code><pre>
+                                s = tf('s');
+                                G = transFunc;
+                                pole(G)
+                            </pre></code>
+                        </div>
+                        Also, we can use the following script to show the poles and zeros in a pole-zero map.
+                        <div class="codeClass">
+                            <code><pre>
+                                pzmap(G);
+                            </pre></code>
+                        </div>
+                        Let's use the previous example again to analyze the stability with the second method. Create a new
+                        file and type the following script in it.
+                        <div class="codeClass">
+                            <code><pre>
+                                s = tf('s');
+                                G = 1/(s^2+0.6*s+1);
+                                pole(G)
+                                pzmap(G);
+                                axis([-0.4, 0, -1, 1]);
+                            </pre></code>
+                        </div>
+                        Run the file and you will see the pole-zero map and the poles in the command window.
+                        </br></br>
+                        <div class="col-12 col-xl">
+                            <pre>
+                            <img src="pic/sa7.jpg" width="400" height="300"> <img src="pic/sa8.jpg" width="150" height="80">
+                            </pre>
+                        </div>
+                        As you can see, the results from both methods are exactly the same.
+                    </p>
+                </div>
+                </br>
+
+
+
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col col-md-2 prev">
+            <p> <a href="SystemModeling.html"> &#10094; Back </a></p>
+            </div>
+            <div class="col"></div>
+            <div class="col col-md-2 next">
+                <p> <a href="Simulation.html">Next &#10095; </a></p>
+            </div>
+        </div>
+        <div class="backToTop">
+            <p> <a href="#top">Back to Top</a></p>
+        </div>
+	</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/code.js"></script>
+</body>
+</html>

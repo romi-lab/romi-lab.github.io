@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ME31002 Lab Session 2</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+</head>
+
+<body>
+<div class="wrapper">
+    <nav id="sidebar">
+
+        <ul class="list-unstyled components">
+            <p>Menu</p>
+
+            <li>
+                <a href="Functions.html">Functions</a>
+            </li>
+            <li>
+                <a href="SystemModeling.html">Systems Modeling</a>
+            </li>
+            <li>
+                <a href="SystemAnalysis.html">System Analysis</a>
+            </li>
+            <li>
+                <a href="Simulation.html">Simulation</a>
+            </li>
+            <li>
+                <a href="LabReport.html">Lab Report</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container-fluid">
+        <div class="row header">
+            <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <i class="fa fa-bars"></i>
+                <!-- <span>Menu</span> -->
+            </button>
+            <div class="col-10 col-xl-auto h2Div" onclick="location.href='index.html';">
+                <h2>ME31002 Lab Session 2 -- Simulation</h2>
+            </div>
+
+        </div>
+        </br>
+        <div class="row justify-content-md-center editor">
+            <div class="col-12 col-xl-8 mainContent">
+                <div>
+                    <h4>
+                        Simulation with Transfer Functions
+                    </h4>
+                    <hr>
+                    In previous sections, we have learnt how to represent a transfer function and do some simple
+                    analysis
+                    in Matlab. By now, you should be able to create simple simulations of dynamic systems as long as the
+                    transfer functions are available.
+                    </br></br>
+                    Now, let's use an example to review the previous sections. Calculate the transfer function of the
+                    following
+                    system, give the step response, impulse response and time response with a sin input, and analyze the
+                    stability of the closed-loop system.
+                    </br></br>
+                    <div class="col-12 col-xl">
+                            <pre>
+                            <img src="pic/sim1.jpg" width="500" height="250">
+                            </pre>
+                    </div>
+                    Create a new file and type the following scripts in it.
+                    <div class="codeClass">
+                        <code><pre>
+                            clc; clear;
+                            close all;
+
+                            %% Usage in Octave
+                            % Uncomment the next line to use in Octave
+                            %pkg load control;
+
+                            %% Calculate transfer function
+                            s = tf('s');
+
+                            sys1 = 20/((s+1)*(s+4));
+                            h1 = 0.4490;
+                            G1 = feedback(sys1, h1, -1);
+
+                            sys2 = 1/s;
+                            G2 = series(G1, sys2);
+
+                            h2 = 1;
+                            G = feedback(G2, h2, -1)
+
+                            %% Time responses
+                            t = 0:0.001:10;
+
+                            [y1, t] = step(G, t);
+                            stepinfo(G)
+
+                            [y2, t] = impulse(G, t);
+
+                            [y3, t] = lsim(G, sin(t), t);
+
+                            %% Stability analysis
+                            p = pole(G)
+
+                            %% Plotting
+                            figure(1)
+                            plot(t, y1);
+                            xlabel('t(s)'); ylabel('y');
+                            title('Step Response');
+
+                            figure(2)
+                            plot(t, y2);
+                            xlabel('t(s)'); ylabel('y');
+                            title('Impulse Response');
+
+                            figure(3)
+                            plot(t, y3);
+                            xlabel('t(s)'); ylabel('y');
+                            title('Time Response with sin(t) Input');
+
+                            figure(4)
+                            pzmap(G);
+                        </pre>
+                        </code>
+                    </div>
+                    Run the file, and you will get the results as follows:
+                    </br></br>
+                    <div class="col-12 col-xl">
+                        <pre>
+                            <img src="pic/sim2.jpg" width="350" height="250"> <img src="pic/sim3.jpg" width="350" height="250">
+                            <img src="pic/sim4.jpg" width="350" height="250"> <img src="pic/sim5.jpg" width="350" height="250">
+                        </pre>
+                    </div>
+                    <div class="col-20 col-xl">
+                        <pre>
+                            <img src="pic/sim6.jpg" width="250" height="120"> <img src="pic/sim7.jpg" width="150" height="220"> <img src="pic/sim8.jpg" width="180" height="120">
+                        </pre>
+                    </div>
+                    <h4>
+                        Simulation with ODEs
+                    </h4>
+                    <hr>
+                    Although simulation with transfer function is very convenient in Matlab, it is not enough to handle
+                    all kinds of systems. For complex systems, such as nonlinear systems, it is always the case that we
+                    can only obtain the ordinary differential equations (ODEs) but not transfer functions, and the ODEs
+                    usually cannot be analytically solved. In this case, we need to numerically calculate the ODEs instead.
+                    </br></br>
+                    Matlab provides abundant resources for numerically solving ODEs.
+                    </br></br>
+                    <h5>
+                        ODE Representation
+                    </h5>
+                    To numerically solve the ODEs, the first step is to represent the ODEs with Matlab language. Generally,
+                    we need to create a function to represent the ODEs. The syntax is as follows.
+                    <div class="codeClass">
+                        <code><pre>
+                            function DY = Fun(t, Y)
+                                ...
+                                DY(1,:) = f1(Y);
+                                DY(2,:) = f2(Y);
+                                ...
+                            end
+                        </pre></code>
+                    </div>
+                    where "t" is the time variable, "Y" is the column vector of states, and "DY" is the first derivative
+                    of "Y". For a dynamic system with control input, the syntax is as follows.
+                    <div class="codeClass">
+                        <code><pre>
+                            function DY = Fun(t, Y, u)
+                                ...
+                                DY(1,:) = f1(Y, u);
+                                DY(2,:) = f2(Y, u);
+                                ...
+                            end
+                        </pre></code>
+                    </div>
+                    where "u" is the column vector of control input.
+                    </br></br>
+                    Now let's see a simple example. Create a ODE function for the following mass-damper system.
+                    <div class="col-12 col-xl-10">
+                        <pre>
+                            <img src="pic/sim9.jpg" width="350" height="160">
+                        </pre>
+                    </div>
+                    The system can be depicted by the following ODE
+                    </br></br>
+                    $$m\dot{v}+cv=f$$
+                    </br>
+                    Assume $m=1$ and $c=2$, the ODE can be writen as
+                    </br></br>
+                    $$\dot v=-2v+f$$
+                    </br>
+                    Create a new file named "dynamics.m" and type the following scripts to create the ODE function.
+                    <div class="codeClass">
+                        <code><pre>
+                            function dv = dynamics(t, v, f)
+                                m = 1;
+                                c = 2;
+                                dv = -c/m*v + f;
+                            end
+                        </pre></code>
+                    </div>
+                    <h5>
+                        Solvers
+                    </h5>
+                    After we create the ODE function, we can call the solvers to solve the ODE. Matlab provides many ODE
+                    solvers. Among these solvers, the most commonly-used one is the "ode45" solver. When the ODE function
+                    is particularly expensive to evaluate, you can use "ode113" as an alternative.
+                    </br></br>
+                    The syntax of using "ode45" to solve ODE functions is
+                    <div class="codeClass">
+                        <code><pre>
+                            [t, Y] = ode45('ODE_FUN', tspan, Y0, options);
+                        </pre></code>
+                    </div>
+                    where "ODE_FUN" is the name of the ODE function file you have created, "tspan" is the time span for
+                    solving the ODE function,"Y0" is the initial value of the ODE function, "t" is the sequence of
+                    independent variable, and "Y" is the numerical solution.
+                    </br></br>
+                    "Options" is an optional argument defined by "odeset" function. The syntax of it is
+                    <div class="codeClass">
+                        <code><pre>
+                            options = odeset(Name, Value,...);
+                        </pre></code>
+                    </div>
+                    You can define many options for ODE solvers. Two commonly-used options are the error control arguments,
+                    i.e. the absolute error tolerance "AbsTol" and the relative error tolerance "RelTol".
+                    </br></br>
+                    Now, let's see an example. For the previous mass-damper system, we implement a constant force f=1 to
+                    it and create a simulation to see the time response. Create a new file and type the following scripts
+                    in it.
+                    <div class="codeClass">
+                        <code><pre>
+                            t = 0:0.001:5;
+                            f = 1;
+                            v0 = 1;
+
+                            options = odeset('RelTol', 1e-6, 'AbsTol', 1e-6);
+                            [~, v] = ode45(@(t, v)dynamics(t, v, f), t, v0, options);
+
+                            figure(1)
+                            plot(t, v);
+                            xlabel('t'); ylabel('Linear velocity');
+                        </pre></code>
+                    </div>
+                    Note that the "@(t,v)" in the script is declaring the independent variable and state variable of the
+                    arguments of "dynamics". Run the file and you can see the figure showing the simulation result.
+                    </br></br>
+                    <div class="col-12 col-xl-8">
+                        <pre>
+                            <img src="pic/sim10.jpg" width="400" height="300">
+                        </pre>
+                    </div>
+                </div>
+                </br>
+
+
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col col-md-2 prev">
+                <p><a href="SystemAnalysis.html"> &#10094; Back </a></p>
+            </div>
+            <div class="col"></div>
+            <div class="col col-md-2 next">
+                <p><a href="LabReport.html">Next &#10095; </a></p>
+            </div>
+        </div>
+        <div class="backToTop">
+            <p><a href="#top">Back to Top</a></p>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/code.js"></script>
+</body>
+</html>
