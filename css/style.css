@@ -64,7 +64,10 @@ h2{
 	text-align: center;
 	display: block;
 }
-h4{
+h3{
+	font-family: 'Proxima Nova Light';
+}
+h4, h5{
 	white-space: pre-wrap;
 	margin-bottom: 0;
 	font-weight: 100;
@@ -343,6 +346,9 @@ a {
 @media screen and (min-width:2100px) {
 
 	body 						{ font-size:175%; }
+	#romi_icon_bar{
+		width: 13vw;
+	}	
 
 
 }
