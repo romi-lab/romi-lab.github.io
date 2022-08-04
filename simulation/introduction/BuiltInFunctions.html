@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ME31002 Lab 1</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+<div class="wrapper">
+    <nav id="sidebar">
+
+        <ul class="list-unstyled components">
+            <p>Menu</p>
+            <li>
+                <a href="BasicSyntax.html">Basic Syntax</a>
+            </li>
+            <li>
+                <a href="MatrixArithmetic.html">Matrix Arithmetic</a>
+            </li>      
+            <li>
+                <a href="BuiltInFunctions.html">Built-in Functions</a>
+            </li>         
+            <li>
+                <a href="PlottingData.html">Plotting Data</a>
+            </li>                          
+            <li>
+                <a href="LinearAlgebra.html">Linear Algebra</a>
+            </li>  
+            <li>
+                <a href="LoopConditions.html">Loops & Conditions</a>
+            </li>              
+            <li>
+                <a href="LabReport.html">Lab Report</a>
+            </li>                         
+
+        </ul>
+    </nav>		
+	<div class="container-fluid">	
+        <div class="row header">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fa fa-bars"></i>
+                        <!-- <span>Menu</span> -->
+                    </button>
+                    <div class="col-10 col-xl-auto h2Div" onclick="location.href='index.html';">
+                        <h2>ME31002 Lab 1</h2>               
+                    </div>
+
+        </div>  
+        </br>	
+        <div class="row justify-content-md-center editor">
+            <div class="col-12 col-xl-8 mainContent">
+                <div>
+                    <h4>
+                        Built-in Functions
+                    </h4>
+                    <hr>    
+                    <p>
+                        There are many built-in functions in MATLAB, we will go through some of them.
+                        </br><div class="codeClass"><code>sin(0)</br>cos(0)</br>tan(0)</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+ans = 0
+ans = 1
+ans = 0
+</code></pre>
+                        </div></br>                          
+                        Interesting thing is that because MATLAB works basically with the matrices, we can pass matrices as the function arguments.
+                        </br><div class="codeClass"><code>A</br>sin(A)</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+ans =
+   0.8415   0.9093
+   0.1411  -0.7568
+</code></pre>
+                        </div></br>
+                        What it does is calculates the sine of every element of A and returns a matrix the same size as A. If we check it separately, we'll get the same result.
+                        </br><div class="codeClass"><code>sin(1)</br>sin(2)</br>sin(3)</br>sin(4)</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+ans = 0.8415
+ans = 0.9093
+ans = 0.1411
+ans = -0.7568
+</code></pre>
+                        </div></br>                        
+                        So all MATLAB functions work generally like that. </br>
+                        Some other functions you might want to use is the exponential function.
+                        </br><div class="codeClass"><code>exp(1)</br>exp(2)</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+ans = 2.7183
+ans = 7.3891
+</code></pre>
+                        </div></br>                           
+                        There is the log, which is the opposite of the exponential:
+                        </br><div class="codeClass"><code>log(1)</br>log(2)</br>log(exp(1))</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+ans = 0
+ans = 0.6931
+ans = 1
+</code></pre>
+                        </div></br>                             
+                        We can get square root as:
+                        </br><div class="codeClass"><code>sqrt(25)</br>sqrt(11)</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+ans = 5
+ans = 3.3166
+</code></pre>
+                        </div></br>                         
+                        So, these are some elementary functions in MATLAB.</br>
+                    </p>  
+                    <hr>
+                    <p>
+                        
+                        There are also some built-in constants, for example, pi.
+                        </br><div class="codeClass"><code>pi</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+ans = 3.1416
+</code></pre>
+                        </div></br>                           
+                        If you do something like creating a variable called pi and you assign it to something else.
+                        </br><div class="codeClass"><code>pi = 2</code></div></br>
+                        <div class="codeClass codeAns">
+<pre><code>
+pi = 2
+</code></pre>
+                        </div></br>                           
+                        Then we cannot use the original variable pi anymore.
+                        </br><div class="codeClass"><code>pi</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+pi = 2
+</code></pre>
+                        </div></br>                           
+                        So it is better to avoid overriding the built-in constants. If we want pi back, we need to go to the workspace and delete pi. So, if we type pi again it's now back to the original pi.
+                        </br><div class="codeClass"><code>clear</br>pi</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+ans = 3.1416
+</code></pre>
+                        </div></br>                         
+
+                    </p>    
+                    <hr>
+                    <p>                
+                        For some reason, MATLAB does not have a variable e, so if you want it, you can create it manually and assign it to <code>exp(1)</code>.
+                        </br><div class="codeClass"><code>e = exp(1)</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+e = 2.7183
+</code></pre>
+                        </div></br>                            
+                        Another important constant is <code>i</code>. If we do <code>sqrt(-1)</code>, we get 0 plus 1 times <code>i</code>. 
+                        </br><div class="codeClass"><code>sqrt(-1)</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+ans =  0 + 1i
+</code></pre>
+                        </div></br>                           
+                        We can just type <code>i</code> and it would give the same answer:
+                        </br><div class="codeClass"><code>i</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+ans =  0 + 1i
+</code></pre>
+                        </div></br>                          
+                        We can do exponents using the hat symbol, so we can do <code>i^2</code>, that also gives -1. 
+                        </br><div class="codeClass"><code>i^2</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+ans = -1
+</code></pre>
+                        </div></br>                              
+                        
+
+                    </p>
+                    <hr>
+                    <p>
+                        There are also some important functions for initializing matrices. The first one is the <code>I</code> function where <code>I</code> is the identity matrix. It is a square matrix with ones on the diagonal and zeros everywhere else. Suppose we want to create 3-by-3 identity matrix. We can do that manually.
+                        </br><div class="codeClass"><code>I = [1 0 0; 0 1 0; 0 0 1]</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+I =
+   1   0   0
+   0   1   0
+   0   0   1
+</code></pre>
+                        </div></br>                           
+                        It is quite inefficient. Instead, we can do <code>eye(3)</code> which is much more convenient.
+                        </br><div class="codeClass"><code>eye(3)</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+ans =
+Diagonal Matrix
+   1   0   0
+   0   1   0
+   0   0   1
+</code></pre>
+                        </div></br>                         
+                        Another thing we might want to do is to create a matrix of all zeros. That's the function <code>zeros()</code>.
+                        </br><div class="codeClass"><code>zeros(4)</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+ans =
+   0   0   0   0
+   0   0   0   0
+   0   0   0   0
+   0   0   0   0
+</code></pre>
+                        </div></br>                          
+                        If we don't want the matrix to be square, we simply need to define the second dimension.
+                        </br><div class="codeClass"><code>zeros(3,2)</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+ans =
+   0   0
+   0   0
+   0   0
+</code></pre>
+                        </div></br>                             
+                        There is also a function called ones which does a similar thing, it creates a matrix of all ones. 
+                        </br><div class="codeClass"><code>ones(3,2)</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+ans =
+   1   1
+   1   1
+   1   1
+</code></pre>
+                        </div></br>                           
+
+                    </p>
+                </div>
+
+            </div>      
+    
+
+        </div> 
+        <div class="row">
+            <div class="col col-md-2 prev">
+                <p> <a href="MatrixArithmetic.html"> &#10094; Back </a></p>
+            </div> 
+            <div class="col"></div>            
+            <div class="col col-md-2 next">
+                <p> <a href="PlottingData.html">Next &#10095; </a></p>
+            </div> 
+        </div>               
+        <div class="backToTop">
+            <p> <a href="#top">Back to Top</a></p>
+        </div>                      	
+	</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/code.js"></script>
+</body>
+</html>

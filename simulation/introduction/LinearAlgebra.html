@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ME31002 Lab 1</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+<div class="wrapper">
+    <nav id="sidebar">
+
+        <ul class="list-unstyled components">
+            <p>Menu</p>
+
+            <li>
+                <a href="BasicSyntax.html">Basic Syntax</a>
+            </li>
+            <li>
+                <a href="MatrixArithmetic.html">Matrix Arithmetic</a>
+            </li>      
+            <li>
+                <a href="BuiltInFunctions.html">Built-in Functions</a>
+            </li>         
+            <li>
+                <a href="PlottingData.html">Plotting Data</a>
+            </li>                          
+            <li>
+                <a href="LinearAlgebra.html">Linear Algebra</a>
+            </li>  
+            <li>
+                <a href="LoopConditions.html">Loops & Conditions</a>
+            </li>              
+            <li>
+                <a href="LabReport.html">Lab Report</a>
+            </li>                         
+
+        </ul>
+    </nav>		
+	<div class="container-fluid">	
+        <div class="row header">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fa fa-bars"></i>
+                        <!-- <span>Menu</span> -->
+                    </button>
+                    <div class="col-10 col-xl-auto h2Div" onclick="location.href='index.html';">
+                        <h2>ME31002 Lab 1</h2>               
+                    </div>
+
+        </div>  
+        </br>	
+        <div class="row justify-content-md-center editor">
+            <div class="col-12 col-xl-8 mainContent">
+                <div>
+                    <h4>
+                        Linear Algebra
+                    </h4>
+                    <hr>                    
+                    <p>
+                        <b>Solving Linear Equations</b></br>
+                        How to solve linear equations?</br>
+                        General form: Ax = b, where A is a matrix, x is a vector of variables you want to solve for, and b is a vector of constants.</br></br>
+                        So, the system of linear equations is when you have more than one variable and the same number of equations. One way of defining the problem is just writing the equations down explicitly like this or writing them down in a matrix form. So in this example,
+                        </br><div class="codeClass"><code>A = [3 2 -1; 2 -2 4; -1 0.5 -1]</br>b = [1 -2 0]</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+A =
+   3.0000   2.0000  -1.0000
+   2.0000  -2.0000   4.0000
+  -1.0000   0.5000  -1.0000
+
+b =
+   1  -2   0
+</code></pre>
+                        </div></br>                           
+                        When you are working with equations like this you might be tempted to do just simple algebra, because mathematically that works. 
+                        </br><div class="codeClass"><code>x = inv(A) * b'</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+x =
+   1.0000
+  -2.0000
+  -2.0000
+</code></pre>
+                        </div></br>                             
+                        But if we try to do that:
+                        </br><div class="codeClass"><code>inv(A)</br>inv(A) * b'</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+ans =
+   2.2204e-16  -5.0000e-01  -2.0000e+00
+   6.6667e-01   1.3333e+00   4.6667e+00
+   3.3333e-01   1.1667e+00   3.3333e+00
+
+ans =
+   1.0000
+  -2.0000
+  -2.0000
+</code></pre>
+                        </div></br>                            
+                        Even though in the current example this approach worked, in many other cases MATLAB will give a warning because this is a quite inefficient way of calculating the answer. Instead, MATLAB already contained algorithms to solve such problems. </br></br>
+                        In the previous tutorial, we mentioned that there are different types of divisions: forward slash and backslash. The forward slash is the basic arithmetic operation, but the backslash is used exactly for solving the system of linear equation.
+                        </br><div class="codeClass"><code>A\b'</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+ans =
+   1.0000
+  -2.0000
+  -2.0000
+</code></pre>
+                        </div></br>                           
+
+
+                    </p>
+                    
+                    <h5><i>
+                        Exercises
+                    </i></h5>
+                    <hr>
+                    <p>
+                        Now let's look at some other linear algebra concepts that we can do in MATLAB. For example, taking the determinant of the matrix. It's a simple function.
+                        </br><div class="codeClass"><code>det(A)</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+ans = -3.0000
+</code></pre>
+                        </div></br>                         
+                        We can also compute eigenvalues of a matrix.
+                        </br><div class="codeClass"><code>eig(A)</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+ans =
+   3.6295
+  -3.8445
+   0.2150
+</code></pre>
+                        </div></br>                           
+                        And when we compute eigenvalues, we usually want the corresponding eigenvectors. This can be done through the same MATLAB function but a different function signature (check on the internet). So, let's try that.
+                        </br><div class="codeClass"><code>[V, D] = eig(A)</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+V =
+  -0.9601  -0.3061  -0.3288
+  -0.2098   0.9134   0.7469
+   0.1847  -0.2682   0.5780
+
+D =
+Diagonal Matrix
+   3.6295        0        0
+        0  -3.8445        0
+        0        0   0.2150
+</code></pre>
+                        </div></br>                            
+                        We can verify the result. By the definition of eigenvalues and eigenvectors, A*V = V*D:
+                        </br><div class="codeClass"><code>A*V == V*D</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+ans =
+  0  0  0
+  0  0  0
+  0  0  0
+</code></pre>
+                        </div></br>                            
+                        In MATLAB, if we want to check if 2 things are equal, we can use <code>==</code> as we do in regular programming environments.
+                        </br><div class="codeClass"><code>1 == 1</br>1 == 0</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+ans = 1
+ans = 0
+</code></pre>
+                        </div></br>                           
+                        If we do <code>A*V == V*D</code>, we get false, which can be surprising because we expect them to be equal according to the definition of eigenvalues and eigenvectors. But here we have to remember that in programming there is always some round-off error. So, if we simply subtract A*V - V*D, we get back very small numbers. 
+                        </br><div class="codeClass"><code>A*V - V*D</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+ans =
+   3.5527e-15   1.3323e-15   1.2906e-15
+  -2.7756e-15  -1.3323e-15  -7.2164e-16
+   1.1102e-16  -4.4409e-16   1.2490e-16
+</code></pre>
+                        </div></br>                            
+
+                        That brings us to the next topic to highlight. We have this matrix A*V - V*D that represents the differences in those 2 matrices, so we want to ensure that all values are small. There 9 different values in our example and there can be much bigger matrices than that, so sometimes it is really hard to tell how big or small are they collectively. In these cases, we want to calculate the distance from the origin. This can be done by calculating the norm of the vector of the matrix. In Euclidean space, it's all the elements squared, added together and then you take the square root. So, in MATLAB there is a built-in function, which gives us indeed a very small number. 
+                        </br><div class="codeClass"><code>norm(A*V - V*D)</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+ans = 5.0950e-15
+</code></pre>
+                        </div></br>                           
+                        If you remember from your math classes, there are different kinds of norms not only Euclidean, such as p-norm.
+
+                    </p>
+                </div>
+                </br>
+
+        </div> 
+
+	</div>
+    <div class="row">
+        <div class="col col-md-2 prev">
+            <p> <a href="PlottingData.html"> &#10094; Back </a></p>
+        </div> 
+        <div class="col"></div>            
+        <div class="col col-md-2 next">
+            <p> <a href="LoopConditions.html">Next &#10095; </a></p>
+        </div> 
+    </div>         
+    <div class="backToTop">
+        <p> <a href="#top">Back to Top</a></p>
+    </div>      
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/code.js"></script>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ME31002 Lab 1</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+<div class="wrapper">
+    <nav id="sidebar">
+
+        <ul class="list-unstyled components">
+            <p>Menu</p>
+
+            <li>
+                <a href="BasicSyntax.html">Basic Syntax</a>
+            </li>
+            <li>
+                <a href="MatrixArithmetic.html">Matrix Arithmetic</a>
+            </li>      
+            <li>
+                <a href="BuiltInFunctions.html">Built-in Functions</a>
+            </li>         
+            <li>
+                <a href="PlottingData.html">Plotting Data</a>
+            </li>                          
+            <li>
+                <a href="LinearAlgebra.html">Linear Algebra</a>
+            </li>  
+            <li>
+                <a href="LoopConditions.html">Loops & Conditions</a>
+            </li>              
+            <li>
+                <a href="LabReport.html">Lab Report</a>
+            </li>     
+        </ul>
+    </nav>		
+	<div class="container-fluid">	
+        <div class="row header">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fa fa-bars"></i>
+                        <!-- <span>Menu</span> -->
+                    </button>
+                    <div class="col-10 col-xl-auto h2Div" onclick="location.href='index.html';">
+                        <h2>ME31002 Lab 1</h2>               
+                    </div>
+
+        </div>  
+        </br>	
+        <div class="row justify-content-md-center editor">
+            <div class="col-12 col-xl-8 mainContent">
+                <div>
+                    <h4>
+                        Basic Syntax
+                    </h4>
+                    <hr>                    
+                    <p>
+                        In MATLAB there are 3 basic types of numbers that you will be working with, which are all actually matrices. There are scalars, which are just plain numbers, vectors, which are kind of like a list of numbers, and matrices, which are tables of numbers. Let's create a simple scalar:
+                        </br><div class="codeClass"><code>x = 6</code></div></br>
+                        The variable 'x' appeared in the Workspace and if we check its size, we can see that it is a one-by-one matrix even if it looks like a scalar. 
+                        </br><div class="codeClass"><code>size(x)</code></div>
+                        <div class="codeAns">
+<pre><code>
+ans =
+   1   1
+</code></pre>
+                        </div></br>                              
+                        
+                        To create a vector, we use square brackets.
+                        </br><div class="codeClass"><code>v = [1 2 3];</code></div></br>
+                        So, our v variable contains 3 elements and if we check its size, we get that it's a one-by-three matrix. 
+                        </br><div class="codeClass"><code>size(v)</code></div>
+                        <div class="codeAns">
+<pre><code>
+ans =
+   1   3
+</code></pre>
+                        </div></br>                         
+                        Here we used a semicolon. It we don't use it, then the result of our command will be printed out. 
+                        </br><div class="codeClass"><code>v = [1 2 3]</code></div>
+                        <div class="codeAns">
+<pre><code>
+v =
+   1   2   3
+</code></pre>
+                        </div></br>                             
+                        So, it is convenient to use semicolons when we want to keep our screen clear from too much data.
+                        </br></br>
+                        Matrices are created like vectors with the difference that rows are separated by semicolons.
+                        </br><div class="codeClass"><code>A = [1 2; 3 4]</code></div>
+                        <div class="codeAns">
+<pre><code>
+ans =
+   1   2
+   3   4
+</code></pre>
+                        </div></br>                          
+                        So, we obtained a two-by-two matrix.
+                        </br><div class="codeClass"><code>size(A)</code></div>
+                        <div class="codeAns">
+<pre><code>
+ans =
+   2   2
+</code></pre>
+                        </div></br>                           
+                        What if we would like to combine 3 row vectors into a matrix?
+                        </br><div class="codeClass"><code>P = [1 2 3 4]; </br>Q = [5 6 7 8]; </br>R = [9 11 11 12]; </code></div></br>
+                        We can assign them into a matrix.
+                        </br><div class="codeClass"><code>S = [P; Q; R]</code></div>
+                        <div class="codeAns">
+<pre><code>
+S =
+    1    2    3    4
+    5    6    7    8
+    9   10   11   12
+</code></pre>
+                        </div></br>                               
+                        So, we obtained a three-by-four matrix.
+                        </br><div class="codeClass"><code>size(S)</code></div>
+                        <div class="codeAns">
+<pre><code>
+ans =
+   3   4
+</code></pre>
+                        </div></br>    
+                    </p>
+                    <hr>
+                    <p>
+                        From math courses, you should know that matrices' dimensions are very important when we are multiplying them or doing other operations. And typically, you work with a column vector, not a row vector like the one that we created before. So we can easily transform it into a column vector using apostrophe to perform a transpose.
+                        </br><div class="codeClass"><code>v = v'</code></div>
+                        <div class="codeAns">
+<pre><code>
+v =
+   1
+   2
+   3
+</code></pre>
+                        </div></br>  
+                        <div class="codeClass"><code>size(v)</code></div>
+                        <div class="codeAns">
+<pre><code>
+ans =
+
+   3   1
+</code></pre>
+                        </div></br>                          
+                        So, you see that v used to be a one-by-three row vector, now it is a three-by-one vector. Of course, you can manually initialize a column vector using semicolons. 
+                        </br><div class="codeClass"><code>v = [1; 2; 3]</code></div>
+                        <div class="codeAns">
+<pre><code>
+v =
+   1
+   2
+   3
+</code></pre>
+                        </div><hr></br>                          
+                        The next thing we need to learn is how to access elements of a matrix. Generally, we use parentheses and index for that. So, if we want to get an element from the i-th row and j-th column we write it like this but with numbers.
+                        </br><div class="codeClass"><code>A(1,1)</code></div>
+                        <div class="codeAns">
+<pre><code>
+ans = 1
+</code></pre>
+                        </div></br>                              
+                        Note that indexing in MATLAB starts from 1, not 0 as in many other languages. Another thing that we can do is to extract a vector from a matrix. So, let's say we want the first row of matrix A. First, we identify the number of the row, 1 in our case, and put a colon in the choice of the column. This means returning all the columns in row 1.
+                        </br><div class="codeClass"><code>A(1,:)</code></div>
+                        <div class="codeAns">
+<pre><code>
+ans =
+   1   2
+</code></pre>
+                        </div></br>                            
+                        Similarly, we can use a colon syntax to get the entire column of a matrix. For example, we want to extract the second column of a matrix A.
+                        </br><div class="codeClass"><code>A(:,2)</code></div>
+                        <div class="codeAns">
+<pre><code>
+ans =
+   2
+   4
+</code></pre>
+                        </div></br>                           
+                        If we put colons in both parts, we will get the whole original matrix.
+                        </br><div class="codeClass"><code>A = [1 2 3 4; 5 6 7 8; 9 10 11 12; 13 4 15 16]</code></div>
+                        <div class="codeAns">
+<pre><code>
+A =
+    1    2    3    4
+    5    6    7    8
+    9   10   11   12
+   13    4   15   16
+</code></pre>
+                        </div></br>           
+                        </br><div class="codeClass"><code>A(:,:)</code></div>
+                        <div class="codeAns">
+<pre><code>
+ans =
+    1    2    3    4
+    5    6    7    8
+    9   10   11   12
+   13    4   15   16
+</code></pre>
+                        </div></br>                                            
+                        Colon syntax can be as well used to access ranges or submatrices. Let's say we want a middle part of A.
+                        </br><div class="codeClass"><code>A(2:3, 2:3)</code></div>
+                        <div class="codeAns">
+<pre><code>
+ans =
+    6    7
+   10   11
+</code></pre>
+                        </div></br>                          
+                        If we want to get all the value from a specfic row. It is not necessary to identify the last index. So, if we write <code>A(3,:)</code>, we'll get all elements from the third row.
+                        </br><div class="codeClass"><code>A(3,:)</code></div>
+                        <div class="codeAns">
+<pre><code>
+ans =
+    9   10   11   12
+</code></pre>
+                        </div></br>                          
+                        
+
+                        The colon syntax can be used by itself, it basically creates a range. So if we do something like <code>1:10</code>, it gives back all the numbers from 1 to 10. 
+                        </br><div class="codeClass"><code>1:10</code></div>
+                        <div class="codeAns">
+<pre><code>
+ans =
+    1    2    3    4    5    6    7    8    9   10
+</code></pre>
+                        </div></br>                          
+                        We can assign this range to a variable <code>w</code>.
+                        </br><div class="codeClass"><code>w = 1:10</code></br><code>size(w)</code></div>
+                        <div class="codeAns">
+<pre><code>
+w =
+    1    2    3    4    5    6    7    8    9   10
+
+ans =
+    1   10
+</code></pre>
+                        </div></br>                         
+                        So, we can see that this command creates a row vector with the elements 1 to 10.
+
+                    </p>
+                </div>
+                </br>
+
+
+
+            </div>      
+    
+
+        </div>  
+        <div class="row">
+            <div class="col col-md-2 prev">
+            </div> 
+            <div class="col"></div>            
+            <div class="col col-md-2 next">
+                <p> <a href="MatrixArithmetic.html">Next &#10095; </a></p>
+            </div> 
+        </div>           
+        <div class="backToTop">
+            <p> <a href="#top">Back to Top</a></p>
+        </div>                     	
+	</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/code.js"></script>
+</body>
+</html>

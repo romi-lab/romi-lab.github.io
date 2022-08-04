@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ME31002 Lab 1</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+<div class="wrapper">
+    <nav id="sidebar">
+
+        <ul class="list-unstyled components">
+            <p>Menu</p>
+
+            <li>
+                <a href="BasicSyntax.html">Basic Syntax</a>
+            </li>
+            <li>
+                <a href="MatrixArithmetic.html">Matrix Arithmetic</a>
+            </li>      
+            <li>
+                <a href="BuiltInFunctions.html">Built-in Functions</a>
+            </li>         
+            <li>
+                <a href="PlottingData.html">Plotting Data</a>
+            </li>                          
+            <li>
+                <a href="LinearAlgebra.html">Linear Algebra</a>
+            </li>  
+            <li>
+                <a href="LoopConditions.html">Loops & Conditions</a>
+            </li>              
+            <li>
+                <a href="LabReport.html">Lab Report</a>
+            </li>                       
+
+        </ul>
+    </nav>		
+	<div class="container-fluid">	
+        <div class="row header top">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fa fa-bars"></i>
+                        <!-- <span>Menu</span> -->
+                    </button>
+                    <div class="col-10 col-xl-auto h2Div" onclick="location.href='index.html';">
+                        <h2>ME31002 Lab 1</h2>               
+                    </div>
+
+        </div>  
+        </br>	
+        <div class="row justify-content-md-center editor">
+            <div class="col-12 col-xl-8 mainContent">
+                    <h4>
+                        Lab Report
+                    </h4> 
+                        Individual Report</br>
+                        Due date: 8 Feb 2022, 23:59</br> 
+                        Include: Code, figures, and anything you think it is important :)</br>               
+                    <hr>
+                    <p>
+                        <b>Question 1</b></br>
+                        There are three sets of data. Plot the relatioship between the <code>Angular Velocity</code> and <code>Capacity of Type A</code> with <code>Angular Velocity</code> and <code>Capacity of Type B</code>.
+                        </br><div class="codeClass">
+<pre><code>
+Angular Velocity = [10, 22, 55, 77, 140, 380, 455];    
+Capacity of Type A = [2, 6.6, 17.6, 19.1, 31.5, 68.9, 122.4];
+Capacity of Type B = [1.5, 3, 12.8, 27.8, 40, 52, 72.4];
+</code></pre>
+                        </div></br>
+                        Should have something similar to this:
+                        <div class="col-12 col-xl-6">
+                            <img src="img/17.jpg">
+                        </div></br>        
+                        </br>               
+                        <b>Question 2</b></br>
+                        There are four subejct groups. Visualize their performances, showing (1) overall and (2) individual performances. </br>
+                        Requirements: At least two types of graph should be used.
+                        </br><div class="codeClass">
+<pre><code>
+Subject Group A: 
+    60, 70, 80, 68, 50, 40, 41, 70, 66, 80, 98, 54, 65, 75, 62, 60, 45, 63, 84, 89
+Subject Group B: 
+    40, 31, 86, 60, 74, 95, 90, 77, 68, 42, 91, 92, 94, 68, 55, 73, 35, 72, 59
+Subject Group C: 
+    82, 95, 86, 47, 73, 83, 94, 91, 79, 50, 92, 87, 87, 45, 87, 88, 85, 67, 74, 71
+Subject Group D: 
+    % Randomly generate 30 scores    
+</code></pre>
+                        </div></br>
+                        </br>
+                        <b>Question 3</b></br>
+                        Let's plot a 3D sine cosine figure. </br>
+                        Example:
+                        </br>                     
+
+                        <div class="col-12 col-xl-6">
+                            <img src="img/18.jpg">
+                        </div></br>    
+                        </br>
+                        <b>Question 4</b></br>
+                        Linearising a nonlinear function </br>
+                        To obtain a linear model of a nonlinear system, we assume the variables deviate slightly from an operating condition.</br>
+                        Taylor Series: a series expansion of a function about a point</br>
+                        Taylor Series: linear approximation</br>
+                        The linear approximation of the system (function) can be obtained using the tangent line.</br>
+                        <div class="codeClass"><code>
+                        f(x) <span>&asymp;</span> f(x<sub>0</sub>) + f'(x<sub>0</sub>)(x - x<sub>0</sub>)
+                        </code></div>
+                        </br>
+                        </br>
+                        Nonlinear function: 5sin(2t)</br>
+                        Linearise it at x<sub>0</sub> = pi and x<sub>0</sub> = 2</br></br>
+                        Plot the nonlinear function and the linearised functions.</br>
+                        Example:
+                        </br>     
+                        <div class="col-12 col-xl-6">
+                            <img src="img/20.jpg">
+                        </div></br>                                          
+
+                                                                        
+
+                    </p>
+                
+                </div>
+
+        </div> 
+        <div class="row">
+            <div class="col col-md-2 prev">
+                <p> <a href="LoopConditions.html"> &#10094; Back </a></p>
+            </div> 
+        </div>                              
+        <div class="backToTop">
+            <p> <a href="#top">Back to Top</a></p>
+        </div>               	
+	</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/code.js"></script>
+</body>
+</html>

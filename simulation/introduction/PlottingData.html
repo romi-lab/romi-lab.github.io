@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ME31002 Lab 1</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+<div class="wrapper">
+    <nav id="sidebar">
+
+        <ul class="list-unstyled components">
+            <p>Menu</p>
+
+            <li>
+                <a href="BasicSyntax.html">Basic Syntax</a>
+            </li>
+            <li>
+                <a href="MatrixArithmetic.html">Matrix Arithmetic</a>
+            </li>      
+            <li>
+                <a href="BuiltInFunctions.html">Built-in Functions</a>
+            </li>         
+            <li>
+                <a href="PlottingData.html">Plotting Data</a>
+            </li>                          
+            <li>
+                <a href="LinearAlgebra.html">Linear Algebra</a>
+            </li>  
+            <li>
+                <a href="LoopConditions.html">Loops & Conditions</a>
+            </li>              
+            <li>
+                <a href="LabReport.html">Lab Report</a>
+            </li>                        
+
+        </ul>
+    </nav>		
+	<div class="container-fluid">	
+        <div class="row header">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fa fa-bars"></i>
+                        <!-- <span>Menu</span> -->
+                    </button>
+                    <div class="col-10 col-xl-auto h2Div" onclick="location.href='index.html';">
+                        <h2>ME31002 Lab 1</h2>               
+                    </div>
+
+        </div>  
+        </br>	
+        <div class="row justify-content-md-center editor">
+            <div class="col-12 col-xl-8 mainContent"> 
+                <div>        
+                    <h4>
+                        Plotting Data
+                    </h4>
+                    <hr>  
+                    <p>
+                        MATLAB provides sufficient tools for plotting data. The simplest plot that we can make is just to plot a series of data. Let's do it on the example of the Fibonacci sequence. Fibonacci numbers are obtained by adding 2 previous numbers. So here are the first 8 values of the Fibonacci sequence.
+                        </br><div class="codeClass"><code>y = [1, 1, 2, 3, 5, 8, 13, 21];</code></div></br>
+                        To plot it, all we need to do is call a function called plot and pass in our vector y:
+                        </br><div class="codeClass"><code>plot(y)</code></div></br>
+                        <div class="col-12 col-xl-6">
+                            <img src="img/01.jpg">
+                        </div></br>
+                        Here you can see the x range is set automatically. Instead, we can define this range ourselves. For example, suppose we want x to increase by 0.1 every time.
+                        </br><div class="codeClass"><code>x = [0 0.1 0.2 0.3 0.4 0.5 0.6 0.7];</code></div></br>                 
+                        So now we can define our 2d plot.
+                        </br><div class="codeClass"><code>plot(x,y)</code></div></br>
+                        <div class="col-12 col-xl-6">
+                            <img src="img/02.jpg">
+                        </div></br>                               
+                        You can see that y axis is the same as before, but x axis is our predefined range. Note that the size of both x and y have to be equal.
+                        </br><div class="codeClass"><code>size(x)</br>size(y)</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+ans =
+   1   8
+
+ans =
+   1   8
+</code></pre>
+                        </div></br>                        
+                        So, if we do something like this <code>plot([1 2 2], y)</code>, it's not going to work.
+                        </br><div class="codeClass"><code>plot([1 2 2], y)</code></div>
+                        <div class="codeAns codeError">
+<pre><code>
+error: __plt2vv__: vector lengths must match
+error: called from
+    __plt__>__plt2vv__ at line 487 column 5
+    __plt__>__plt2__ at line 247 column 14
+    __plt__ at line 112 column 18
+    plot at line 229 column 10
+</code></pre>
+                        </div></br>                             
+                         
+
+                    </p>     
+                    <hr></br> 
+                    <p>
+                        <h5>Line Graph</h5>
+                        The next thing that we are going to do is a bit more complex, we are going to plot a function. One of the most useful functions that we need to learn is linspace. Linspace creates the range of values, so we pass in where we want it to start, where we want it to end, and how many points will be in between. So we are saying x is going to go from 0 to 100 and have 200 points in between.
+                        </br><div class="codeClass"><code>x = linspace(0,100,200);</code></div></br>
+                        Now to calculate y all we have to do is for example to use the sine function.
+                        </br><div class="codeClass"><code>y = sin(x);</br>plot(x,y)</code></div></br>
+                        <div class="col-12 col-xl-6">
+                            <img src="img/03.jpg">
+                        </div></br>                          
+                        One thing you might notice about this graph is that the lines are pretty jagged, it's not a smooth graph but sine x is actually a smooth graph. The reason why that is if we look at x again,
+                        </br><div class="codeClass"><code>x</code></div></br>
+                        there are 200 points for a range of 100, so, that's a very low resolution. To increase it we either can reduce the range or put more points in between or both. So, let's recreate x.
+                        </br><div class="codeClass"><code>x = linspace(0, 2*pi, 100);</br>y = sin(x);</br>plot(x,y);</code></div></br>
+                        <div class="col-12 col-xl-6">
+                            <img src="img/04.jpg">
+                        </div></br>                           
+                        So now we can see that it's a lot smoother. </br></br>
+                        Now let's look at how to plot two functions on the same plot. That might be useful to compare 2 different series, so let's create the second function.
+                        </br><div class="codeClass"><code>y2 = cos(x);</code></div></br>
+                        If we type in just plot, we can see some different function signatures for the plot. If you look closer, you will find that it shows us that for every pair X and Y we want to plot, we just pass them in adjacent to each other. So in our case, we are going to have x and y, and since it is the same x for both y and y2, we are going to pass in x again.
+                        </br><div class="codeClass"><code>plot(x, y, x, y2);</code></div></br>
+                        <div class="col-12 col-xl-6">
+                            <img src="img/05.jpg">
+                        </div></br>                               
+                        So, now we can see the sine x in blue color and cosine x in orange color on the same plot. We can make our plot a little fancier by specifying a line color and line style.
+                        </br><div class="codeClass"><code>plot(x, y,'b--',x ,y2, 'g.');</code></div></br>
+                        <div class="col-12 col-xl-6">
+                            <img src="img/06.jpg">
+                        </div></br>                          
+                        So those are also passed in adjacent to the x and y. Now it's even easier to differentiate between those two lines. So the cosine graph is a bunch of green dots and the sine graph is a blue dashed line.</br> 
+                        
+                        <hr></br>
+                        <h5>Line Graph with Error Bars</h5>
+                        Error bar can be used to show the range of error at each point. 
+                        </br><div class="codeClass"><code>x = 1:10:100;</br>y = rand(1,10)*100;</br>err = [2 8 10 4 5 6 3 9 2 7];</br>errorbar(x,y,err)</code></div></br>
+                        <div class="col-12 col-xl-6">
+                            <img src="img/err0.jpg">
+                        </div></br>    
+
+                        <hr></br>                   
+                        <h5>Bar Chart</h5>
+                        Those were the default type of plots, there are other types as well. Like a bar plot. Let's see a simple example.
+                        </br><div class="codeClass"><code>x = 1:10</code></div>
+                        <div class="codeClass codeAns">
+<pre><code>
+x =
+    1    2    3    4    5    6    7    8    9   10
+</code></pre>
+                        </div></br>                            
+                        And we want to plot this on a bar chart, so, we call the method bar, pass in x.
+                        </br><div class="codeClass"><code>bar(x)</code></div></br>
+                        <div class="col-12 col-xl-6">
+                            <img src="img/07.jpg">
+                        </div></br>                           
+                        These does pretty much the exact same thing as the plot function except instead of connecting them all in a line, it divides them into their own individual bar. So just for reference, let's do a sine example again.
+                        </br><div class="codeClass"><code>x = linspace(0, 2*pi, 100);</br>y = sin(x);</br>bar(x,y);</code></div></br>
+                        <div class="col-12 col-xl-6">
+                            <img src="img/08.jpg">
+                        </div></br>                          
+                        So this is a bar chart of the sine function. </br>
+                        <hr></br>
+                        <h5>Histogram</h5>
+                        The next useful plot is the histogram. If you have studied probability, you should be familiar with it. So with a given data set we might want to figure out what kind of distribution does it follow. Let's generate some data where we want to know the distribution. Like a thousand points that are normally distributed.
+                        </br><div class="codeClass"><code>x = rand(1000,1)</br>plot(x);</code></div></br>
+                        <div class="col-12 col-xl-6">
+                            <img src="img/09.jpg">
+                        </div></br>                          
+                        If we plot this, it does not do much it just looks like noise, so we are not able to make much sense from that. What we want to do is to call a function called hist.
+                        </br><div class="codeClass"><code>hist(x);</code></div></br>
+                        <div class="col-12 col-xl-6">
+                            <img src="img/10.jpg">
+                        </div></br>                          
+                        So we can see that it's pretty much normally distributed. The resolution for this chart is not that great, we can change it by setting the number of bins, let's say 50.
+                        </br><div class="codeClass"><code>hist(x,50);</code></div></br>
+                        <div class="col-12 col-xl-6">
+                            <img src="img/11.jpg">
+                        </div></br>                         
+                        And this gives us a much more granular representation of the data.</br>
+                        <hr></br>
+                        <h5>Pie Chart</h5>
+                        Another plot type is a pie chart, which you probably have used in excel and powerpoint. Let's say x is 1 to 5.
+                        </br><div class="codeClass"><code>x = 1:5;</code></div></br>
+                        Then, we call a function, called pie, pass in data and add a title for the chart.
+                        </br><div class="codeClass"><code>pie(x);</br>title("Example of a Pie Chart")</code></div></br>
+                        <div class="col-12 col-xl-6">
+                            <img src="img/12.jpg">
+                        </div></br>                           
+                        And it automatically splits up the data so that purple is the first element, blue is the second element, and so on. There are ways to label them to make your visualization more comprehensible. We will not do that now, you can check MATLAB documentation for that later. </br>
+                        <hr></br>
+                        <h5>Scatter Plot</h5>
+                        Another useful plot that we are going to see is the scatter plot. It is very useful and widely used in data analysis. Let's return to our sine example.
+                        </br><div class="codeClass"><code>x = linspace(0, 2*pi, 1000);</code></div></br>
+                        Now we are going to do something a little different, we are going to set it.
+                        </br><div class="codeClass"><code>y = 10 * sin(x) + rand(1,1000);</code></div></br>
+                        So that the sine x has an amplitude of 10 and then we are going to add some random noise with variance 1. The reason to scale it by 10 is to make the sine wave is bigger compared to the noise. Otherwise, the noise will just take over the shape of the sine wave. Now if we are going to plot x and y, we would just get a noisy sine wave. 
+                        </br><div class="codeClass"><code>plot(x,y);</code></div></br>
+                        <div class="col-12 col-xl-6">
+                            <img src="img/13.jpg">
+                        </div></br>                          
+                        If we do it in a scatter plot, we can see the pattern pretty much the same, it does not seem to make much differences. 
+                        </br><div class="codeClass"><code>scatter(x,y)</code></div></br>
+                        <div class="col-12 col-xl-6">
+                            <img src="img/14.jpg">
+                        </div></br>                              
+                        But in our case, the data was pretty ordered. Now suppose that our data is not ordered. So instead of linspace, our x will be just a bunch of random points.
+                        </br><div class="codeClass"><code>x = rand(1000,1) * 2;</code></div></br>
+                        So, x is normally distributed with a standard deviation of 2. And y is going to be let's say:
+                        </br><div class="codeClass"><code>y = 5 * sin(x) + rand(1000,1);</code></div></br>
+                        If we plot x and y now, we don't really see anything. 
+                        </br><div class="codeClass"><code>plot(x,y);</code></div></br>
+                        <div class="col-12 col-xl-6">
+                            <img src="img/15.jpg">
+                        </div></br>                            
+                        But scattering plots all the dots individually.
+                        </br><div class="codeClass"><code>scatter(x,y);</code></div></br>
+                        <div class="col-12 col-xl-6">
+                            <img src="img/16.jpg">
+                        </div></br>                          
+                        So now we can very clearly see the sine wave that we are supposed to see. So if you are doing data analysis and your points are not ordered you probably would want to use a scatter plot.
+
+                        <hr></br>
+                        <h5>3D Plot</h5>
+                        Beside 2D graphs, we can even plot things in 3D. Let's try to create a simple 3D line graph with the grid lines.
+                        </br><div class="codeClass"><code>m = 1:5;</br>plot3(m,m,m);</br>grid on</code></div></br>
+                        <div class="col-12 col-xl-6">
+                            <img src="img/3d0.jpg">
+                        </div></br>    
+                        Let's make something interesting.
+                        </br><div class="codeClass"><code>t = linspace(0,20,1000);</br>x = exp(t./10).*sin(15*t);</br>y = exp(t./10).*cos(15*t);</br>plot3(x,y,y);</br>grid on</code></div></br>
+                        <div class="col-12 col-xl-6">
+                            <img src="img/3d1.jpg">
+                        </div></br>                           
+
+                    </p>              
+                </div>
+
+            </div>      
+    
+
+        </div>  
+        <div class="row">
+            <div class="col col-md-2 prev">
+                <p> <a href="BuiltInFunctions.html"> &#10094; Back </a></p>
+            </div> 
+            <div class="col"></div>            
+            <div class="col col-md-2 next">
+                <p> <a href="LinearAlgebra.html">Next &#10095; </a></p>
+            </div> 
+        </div>                   
+        <div class="backToTop">
+            <p> <a href="#top">Back to Top</a></p>
+        </div>                     	
+	</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/code.js"></script>
+</body>
+</html>

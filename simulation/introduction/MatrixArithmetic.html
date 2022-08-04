@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ME31002 Lab 1</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+<div class="wrapper">
+    <nav id="sidebar">
+
+        <ul class="list-unstyled components">
+            <p>Menu</p>
+
+            <li>
+                <a href="BasicSyntax.html">Basic Syntax</a>
+            </li>
+            <li>
+                <a href="MatrixArithmetic.html">Matrix Arithmetic</a>
+            </li>      
+            <li>
+                <a href="BuiltInFunctions.html">Built-in Functions</a>
+            </li>         
+            <li>
+                <a href="PlottingData.html">Plotting Data</a>
+            </li>                          
+            <li>
+                <a href="LinearAlgebra.html">Linear Algebra</a>
+            </li>  
+            <li>
+                <a href="LoopConditions.html">Loops & Conditions</a>
+            </li>              
+            <li>
+                <a href="LabReport.html">Lab Report</a>
+            </li>     
+        </ul>
+    </nav>		
+	<div class="container-fluid">	
+        <div class="row header">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fa fa-bars"></i>
+                        <!-- <span>Menu</span> -->
+                    </button>
+                    <div class="col-10 col-xl-auto h2Div" onclick="location.href='index.html';">
+                        <h2>ME31002 Lab 1</h2>               
+                    </div>
+
+        </div>  
+        </br>	
+        <div class="row justify-content-md-center editor">
+            <div class="col-12 col-xl-8 mainContent">
+                <div>
+                    <h4>
+                        Matrix Arithmetic
+                    </h4>
+                    <hr>                      
+                    <p>
+                       Now let's go through some basic arithmetic in MATLAB. First, we create simple matrices to work with.
+                        </br><div class="codeClass"><code>A = [1 2; 3 4]</br>B = [5 6; 7 8]</br>C = [9 10; 11 12]</code></div>
+                        <div class="codeAns">
+<pre><code>
+A =
+   1   2
+   3   4
+
+B =
+   5   6
+   7   8
+
+C =
+    9   10
+   11   12
+</code></pre>
+                        </div></br>                          
+                        Suppose we want to add two matrices, that's very simple.
+                        </br><div class="codeClass"><code>A + B</code></div>
+                        <div class="codeAns">
+<pre><code>
+ans =
+    6    8
+   10   12
+</code></pre>
+                        </div></br>                           
+                        Or subtract them.
+                        </br><div class="codeClass"><code>A - B</code></div>
+                        <div class="codeAns">
+<pre><code>
+ans =
+  -4  -4
+  -4  -4
+</code></pre>
+                        </div></br>   
+                        Let's try to multiply them.
+                        </br><div class="codeClass"><code>A * B</code></div>
+                        <div class="codeAns">
+<pre><code>
+ans =
+   19   22
+   43   50
+</code></pre>
+                        </div></br>                          
+                        Here we need to note that this is pure matrix multiplication, which means that the inner dimensions of the matrices A and B have to match. For example, if we create another matrix that does not have the same number of rows as the number of columns in A it's not going to work.
+                        </br><div class="codeClass"><code>B2 = [1 2; 4 5; 6 7];</br>size(B2)</br>size(A)</code></div>
+                        <div class="codeAns">
+<pre><code>
+ans =
+   3   2
+
+ans =
+   2   2
+</code></pre>
+                        </div></br>                           
+                        So, if we try to multiply them, we'll get an error message.
+                        </br><div class="codeClass"><code>A * B2</code></div>
+                        <div class="codeAns codeError">
+<pre><code>
+error: operator *: nonconformant arguments (op1 is 2x2, op2 is 3x2)
+</code></pre>
+                        </div></br>                           
+                        </br>
+                        Then, we can transpose B2.
+                        </br><div class="codeClass"><code>A * B2'</code></div>
+                        <div class="codeAns">
+<pre><code>
+ans =
+    5   14   20
+   11   32   46
+</code></pre>
+                        </div></br>                            
+                        In this case, the inner dimensions meet the requirement. </br>                          
+                    </p>
+                    <hr></br>
+                    <p>
+                        We can also divide matrices with a forward slash <code>/</code>. But if you remember from linear algebra there isn't really a matrix division like that. The division of scalars is very simple.
+                        </br><div class="codeClass"><code>3/5</code></div>
+                        <div class="codeAns">
+<pre><code>
+ans = 0.6000
+</code></pre>
+                        </div></br>                               
+                        The order of the operations and usage of parentheses does not contain any surprises. </br>
+                        There are also situations when we want to perform element-by-element operations. For that we need to put a dot before a multiply sign.
+                        </br><div class="codeClass"><code>A .* B</code></div>
+                        <div class="codeAns">
+<pre><code>
+ans =
+    5   12
+   21   32
+</code></pre>
+                        </div></br>                           
+                        So it multiplies each matrix element by each corresponding element in the other matrix. That also works for division, so, with dot slash.
+                        </br><div class="codeClass"><code>A ./ B</code></div>
+                        <div class="codeAns">
+<pre><code>
+ans =
+   0.2000   0.3333
+   0.4286   0.5000
+</code></pre>
+                        </div></br>                           
+                        Let's consider inner products in more detail. 
+                        </br><div class="codeClass"><code>x = [1 2 3]</br>y = [4 5 6]</br>x * y'</code></div>
+                        <div class="codeAns">
+<pre><code>
+x =
+   1   2   3
+
+y =
+   4   5   6
+
+ans = 32
+</code></pre>
+                        </div></br>                              
+                        The same can be done with a built-in dot function.
+                        </br><div class="codeClass"><code>dot(x, y)</code></div>
+                        <div class="codeAns">
+<pre><code>
+ans = 32
+</code></pre>
+                        </div></br>                           
+                        Another operation is a cross-product. If you remember, it is the magnitude of the first vector times the magnitude of the second vector times the sine of the angle between them and then you use the right-hand rule to determine the direction of the result. So, the cross product gives us back a vector. 
+                        </br><div class="codeClass"><code>cross(x, y)</code></div>
+                        <div class="codeAns">
+<pre><code>
+ans =
+  -3   6  -3
+</code></pre>
+                        </div></br>                          
+
+                    </p>
+
+                </div> 
+                </br>
+
+
+            </div>      
+    
+
+        </div> 
+        <div class="row">
+            <div class="col col-md-2 prev">
+                <p> <a href="BasicSyntax.html"> &#10094; Back </a></p>
+            </div> 
+            <div class="col"></div>            
+            <div class="col col-md-2 next">
+                <p> <a href="BuiltInFunctions.html">Next &#10095; </a></p>
+            </div> 
+        </div>                   
+        <div class="backToTop">
+            <p> <a href="#top">Back to Top</a></p>
+        </div>                    	
+	</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/code.js"></script>
+</body>
+</html>
