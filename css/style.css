@@ -231,7 +231,7 @@ a {
 
 
 #footer h5{
- 	white-space: pre-wrap;
+ 	white-space: pre-line;
 	color: #fff;
 	font-style: normal;
 	text-transform: none;
