@@ -28,7 +28,7 @@
 <div class="container" id="bg">
 
 	<div class="row" id="intro">
-		<div class="col-sm-12" >
+		<div class="col col-sm-12" >
 			<h1>Teaching Resources</br></h1>
 
 			<h2>The Robotics and Machine Intelligence Laboratory</h2>
@@ -50,37 +50,43 @@
 	</div>
 	<div class="row">
 		
-		<div class="card_wrapper col-md-4">	
+		<div class="card_wrapper col-md-4 d-flex align-items-stretch ">	
 			<div class="card">
 			  <img class="card-img-top" src="image/sim.jpg">
 			  <div class="card-body">
 			    <h4 class="card-title">Introduction to Simulation</h4>
-			    <h5 class="card-text">Learning simulation in Matlab/Octave.</h5>
-			    <a href="simulation/introduction/index.html" class="btn btn-primary">Beginner</a>
-			    <a href="simulation/advance/index.html" class="btn btn-primary">Advanced</a>
+			    <h5 class="card-text">Learning simulation and control theory in Matlab/Octave.</h5>
+			    <div class="btnList mt-auto">
+				    <a href="simulation/introduction/index.html" class="btn btn-primary">Beginner</a>
+				    <a href="simulation/advance/index.html" class="btn btn-primary">Advanced</a>
+				</div>
 			  </div>
 			</div>
 		</div>
 
-		<div class="card_wrapper col-md-4">
+		<div class="card_wrapper col-md-4 d-flex align-items-stretch ">
 			<div class="card">
 			  <img class="card-img-top" src="image/robot2.jpg">
 			  <div class="card-body">
 			    <h4 class="card-title">Perceptual Robotics</h5>
 			    <h5 class="card-text">Learning image processing, sensors, and robot control in Python.</h5>
-			    <a href="perceptual-robotics/index.html" class="btn btn-primary">Beginner</a>
-			    <a href="perceptual-robotics/Lab2.html" class="btn btn-primary">Advanced</a>
+			    <div class="btnList mt-auto">
+			    	<a href="perceptual-robotics/index.html" class="btn btn-primary">Beginner</a>
+			    	<a href="perceptual-robotics/Lab2.html" class="btn btn-primary">Advanced</a>
+				</div>
 			  </div>
 			</div>	
 		</div>
 
-		<div class="card_wrapper col-md-4">
+		<div class="card_wrapper col-md-4 d-flex align-items-stretch">
 			<div class="card">
 			  <img class="card-img-top" src="image/pop.jpg">
 			  <div class="card-body">
 			    <h4 class="card-title">Digitial Robotics Laboratory</h4>
 			    <h5 class="card-text">Learning system stability through online interactive simulations.</h5>
-			    <a href="https://romi-lab.github.io/pop/index.html" class="btn btn-primary">Start Learning</a>
+			    <div class="btnList mt-auto">
+			    	<a href="https://romi-lab.github.io/pop/index.html" class="btn btn-primary">Start Learning</a>
+				</div>
 			  </div>
 			</div>	
 		</div>			
@@ -91,14 +97,23 @@
 
 
 <footer id="footer">
-	<div class="container">
-		<h2>Contact</h2>
+	<div class="container-fluid">
 		<div class="row justify-content-center">
-			<div class="col-md-1 col-2">
-				<img id="romi_contact" src="image/romi_dark.png">
+			<div class="col col-md-4">
+				<img id="romi_contact" src="image/romi_semi.png">
 			</div>
-			<div class="col col-md-6 link_div">
-				<a href="https://www.romi-lab.org/" target="_blank"><h4>https://www.romi-lab.org/</h4></span></a>
+			<div class="col-8 col-md-8 link_div">
+				<h5>
+					<a href="mailto:contact@romi-lab.org" target="_blank"><u>contact@romi-lab.org</u></a>
+					
+					FG 638, PolyU, Hung Hom, HK <br/>
+					(+852) 2766 7816
+				</h5>
+			</div>
+		</div>
+		<div class="row justify-content-center">
+			<div id="copyRight">
+				<p>© 2021 romi-lab</p>
 			</div>
 		</div>
 	</div>
