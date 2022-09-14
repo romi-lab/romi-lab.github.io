@@ -192,7 +192,9 @@ a {
 #copyRight{
 	padding-bottom: 4vh;
 }
-
+#copyRight p{
+	font-size: 14px;
+}
 
 
 #footer{
