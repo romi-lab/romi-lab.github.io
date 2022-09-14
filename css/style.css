@@ -155,7 +155,7 @@ a {
 	margin-bottom: 5%;
 }
 #romi_icon_bar{
-	height: 10vh;
+	height: 7vh;
 }
 .card{
 	border: 3px solid #F3F3F3;
@@ -270,7 +270,6 @@ a {
 	}
 
 	#romi_icon_bar{
-		width: 60vw;
 		text-align: center;
 		margin: auto;
 	}
@@ -302,7 +301,6 @@ a {
 /* 550 and up */	
 @media screen and (min-width:550px) {
 	#intro{
-		/*margin-top: 5vh;*/
 		height: 35vh;
 		margin-top: 5vh;
 	}
@@ -357,7 +355,7 @@ a {
 
 	body 						{ font-size:175%; }
 	#romi_icon_bar{
-		width: 13vw;
+		height: 9vh;
 	}	
 	#intro h2{
 		font-size: 150%;
