@@ -26,7 +26,7 @@ body{
 
 .backgroundImg{
   width: 100vw;
-  height: 50vh;
+  /*height: 50vh;*/
   position: relative;
   overflow: hidden;
   display: flex;
@@ -43,7 +43,7 @@ h1{
 	letter-spacing: .01em;
 	line-height: 1.1em;
 	text-transform: none;
-	margin: .67em 0;
+	/*margin: .67em 0;*/
 	display: block;
 	font-size: 4em;
 	font-weight: bold;
@@ -96,7 +96,7 @@ h1, h2, h3, h4, h5 {
 
 #intro{
 	color: #fff;
-	margin-top: 8vh;
+	margin-top: 2em;
 }
 
 #intro h1{
@@ -116,7 +116,7 @@ h1, h2, h3, h4, h5 {
 	font-size: 1.8em;
 	text-align: center;
 	position: relative;
-	
+	padding-bottom: 1.5em;
 
 }
 
@@ -266,27 +266,18 @@ a {
 		z-index:-1;
 	}
 	.backgroundImg{
-		height: 43vh;
+		/*height: 43vh;*/
 	}
 
 	#romi_icon_bar{
 		text-align: center;
 		margin: auto;
 	}
-	
-	#intro{
-		margin-top: 0;
-		height: 40vh;
-	}
 
 	#romi_contact{
 		height: 6vh;
 	}
 
-	#intro{
-		height: 35vh;
-		margin-top: 3vh;
-	}
 	.card-text{
 		padding-bottom: 2vh;
 	}
@@ -300,10 +291,6 @@ a {
 
 /* 550 and up */	
 @media screen and (min-width:550px) {
-	#intro{
-		height: 35vh;
-		margin-top: 5vh;
-	}
 
 }
 
