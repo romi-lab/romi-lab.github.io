@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ME567 Lab Session</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+</head>
+
+<body>
+<div class="wrapper">
+    <nav id="sidebar">
+
+        <ul class="list-unstyled components">
+            <p>Menu</p>
+
+            <li>
+                <a href="Functions.html">Functions</a>
+            </li>
+            <li>
+                <a href="SystemModeling.html">Systems Modeling</a>
+            </li>
+            <li>
+                <a href="SystemAnalysis.html">System Analysis</a>
+            </li>
+            <li>
+                <a href="Simulation.html">Simulation</a>
+            </li>
+            <li>
+                <a href="Control.html">Control</a>
+            </li>
+            <li>
+                <a href="LabReport.html">Lab Report</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container-fluid">
+        <div class="row header">
+            <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <i class="fa fa-bars"></i>
+                <!-- <span>Menu</span> -->
+            </button>
+            <div class="col-10 col-xl-auto h2Div" onclick="location.href='index.html';">
+                <h2>ME567 Lab Session -- Control</h2>
+            </div>
+
+        </div>
+        </br>
+        <div class="row justify-content-md-center editor">
+            <div class="col-12 col-xl-8 mainContent">
+                <div>
+                    In previous sections, we have learnt the basic skills to create a simulation using Matlab/Octave. Now,
+                    we will use these skills to implement our own controller. In this section, we use the PID controller
+                    as an example.
+                    </br></br>
+                    <h4>
+                        Basic Knowledge of PID Control
+                    </h4>
+                    <hr>
+                    PID control stands for the Proportional-Integral-Derivative control. We can read from its name that
+                    it consists of three parts, i.e., the proportional, integral, and derivative control. The following
+                    figure shows the structure of a system controlled by a PID controller.
+                    </br></br>
+                    <div class="col-12 col-xl">
+                            <pre>
+                            <img src="pic/pid.jpg" width="500" height="200">
+                            </pre>
+                    </div>
+                    The usefulness of PID controls lies in their general feasibility to most control systems. In particular, 
+                    PID controls prove to be most useful when the mathematical model of the plant is unknown. 
+                    In the field of process control systems, it is well known that the 
+                    basic and modified PID control schemes have proved their usefulness in providing satisfactory control, 
+                    although in many given situations they may not provide optimal control.There are many variants of PID 
+                    controller, such as P controller, PI controller, and PD controller.
+                    <br><br>
+                    As mentioned before, the PID controller consists of three parts and it can be depicted by the following form.
+                    
+                    $$u(t)=K_pe(t)+K_i\int e(t)dt+K_d\frac{de(t)}{dt}$$
+
+                    Each part has a gain parameter, denoted by
+                    $K_p$ for proportional, $K_i$ for integral, and $K_d$ for derivative, respectively. The performance of the PID
+                    controller is governed by these three gain parameters.
+                    <br><br>
+                    Larger $K_p$ usaully leads to faster response since the larger the error, the larger the proportional term 
+                    compensation. However, an excessively large $K_p$ could cause the instability and oscillation.
+                    <br><br>
+                    The integral part is usually used for the elimination of offset caused by disturbance, etc.
+                    <br><br>
+                    The derivative part can mitigate the overshoot and stability problem arised from a proportional controller with a high gain.
+                    <br><br>
+                    The following table presents the characteristics of different part of the PID controller.
+                    <br><br>
+                    <div class="col-12 col-xl">
+                        <pre>
+                        <img src="pic/param.jpg" width="500" height="250">
+                        </pre>
+                    </div>
+                    
+                    <h4>
+                        Implementation of PID Controller
+                    </h4>
+                    <hr>
+                    In the previous section, we were discussing the PID controller in an analog way, that is, we are using a 
+                    continuous PID controller to regulate a continuous system. However, to implement the PID controller in a 
+                    simulation or to a real systems, such as robots, we usually need to design it in a discrete way.
+                    <br><br>
+                    There are many methods to implement the discrete PID controller. In this section, we discuss two of them, which
+                    are most commonly used.
+                    </br></br>
+                    <h5>
+                        Positional PID Control
+                    </h5>
+                    Positional PID is an approximation of the analog PID. For this algorithm, we use a series of sampling time poins
+                    to replace the continuous time, use the summation to approximate the integration, and use the difference equation to 
+                    approximate the differential. The approximations are as follows:
+
+                    $$
+                    \left\{\begin{aligned}
+                    & t=kT, k=0,1,2,\dots\\
+                    & \int_0^te(t)dt\approx T\sum_{j=0}^ke(j)\\
+                    & \frac{de(t)}{dt}\approx\frac{e(k)-e(k-1)}{T}
+                    \end{aligned}\right.
+                    $$
+
+                    where $T$ is the sampling period, $e(k)=e(kT)$. Therefore, we can obtain the discrete PID controller as 
+                    the following form:
+
+                    $$
+                    u(k)=K_pe(k)+k_iT\sum_{j=0}^ke(j)+K_d\frac{e(k)-e(k-1)}{T}
+                    $$
+
+                    <h5>
+                        Incremental PID Control
+                    </h5>
+                    The incremental PID control can be derived from the positional PID control. We define a control increment
+
+                    $$
+                    \Delta u(k)=u(k)-u(k-1)
+                    $$
+
+                    Using the controller we derived in the positional PID control, we can obtain the incremental PID controller
+
+                    $$
+                    \Delta u(k)=K_p(e(k)-e(k-1))+K_iTe(k)+K_d\frac{e(k)-2e(k-1)+e(k-2)}{T}
+                    $$
+
+                    We accumulatively sum the control increment to update the PID controller. Compared with the positional PID
+                    controller, the incremental PID controller doesn't require to record the errors at all steps and only involves
+                    the current error and the errors at the last two steps.
+                    <br><br>
+                    <h5>
+                        Parameter Tuning
+                    </h5>
+                    One key to implement the PID controller well is the tuning of the three gain parameters. However, tuning the parameters
+                    is usually empirical and there's no formal analytical ways to do it. Many methods have been developed to faciliate the
+                    parameters tuning. Here, we present a most commonly used method.
+                    <br><br>
+                    The basic routine is shown in the following table.
+                    <br><br>
+                    <div class="col-12 col-xl">
+                        <pre>
+                        <img src="pic/tuning.jpg" width="500" height="300">
+                        </pre>
+                    </div>
+                    1. At the beginning, set all gains to zero.
+                    <br>
+                    2. Increase the P gain until the response to a disturbance is steady oscillation.
+                    <br>
+                    3. Increase the D gain until the oscillations go away (i.e. it's critically damped).
+                    <br>
+                    4. Repeat steps 2 and 3 until increasing the D gain does not stop the oscillations.
+                    <br>
+                    5. Set P and D to the last stable values.
+                    <br>
+                    6. Increase the I gain until it brings you to the setpoint with the number of
+                    oscillations desired (normally zero. otherwise a quicker response can be
+                    obtained if you don't mind a couple oscillations of overshoot)
+                    <br><br>
+                    <h5>
+                        Example
+                    </h5>
+                    Now let us use an example to see how the implementation of PID controller works. Consider a system with
+                    the following transfer function:
+                    $$
+                    G(s)=\frac{523500}{s^3+87.35s^2+10470s}
+                    $$
+                    we set the sampling period as $dt=0.001$s and discretize the system using $z$-transformation, then we
+                    can obtain the discrete system:
+                    $$
+                    y(k)-2.9603y(k-1)+2.8227y(k-2)-0.9164y(k-3)=10^{-3}\times[0.0853u(k-1)+0.3338u(k-2)+0.0817u(k-3)]
+                    $$
+                    Now, we adopt the positional PID controller to drive the system to track a step signal with amplitude of 1. Create
+                    a new m file and type the following script in it, then run the script and you can obtain the simulation
+                    result.
+                    <div class="codeClass">
+                        <code><pre>
+                            close all;
+                            clear; clc;
+
+                            % uncomment the following line if you are using Octave.
+                            % pkg load control
+
+                            %% parameters
+                            dt = 0.001;   % sampling period
+
+                            % initial values
+                            u_1 = 0.0;    % u(k-1)
+                            u_2 = 0.0;    % u(k-2)
+                            u_3 = 0.0;    % u(k-3)
+
+                            x_1 = 0.0;    % x(k-1)
+                            x_2 = 0.0;    % x(k-2)
+                            x_3 = 0.0;    % x(k-3)
+
+                            e_curr = 0; % current error
+                            e_last = 0; % last error
+                            e_sum = 0;  % interation
+                            e_diff = 0; % differential
+
+                            % gain parameters
+                            kp = 0.5;
+                            ki = 0.001;
+                            kd = 0.001;
+
+                            %% system discretization
+                            sys = tf(5.235e005,[1,87.35,1.047e004,0]);
+                            dsys = c2d(sys,dt,'z');
+                            [num,den] = tfdata(dsys,'v');
+                            n = size(num, 2);
+                            num = num(n-2:n);
+
+                            for k=1:1:2000
+
+                                time(k)=k*dt;
+
+                                % controller
+                                u(k) = kp*e_curr + ki*e_sum + kd*e_diff;
+
+                                %Linear model
+                                x(k)=-den(2)*x_1-den(3)*x_2-den(4)*x_3+num(1)*u_1+num(2)*u_2+num(3)*u_3;
+
+                                % data recording
+                                xd(k) = 1;  % step singal
+                                error(k) = xd(k)-x(k);
+
+                                % update
+                                e_last = e_curr;
+                                e_curr = error(k);
+                                e_sum = e_sum + e_curr*dt;
+                                e_diff = (e_curr - e_last)/dt;
+
+                                u_3 = u_2; u_2 = u_1; u_1 = u(k);
+                                x_3 = x_2; x_2 = x_1; x_1 = x(k);
+
+                            end
+
+                            %% plot data
+                            figure(1);
+                            plot(time,xd,'r',time,x,'k','linewidth',1);
+                            xlabel('time(s)');ylabel('xd,x');
+                            legend('Ideal position signal','Position tracking');
+                        </pre>
+                        </code>
+                    </div>
+                    <br><br>
+                    <div class="col-12 col-xl">
+                        <pre>
+                        <img src="pic/pid_sim.jpg" width="500" height="300">
+                        </pre>
+                    </div>
+                </div>
+                </br>
+
+
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col col-md-2 prev">
+                <p><a href="Simulation.html"> &#10094; Back </a></p>
+            </div>
+            <div class="col"></div>
+            <div class="col col-md-2 next">
+                <p><a href="LabReport.html">Next &#10095; </a></p>
+            </div>
+        </div>
+        <div class="backToTop">
+            <p><a href="#top">Back to Top</a></p>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/code.js"></script>
+</body>
+</html>

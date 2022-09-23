@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Introduction to Simulation: Advanced</title>
+    <title>ME567 Lab Session</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -40,6 +40,9 @@
                 <a href="Simulation.html">Simulation</a>
             </li>
             <li>
+                <a href="Control.html">Control</a>
+            </li>
+            <li>
                 <a href="LabReport.html">Lab Report</a>
             </li>
 
@@ -52,7 +55,7 @@
                 <!-- <span>Menu</span> -->
             </button>
             <div class="col-10 col-xl-auto h2Div" onclick="location.href='index.html';">
-                <h2>ME31002 Lab 2 -- Lab Report</h2>
+                <h2>ME567 Lab Session -- Lab Report</h2>
             </div>
 
         </div>
@@ -63,7 +66,7 @@
                     Lab Report
                 </h4>
                 Individual Report</br>
-                Due date: Thursday, 10 Mar. 2022, 23:59</br>
+                Due date: Sunday, 2 Oct. 2022, 23:59</br>
                 Include: Code, figures, and anything you think it is important :)</br>
                 <hr>
                 <h5>
@@ -136,12 +139,28 @@
                     & \dot x_2 = -bx_2-cx_1+u
                 \end{aligned}\right.$$
                 </br></br>
+                <h5>
+                    Question 5
+                </h5>
+                Consider a system with the following transfer function
+                $$
+                G(s)=\frac{400}{s^2+50s}
+                $$
+                we set the sampling period as 0.001s and discretize it with $z$-transformation as:
+                $$
+                y(k)-1.9512y(k-1)+0.9512y(k-2)=10^{-3}\times[0.1967u(k-1)+0.1935u(k-2)]
+                $$
+                Suppose we have a constraint on the amplitude of the controller such that $\lvert u\rvert\leq10$, and
+                initial conditions of $y(0)=y(-1)=y(-2)=0$ and $u(-1)=u(-2)=0$, please design
+                an incremental PID controller to drive the system to track a step signal with amplitude of 1.
+                <br>
+                *Requirement: You should attach the code of the simulation and the response of $x(k)$ in your report.
             </div>
 
         </div>
         <div class="row">
             <div class="col col-md-2 prev">
-                <p><a href="Simulation.html"> &#10094; Back </a></p>
+                <p><a href="Control.html"> &#10094; Back </a></p>
             </div>
         </div>
         <div class="backToTop">
