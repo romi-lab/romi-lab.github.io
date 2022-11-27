@@ -93,6 +93,16 @@ h1, h2, h3, h4, h5 {
 	padding: 20vh 6vw;
 }
 
+#romi_icon_center{
+	visibility: hidden;
+	height: 0;
+}
+
+#romi_icon{
+	visibility: visible;
+	margin: auto;
+	padding: 1.5vh 0;
+}
 
 #intro{
 	color: #fff;
@@ -154,8 +164,8 @@ a {
 	margin-top: 5%;
 	margin-bottom: 5%;
 }
-#romi_icon_bar{
-	height: 7vh;
+.romi_icon_bar{
+	height: 7.5vh;
 }
 .card{
 	border: 3px solid #F3F3F3;
@@ -269,9 +279,21 @@ a {
 		/*height: 43vh;*/
 	}
 
-	#romi_icon_bar{
+	.romi_icon_bar{
 		text-align: center;
 		margin: auto;
+	}
+	#romi_icon{
+		visibility: hidden;
+		height: 0;
+	}
+
+	#romi_icon_center{
+		visibility: visible;
+		margin: auto;
+		height: auto;
+		margin-left: -1.8vw;
+		padding: 2vh 0;
 	}
 
 	#romi_contact{
@@ -341,7 +363,7 @@ a {
 @media screen and (min-width:2100px) {
 
 	body 						{ font-size:175%; }
-	#romi_icon_bar{
+	.romi_icon_bar{
 		height: 9vh;
 	}	
 	#intro h2{
