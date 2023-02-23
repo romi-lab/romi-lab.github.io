@@ -60,8 +60,9 @@
                         Lab Report
                     </h4> 
                         Individual Report</br>
-                        Due date: 8 Feb 2022, 23:59</br> 
-                        Include: Code, figures, and anything you think it is important :)</br>               
+                        Due date: 3 March 2023, 23:59</br> 
+                        Include: Code, figures, and anything you think it is important :)</br> 
+                        Submit: PDF file only to Blackboard              
                     <hr>
                     <p>
                         <b>Question 1</b></br>
@@ -79,29 +80,65 @@ Capacity of Type B = [1.5, 3, 12.8, 27.8, 40, 52, 72.4];
                         </div></br>        
                         </br>               
                         <b>Question 2</b></br>
-                        There are four subejct groups. Visualize their performances, showing (1) overall and (2) individual performances. </br>
-                        Requirements: At least two types of graph should be used.
+                        There are three datasets (Dataset A to C) as shown below. 
+                        <ol>
+                            <li>Find the relationship between values in each dataset (Dataset A to C).</li>
+                            <li>Generate same datasets with a for loop function and randomly generate one more dataset (Dataset D). </li>
+                            <li>Visualize Dataset A with a line plot, Dataset B with a bar chart, Dataset C with a pie chart, and Dataset D with a histogram chart.</li>
+                        </ol>
+                        Requirement: Show clearly which dataset you are using in each graph. Use only ONE for loop function to generate all the dataset.
                         </br><div class="codeClass">
 <pre><code>
-Subject Group A: 
-    60, 70, 80, 68, 50, 40, 41, 70, 66, 80, 98, 54, 65, 75, 62, 60, 45, 63, 84, 89
-Subject Group B: 
-    40, 31, 86, 60, 74, 95, 90, 77, 68, 42, 91, 92, 94, 68, 55, 73, 35, 72, 59
-Subject Group C: 
-    82, 95, 86, 47, 73, 83, 94, 91, 79, 50, 92, 87, 87, 45, 87, 88, 85, 67, 74, 71
-Subject Group D: 
-    % Randomly generate 30 scores    
+Dataset A: 
+    0.8415, 0.9093, 0.1411, -0.7568, -0.9589, -0.2794, 0.6570, 0.9894, 0.4121, -0.5440
+Dataset B: 
+    4, 8, 12, 16, 20, 24, 28, 32, 36, 40
+Dataset C: 
+    4, 25, 64, 121, 196, 289, 400, 529, 676, 841
+Datasetp D: 
+    % Randomly generate 10 scores    
 </code></pre>
                         </div></br>
                         </br>
                         <b>Question 3</b></br>
-                        Let's plot a 3D sine cosine figure. </br>
-                        Example:
-                        </br>                     
+                        Gravity is ignored in this question. </br>
+                        Consider we have a simple mass spring system as shown below. Without a damper, the system keeps oscillating with a sine function <code>x = 5 * sin(10 *t)</code>.</br>
+                        The oscillation is visualized in 2D and 3D.</br></br>
+                        <div class="row">
+                            <div class="col-12 col-xl-4">
+                                <img src="img/mass_spring.jpg" class="msdIMG">
+                            </div>          
+                            <div class="col-12 col-xl-4">
+                                <img src="img/21.jpg" class="msdIMG">
+                            </div>
+                            <div class="col-12 col-xl-4">
+                                <img src="img/22.jpg" class="msdIMG">
+                            </div>                              
+                        </div>
+                        </br>   
 
-                        <div class="col-12 col-xl-6">
-                            <img src="img/18.jpg">
-                        </div></br>    
+                        To stablize the system, we can add a damper. The displacement is converged with <code>x = 5 * sin(10 *t).*exp(-t)</code> and the system becomes stable.</br>
+                        The oscillation is visualized in 2D and 3D.</br></br>
+
+                        <div class="row">
+                            <div class="col-12 col-xl-4">
+                                <img src="img/mass_spring_damper.jpg" class="msdIMG">
+                            </div>        
+                            <div class="col-12 col-xl-4">
+                                <img src="img/23.jpg" class="msdIMG">
+                            </div>
+                            <div class="col-12 col-xl-4">
+                                <img src="img/24.jpg" class="msdIMG">
+                            </div>                              
+                        </div>
+                        </br></br>  
+                        Regenerate the same results.
+                        <ol>       
+                            <li>Determine the displacement and velocity functions.</li>
+                            <li>Plot the same graphs as shown above (4 graphs in total).</li>
+                        </ol>
+                        </br>
+
                         </br>
                         <b>Question 4</b></br>
                         Linearising a nonlinear function </br>
@@ -114,8 +151,8 @@ Subject Group D:
                         </code></div>
                         </br>
                         </br>
-                        Nonlinear function: 5sin(2t)</br>
-                        Linearise it at x<sub>0</sub> = pi and x<sub>0</sub> = 2</br></br>
+                        Nonlinear function: sine function</br>
+                        Linearise it at x<sub>0</sub> = pi and x<sub>0</sub> = 5</br></br>
                         Plot the nonlinear function and the linearised functions.</br>
                         Example:
                         </br>     
