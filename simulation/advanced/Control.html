@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ME567 Lab Session</title>
+    <title>Advanced Matlab/Octave Tutorial</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -27,9 +27,9 @@
         <ul class="list-unstyled components">
             <p>Menu</p>
 
-<!--             <li>
+            <li>
                 <a href="Functions.html">Functions</a>
-            </li> -->
+            </li>
             <li>
                 <a href="SystemModeling.html">Systems Modeling</a>
             </li>
@@ -54,7 +54,7 @@
                 <!-- <span>Menu</span> -->
             </button>
             <div class="col-10 col-xl-auto h2Div" onclick="location.href='index.html';">
-                <h2>ME567 Lab Session -- Control</h2>
+                <h2>Advanced Matlab/Octave Tutorial -- Control</h2>
             </div>
 
         </div>
@@ -113,9 +113,38 @@
                         Implementation of PID Controller
                     </h4>
                     <hr>
-                    In the previous section, we were discussing the PID controller in an analog way, that is, we are using a 
-                    continuous PID controller to regulate a continuous system. However, to implement the PID controller in a 
-                    simulation or to a real systems, such as robots, we usually need to design it in a discrete way.
+                    In the previous section, we discussed the basic knowledge of the PID controller. Now, let's see how to
+                    implement a PID controller in Matlab/Octave. Basicly, there are two types of implementation, which are
+                    the continuous method and the discrete method.
+                    <br><br>
+                    First, let's learn the continuous way to implement a PID controller.
+                    </br></br>
+                    <h5>
+                        Transfer Function
+                    </h5>
+                    As mentioned in previous section, a common way to represent the system is the transfer function. Similarly,
+                    we can also calculate the transfer function of the PID controller by simple Laplace transformation.
+                    The transfer function in the Laplace domain of the PID controller is
+
+                    $$
+                    G_c=K_p+\frac{K_i}{s}+K_ds
+                    $$
+
+                    The block diagram of the closed-loop system with a PID controller looks like:
+                    <br><br>
+                    <div class="col-12 col-xl">
+                        <pre>
+                        <img src="pic/pid_trans.jpg" width="500" height="150">
+                        </pre>
+                    </div>
+                    By using the knowledge we learnt in the Sec. Systems Modeling, we can easily obtain the transfer
+                    function of the closed-loop system. Then, utilize the knowledge we learnt in Sec. Systems Analysis,
+                    we can examine the time response of the closed-loop system with the PID controller. Now, we finally
+                    implement the PID controller in a continuous way.
+
+                    <br><br>
+                    However, to implement the PID controller to a real systems, such as robots, we usually need to design
+                    it in a discrete way. Now, let's consider the implementation of PID controller in a discrete way.
                     <br><br>
                     There are many methods to implement the discrete PID controller. In this section, we discuss two of them, which
                     are most commonly used.
@@ -197,88 +226,39 @@
                     $$
                     G(s)=\frac{523500}{s^3+87.35s^2+10470s}
                     $$
-                    we set the sampling period as $dt=0.001$s and discretize the system using $z$-transformation, then we
-                    can obtain the discrete system:
-                    $$
-                    y(k)-2.9603y(k-1)+2.8227y(k-2)-0.9164y(k-3)=10^{-3}\times[0.0853u(k-1)+0.3338u(k-2)+0.0817u(k-3)]
-                    $$
-                    Now, we adopt the positional PID controller to drive the system to track a step signal with amplitude of 1. Create
+
+                    Now, we design a PID controller in the form of transfer function to drive the system to track a step signal with amplitude of 1. Create
                     a new m file and type the following script in it, then run the script and you can obtain the simulation
                     result.
                     <div class="codeClass">
                         <code><pre>
                             close all;
-                            clear; clc;
+                            clear;
 
-                            % uncomment the following line if you are using Octave.
-                            % pkg load control
+                            % System function
+                            G = tf(5.235e005,[1,87.35,1.047e004,0]);
+                            % PID controller, K_p=0.5, K_i=K_d=0.001
+                            G_c = tf([0.001, 0.5, 0.001], [1, 0]);
 
-                            %% parameters
-                            dt = 0.001;   % sampling period
+                            sys1 = series(G, G_c);
+                            % Closed-loop system
+                            sys2 = feedback(sys1, 1);
 
-                            % initial values
-                            u_1 = 0.0;    % u(k-1)
-                            u_2 = 0.0;    % u(k-2)
-                            u_3 = 0.0;    % u(k-3)
+                            t = 0:0.001:2;
+                            [y, t] = step(sys2, t);
 
-                            x_1 = 0.0;    % x(k-1)
-                            x_2 = 0.0;    % x(k-2)
-                            x_3 = 0.0;    % x(k-3)
-
-                            e_curr = 0; % current error
-                            e_last = 0; % last error
-                            e_sum = 0;  % interation
-                            e_diff = 0; % differential
-
-                            % gain parameters
-                            kp = 0.5;
-                            ki = 0.001;
-                            kd = 0.001;
-
-                            %% system discretization
-                            sys = tf(5.235e005,[1,87.35,1.047e004,0]);
-                            dsys = c2d(sys,dt,'z');
-                            [num,den] = tfdata(dsys,'v');
-                            n = size(num, 2);
-                            num = num(n-2:n);
-
-                            for k=1:1:2000
-
-                                time(k)=k*dt;
-
-                                % controller
-                                u(k) = kp*e_curr + ki*e_sum + kd*e_diff;
-
-                                %Linear model
-                                x(k)=-den(2)*x_1-den(3)*x_2-den(4)*x_3+num(1)*u_1+num(2)*u_2+num(3)*u_3;
-
-                                % data recording
-                                xd(k) = 1;  % step singal
-                                error(k) = xd(k)-x(k);
-
-                                % update
-                                e_last = e_curr;
-                                e_curr = error(k);
-                                e_sum = e_sum + e_curr*dt;
-                                e_diff = (e_curr - e_last)/dt;
-
-                                u_3 = u_2; u_2 = u_1; u_1 = u(k);
-                                x_3 = x_2; x_2 = x_1; x_1 = x(k);
-
-                            end
-
-                            %% plot data
-                            figure(1);
-                            plot(time,xd,'r',time,x,'k','linewidth',1);
-                            xlabel('time(s)');ylabel('xd,x');
-                            legend('Ideal position signal','Position tracking');
+                            plot(t, ones(size(t)), 'Color', 'r', 'LineWidth', 1)
+                            hold on;
+                            plot(t, y, 'Color', 'k', 'LineWidth', 1)
+                            xlabel('time (s)')
+                            legend('Reference', 'Control result', 'Location', 'southeast')
                         </pre>
                         </code>
                     </div>
                     <br><br>
                     <div class="col-12 col-xl">
                         <pre>
-                        <img src="pic/pid_sim.jpg" width="500" height="300">
+                        <img src="pic/pid_sim.jpg" width="500" height="400">
                         </pre>
                     </div>
                 </div>

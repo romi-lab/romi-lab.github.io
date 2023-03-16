@@ -1,5 +1,5 @@
 % uncomment the next line if you are using Octave
-%pkg load control;
+pkg load control;
 
 s = tf('s');
 sys = 1/(s^2+0.6*s+1);

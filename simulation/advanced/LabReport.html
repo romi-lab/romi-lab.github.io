@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ME567 Lab Session</title>
+    <title>Advanced Matlab/Octave Tutorial</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -27,9 +27,9 @@
         <ul class="list-unstyled components">
             <p>Menu</p>
 
-<!--             <li>
+            <li>
                 <a href="Functions.html">Functions</a>
-            </li> -->
+            </li>
             <li>
                 <a href="SystemModeling.html">Systems Modeling</a>
             </li>
@@ -55,45 +55,46 @@
                 <!-- <span>Menu</span> -->
             </button>
             <div class="col-10 col-xl-auto h2Div" onclick="location.href='index.html';">
-                <h2>ME567 Lab Session -- Lab Report</h2>
+                <h2>Advanced Matlab/Octave Tutorial -- Lab Report</h2>
             </div>
 
         </div>
         </br>
         <div class="row justify-content-md-center editor">
             <div class="col-12 col-xl-8 mainContent">
-                <h3>
+                <h4>
                     Lab Report
-                </h3>
+                </h4>
                 Individual Report</br>
-                Due date: Sunday, 27 Nov. 2022, 23:59</br>
+                Due date: Sunday, 2 April 2022, 23:59</br>
                 Include: Code, figures, and anything you think it is important :)</br>
                 <hr>
-                <h3>
-                    Question 1
-                </h3>
-                Given the following dynamic system $\ddot{x}+2\dot{x}+10x=t^2$ with initial conditions
-                $x(0)=0$ and $\dot x(0)=0$, and $t$ is the time, manually calculate the Laplace transformation and represent
+                <h5>
+                    Question 1 (20 Pts.)
+                </h5>
+                Given the following dynamic system ${m}\ddot{x}+2\dot{x}+10x=5u$, for $m=4$ and $u$ as the input, with initial conditions
+                $x(0)=0$ and $\dot x(0)=0$. Manually calculate the transfer function and represent
                 it in Matlab/Ocatve. Calculate the Laplace transformation's partial fraction decomposition (i.e. [r, p, k])
                 by Matlab/Octave and write down the complete form (i.e. the function) in your lab report.
                 </br></br>
-                <h3>
-                    Question 2
-                </h3>
-                Compute the transfer function of the following block diagram and analyze the stability using Matlab/Octave.
+                <h5>
+                    Question 2 (20 Pts.)
+                </h5>
+                Compute the total transfer function $Y/U$ of the following system, compute the poles, draw the pole-zero map and the root locus
+                using Matlab/Octave.
                 </br></br>
                 <div class="col-12 col-xl-10">
                     <pre>
-                        <img src="pic/lr1.jpg" width="450" height="150">
+                        <img src="pic/lr1.jpg" width="450" height="200">
                     </pre>
                 </div>
-                <h3>
-                    Question 3
-                </h3>
-                Given the following transfer function, calculate the step response, impulse response and the time response
-                with a square wave input of period 8s with amplitude 1;
+                <h5>
+                    Question 3 (20 Pts.)
+                </h5>
+                Given the following transfer function, calculate the unit step response, impulse response, and the time response
+                with a square wave input of period 5s with amplitude 1;
                 </br></br>
-                $$G(s)=\frac{16}{s^2+3s+16}$$
+                $$G(s)=\frac{8(s + 2)}{(s + 3.3)(2s + 7)}$$
                 </br>
                 Hint: the syntax of generating square wave in Matlab is
                 <div class="codeClass">
@@ -117,44 +118,37 @@
                         <img src="pic/lr2.jpg" width="400" height="300">
                     </pre>
                 </div>
-                <h3>
-                    Question 4
-                </h3>
-                Consider the following mass-damper-spring system, we can depict it with an ODE
-                $m\ddot{x}+c\dot x+kx=f$.
+                <h5>
+                    Question 4 (20 Pts.)
+                </h5>
+                Consider the following mass-damper-spring system,
                  </br></br>
                 <div class="col-12 col-xl-10">
                     <pre>
-                        <img src="pic/lr3.jpg" width="400" height="200">
+                        <img src="pic/lr3.jpg" width="300" height="150">
                     </pre>
                 </div>
-                Suppose we have $m=1$, $c=2$, $k=1$, $\dot x(0)=0$ and $x(0)=0$, create a simulation to show the response of $x$
-                under a constant force $f=1$.
+                Suppose we have $m=1$, $b_1=3$, $b_2=2$, $k=1$, $\dot x(0)=0$ and $x(0)=0$, use the ODE solver to create
+                a simulation to show the response of $x$ under a constant force $f=1$.
                 </br></br>
-                Hint: For a given second-order system $\ddot{x}+b\dot{x}+cx=u$, denote
+                Hint: For a second-order system $\ddot{x}+b\dot{x}+cx=u$, denote
                 $x_1=x, x_2=\dot{x}$, then the system can be rewritten as
                 </br></br>
                 $$\left\{\begin{aligned}
                     & \dot x_1=x_2\\
                     & \dot x_2 = -bx_2-cx_1+u
                 \end{aligned}\right.$$
-<!--                 </br></br>
                 <h5>
-                    Question 5
+                    Question 5 (20 Pts.)
                 </h5>
-                Consider a system with the following transfer function
+                Consider a system with the following dynamics
                 $$
-                G(s)=\frac{400}{s^2+50s}
+                \ddot{x}+5\dot x=5u
                 $$
-                we set the sampling period as 0.001s and discretize it with $z$-transformation as:
-                $$
-                y(k)-1.9512y(k-1)+0.9512y(k-2)=10^{-3}\times[0.1967u(k-1)+0.1935u(k-2)]
-                $$
-                Suppose we have a constraint on the amplitude of the controller such that $\lvert u\rvert\leq10$, and
-                initial conditions of $y(0)=y(-1)=y(-2)=0$ and $u(-1)=u(-2)=0$, please design
-                an incremental PID controller to drive the system to track a step signal with amplitude of 1.
+                Suppose we have the initial conditions $x(0)=0$ and $\dot x(0)=0$. Please design a controller $u = K_p e$, for $e = r - x$, to
+                drive the system to track a step input $r = - 2$.
                 <br>
-                *Requirement: You should attach the code of the simulation and the response of $x(k)$ in your report. -->
+                *Requirement: You should attach the code of the simulation and the response of the system in your report.
             </div>
 
         </div>

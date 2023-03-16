@@ -7,7 +7,8 @@ pkg load signal;
 t = 0:0.001:20;
 %% transfer function
 s = tf('s');
-G = 16/(s^2+3*s+16);
+%G = 16/(s^2+3*s+16);
+G = 8*(s+7)/((s+3.3)*(2*s+7));
 
 %% step response
 [y1, t] = step(G, t);

@@ -1,7 +1,6 @@
 body{
 	margin:0px;
 	font-family: "Raleway", sans-serif;
-	font-size: 1.5em ;
 	height: 100%;
 }
 .container{
@@ -80,7 +79,6 @@ a, a:hover, a:focus {
 /*	height: 6vh;*/
 	height: auto;
 	background: #111;
-	padding: 1vh;
 }
 
 .btn button{

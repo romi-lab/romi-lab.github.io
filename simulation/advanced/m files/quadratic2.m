@@ -1,5 +1,5 @@
 function [x1,x2] = quadratic2(a,b,c)
-    d = 0;
+d=0;
     function disc  % nested function
         d = sqrt(b^2 - 4*a*c);
     end   % end of function disc

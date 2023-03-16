@@ -2,7 +2,7 @@ clc; clear;
 close all;
 
 % comment the next line if using Matlab
-pkg load control;
+% pkg load control;
 
 % compute the transfer function
 s = tf('s');
@@ -22,3 +22,5 @@ G = feedback(sys4, H2, -1)
 
 % compute the poles
 pole(G)
+
+rlocus(G)
