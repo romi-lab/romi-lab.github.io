@@ -60,86 +60,71 @@
                         Lab Report
                     </h4> 
                         Individual Report</br>
-                        Due date: 3 March 2023, 23:59</br> 
+                        Due date: 3 Oct 2023, 11:59</br> 
                         Include: Code, figures, and anything you think it is important :)</br> 
-                        Submit: PDF file only to Blackboard              
+                        Submit: PDF file only to Blackboard  </br>
+                        email: fangyuan.wang@connect.polyu.hk
                     <hr>
                     <p>
                         <b>Question 1</b></br>
-                        There are three sets of data. Plot the relatioship between the <code>Angular Velocity</code> and <code>Capacity of Type A</code> with <code>Angular Velocity</code> and <code>Capacity of Type B</code>.
+                        There are three sets of data. Plot a line graph of <code>Capacity of Type A</code> and <code>Capacity of Type B</code> in terms of <code>Angular Velocity</code>.
+                        And also add proper labels, legend and title to the graph.
                         </br><div class="codeClass">
 <pre><code>
-Angular Velocity = [10, 22, 55, 77, 140, 380, 455];    
-Capacity of Type A = [2, 6.6, 17.6, 19.1, 31.5, 68.9, 122.4];
-Capacity of Type B = [1.5, 3, 12.8, 27.8, 40, 52, 72.4];
+Angular Velocity = [5, 10, 80, 100, 114, 142, 186];    
+Capacity of Type A = [201, 168, 144, 90, 78, 55, 24];
+Capacity of Type B = [10, 46, 88, 120, 145, 167, 198];
 </code></pre>
                         </div></br>
                         Should have something similar to this:
                         <div class="col-12 col-xl-6">
-                            <img src="img/17.jpg">
+                            <img src="img/q1.jpg">
                         </div></br>        
-                        </br>               
+                        </br>  
+                        
+                        
                         <b>Question 2</b></br>
-                        There are three datasets (Dataset A to C) as shown below. 
-                        <ol>
-                            <li>Find the relationship between values in each dataset (Dataset A to C).</li>
-                            <li>Generate same datasets with a for loop function and randomly generate one more dataset (Dataset D). </li>
-                            <li>Visualize Dataset A with a line plot, Dataset B with a bar chart, Dataset C with a pie chart, and Dataset D with a histogram chart.</li>
-                        </ol>
-                        Requirement: Show clearly which dataset you are using in each graph. Use only ONE for loop function to generate all the dataset.
-                        </br><div class="codeClass">
-<pre><code>
-Dataset A: 
-    0.8415, 0.9093, 0.1411, -0.7568, -0.9589, -0.2794, 0.6570, 0.9894, 0.4121, -0.5440
-Dataset B: 
-    4, 8, 12, 16, 20, 24, 28, 32, 36, 40
-Dataset C: 
-    4, 25, 64, 121, 196, 289, 400, 529, 676, 841
-Dataset D: 
-    % Randomly generate 10 values    
-</code></pre>
-                        </div></br>
+                        Plot the function <code>y = sin(x^3 - 2)</code> for 100 equally spaced values of <code>x</code> in the interval <code>[0,4]</code>, using solid black line. 
+                        Draw a random sample of 10 values of <code>x</code>, and display the respective <code>(x, y)</code> points on the graph with marker red circle. 
+                        
+                        Label the axes and add a title to the graph.
+
+                        <div class="col-12 col-xl-6">
+                            <img src="img/q2.jpg" class="msdIMG">
+                        </div>                               
+
                         </br>
+
+
                         <b>Question 3</b></br>
-                        Gravity is ignored in this question. </br>
-                        Consider we have a simple mass spring system as shown below. Without a damper, the system keeps oscillating with a sine function <code>x = 5 * sin(10 *t)</code>.</br>
-                        The oscillation is visualized in 2D and 3D.</br></br>
-                        <div class="row">
-                            <div class="col-12 col-xl-4">
-                                <img src="img/mass_spring.jpg" class="msdIMG">
-                            </div>          
-                            <div class="col-12 col-xl-4">
-                                <img src="img/21.jpg" class="msdIMG">
-                            </div>
-                            <div class="col-12 col-xl-4">
-                                <img src="img/22.jpg" class="msdIMG">
-                            </div>                              
-                        </div>
-                        </br>   
-
-                        To stablize the system, we can add a damper. The displacement is converged with <code>x = 5 * sin(10 *t).*exp(-t)</code> and the system becomes stable.</br>
-                        The oscillation is visualized in 2D and 3D.</br></br>
-
-                        <div class="row">
-                            <div class="col-12 col-xl-4">
-                                <img src="img/mass_spring_damper.jpg" class="msdIMG">
-                            </div>        
-                            <div class="col-12 col-xl-4">
-                                <img src="img/23.jpg" class="msdIMG">
-                            </div>
-                            <div class="col-12 col-xl-4">
-                                <img src="img/24.jpg" class="msdIMG">
-                            </div>                              
-                        </div>
-                        </br></br>  
-                        Regenerate the same results.
-                        <ol>       
-                            <li>Determine the displacement and velocity functions.</li>
-                            <li>Plot the same graphs as shown above (4 graphs in total).</li>
-                        </ol>
+                        Using loops to implement the 'brute force' sorting algorithm. Consider the numerical array A <code>[1, 2, 3, 4, 5]</code>, and arrange the numbers in descending order <code>[5, 4, 3, 2, 1]</code>. 
+                        </br>
                         </br>
 
+                        Note that the usage of min, max, sort, or any other relevant MATLAB command is prohibited.
+
                         </br>
+                        </br>
+                        Solution:
+                        <ul>
+                            <li>Suppose that there are N elements to sort. Organise a loop which goes from 1 to N − 1. Naturally, the loop does not have to go to N because, once N − 1 values are sorted, so is the last one.</li>
+                        
+                            <li>
+                        In each pass through the loop, one value will be placed in its destination. The first pass will identify
+                        the largest element and place it at the top of the array. The second largest element will be identified
+                        in pass 2, and will replace the second element of A. Thus, at iteration i, we will be positioning an
+                        element at i in A.
+                            </li>
+
+                            <li>
+                        To identify the largest element, set a variable to the smallest value MATLAB can handle, -Inf. Search
+                        through the unsorted part of the array by comparing the current maximum with the array entry. If
+                        array entry is larger, store the value as the new maximum, and the index where this maximum value
+                        is found.
+                            </li>
+                        </ul>
+
+
                         <b>Question 4</b></br>
                         Linearising a nonlinear function </br>
                         To obtain a linear model of a nonlinear system, we assume the variables deviate slightly from an operating condition.</br>
@@ -151,13 +136,13 @@ Dataset D:
                         </code></div>
                         </br>
                         </br>
-                        Nonlinear function: sine function</br>
-                        Linearise it at x<sub>0</sub> = pi and x<sub>0</sub> = 5</br></br>
+                        Nonlinear function: <code>f(x) = 1 / x</code> </br>
+                        Linearise it at x<sub>0</sub> = 0.25 and x<sub>0</sub> = -0.25</br></br>
                         Plot the nonlinear function and the linearised functions.</br>
                         Example:
-                        </br>     
+                        </br>
                         <div class="col-12 col-xl-6">
-                            <img src="img/20.jpg">
+                            <img src="img/q4.jpg">
                         </div></br>                                          
 
                                                                         
