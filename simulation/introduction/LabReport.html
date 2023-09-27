@@ -84,46 +84,23 @@ Capacity of Type B = [10, 46, 88, 120, 145, 167, 198];
                         
                         
                         <b>Question 2</b></br>
-                        Plot the function <code>y = sin(x^3 - 2)</code> for 100 equally spaced values of <code>x</code> in the interval <code>[0,4]</code>, using solid black line. 
-                        Draw a random sample of 10 values of <code>x</code>, and display the respective <code>(x, y)</code> points on the graph with marker red circle. 
-                        
-                        Label the axes and add a title to the graph.
+                        A <code>4x4</code> matrix <code>A = [16 3 2 13; 5 10 11 8; 9 6 7 12; 4 15 14 1]</code>,
 
-                        <div class="col-12 col-xl-6">
-                            <img src="img/q2.jpg" class="msdIMG">
-                        </div>                               
+                        <ul>
+                            <li>1. Calculate the summation of the first row.</li>
+                            <li>2. <code>B = [1 0 0 0; 0 1 0 0; 0 0 1 0; 0 0 0 1]</code> is the identity matrix. The manipulation of A by B should yield A. Check this.</li>
+                            <li>3. What dose component by component multiplication of A and B give?</li>
+                        </ul>                              
 
                         </br>
 
 
                         <b>Question 3</b></br>
-                        Using loops to implement the 'brute force' sorting algorithm. Consider the numerical array A <code>[1, 2, 3, 4, 5]</code>, and arrange the numbers in descending order <code>[5, 4, 3, 2, 1]</code>. 
+                        Using one loop to find the maximum and minimum values in an array <code>A = [8, 2, 5, 9, 4, 6, 3, 1, 6, 5]</code>. </br>
                         </br>
-                        </br>
-
                         Note that the usage of min, max, sort, or any other relevant MATLAB command is prohibited.
-
                         </br>
                         </br>
-                        Solution:
-                        <ul>
-                            <li>Suppose that there are N elements to sort. Organise a loop which goes from 1 to N − 1. Naturally, the loop does not have to go to N because, once N − 1 values are sorted, so is the last one.</li>
-                        
-                            <li>
-                        In each pass through the loop, one value will be placed in its destination. The first pass will identify
-                        the largest element and place it at the top of the array. The second largest element will be identified
-                        in pass 2, and will replace the second element of A. Thus, at iteration i, we will be positioning an
-                        element at i in A.
-                            </li>
-
-                            <li>
-                        To identify the largest element, set a variable to the smallest value MATLAB can handle, -Inf. Search
-                        through the unsorted part of the array by comparing the current maximum with the array entry. If
-                        array entry is larger, store the value as the new maximum, and the index where this maximum value
-                        is found.
-                            </li>
-                        </ul>
-
 
                         <b>Question 4</b></br>
                         Linearising a nonlinear function </br>
