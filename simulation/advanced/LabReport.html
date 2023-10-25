@@ -72,7 +72,7 @@
                 <h5>
                     Question 1 (20 Pts.)
                 </h5>
-                Given the following dynamic system ${m}\ddot{x}+2\dot{x}+10x=5u$, for $m=4$ and $u$ as the input, with initial conditions
+                Given the following dynamic system ${m}\ddot{x}+4\dot{x}+8x=3u$, for $m=2$ and $u$ as the input, with initial conditions
                 $x(0)=0$ and $\dot x(0)=0$. Manually calculate the transfer function and represent
                 it in Matlab/Ocatve. Calculate the Laplace transformation's partial fraction decomposition (i.e. [r, p, k])
                 by Matlab/Octave and write down the complete form (i.e. the function) in your lab report.
@@ -80,22 +80,24 @@
                 <h5>
                     Question 2 (20 Pts.)
                 </h5>
-                Compute the total transfer function $Y/U$ of the following system, compute the poles, draw the pole-zero map and the root locus
+                Compute the total transfer function $C/R$ of the following system, compute the poles, draw the pole-zero map and the root locus
                 using Matlab/Octave.
                 </br></br>
                 <div class="col-12 col-xl-10">
                     <pre>
-                        <img src="pic/lr1.jpg" width="450" height="200">
+                        <img src="pic/lr11.jpg" width="450" height="200">
                     </pre>
                 </div>
                 <h5>
                     Question 3 (20 Pts.)
                 </h5>
-                Given the following transfer function, calculate the unit step response, impulse response, and the time response
-                with a square wave input of period 5s with amplitude 1;
+                Given the following open-loop transfer function,
                 </br></br>
-                $$G(s)=\frac{8(s + 2)}{(s + 3.3)(2s + 7)}$$
+                $$G(s)=\frac{5(s + 20)}{s(s + 4.5883)(s^2 + 3.4118s + 16.346)}$$
                 </br>
+                calculate the transfer function of a unit negative feedback system, then calculate the unit step response, impulse response, and the time response
+                with a square wave input of period 5s with amplitude 1 of the closed-loop system through matlab/octave;
+                </br></br>
                 Hint: the syntax of generating square wave in Matlab is
                 <div class="codeClass">
                     <code><pre>
@@ -128,8 +130,8 @@
                         <img src="pic/lr3.jpg" width="300" height="150">
                     </pre>
                 </div>
-                Suppose we have $m=1$, $b_1=3$, $b_2=2$, $k=1$, $\dot x(0)=0$ and $x(0)=0$, use the ODE solver to create
-                a simulation to show the response of $x$ under a constant force $f=1$.
+                Suppose we have $m=1$, $b_1=2$, $b_2=3$, $k=1$, $\dot x(0)=0$ and $x(0)=0$, use the ODE solver to create
+                a simulation to show the response of $x$ under a constant force $f=1.5$.
                 </br></br>
                 Hint: For a second-order system $\ddot{x}+b\dot{x}+cx=u$, denote
                 $x_1=x, x_2=\dot{x}$, then the system can be rewritten as
@@ -138,7 +140,7 @@
                     & \dot x_1=x_2\\
                     & \dot x_2 = -bx_2-cx_1+u
                 \end{aligned}\right.$$
-                <h5>
+                <!--<h5>
                     Question 5 (20 Pts.)
                 </h5>
                 Consider a system with the following dynamics
@@ -148,7 +150,7 @@
                 Suppose we have the initial conditions $x(0)=0$ and $\dot x(0)=0$. Please design a controller $u = K_p e$, for $e = r - x$, to
                 drive the system to track a step input $r = - 2$.
                 <br>
-                *Requirement: You should attach the code of the simulation and the response of the system in your report.
+                *Requirement: You should attach the code of the simulation and the response of the system in your report.-->
             </div>
 
         </div>
