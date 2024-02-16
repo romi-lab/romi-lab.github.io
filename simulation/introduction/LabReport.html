@@ -60,49 +60,71 @@
                         Lab Report
                     </h4> 
                         Individual Report</br>
-                        Due date: 3 Oct 2023, 11:59</br> 
+                        Due date: 25 Feb 2024, 11:59</br> 
                         Include: Code, figures, and anything you think it is important :)</br> 
                         Submit: PDF file only to Blackboard  </br>
-                        email: fangyuan.wang@connect.polyu.hk
+                        email: fangyuan.wang@connect.polyu.hk (WANG Fangyuan)
                     <hr>
+
+                    <h5>Question 1</h5>
+
                     <p>
-                        <b>Question 1</b></br>
-                        There are three sets of data. Plot a line graph of <code>Capacity of Type A</code> and <code>Capacity of Type B</code> in terms of <code>Angular Velocity</code>.
-                        And also add proper labels, legend and title to the graph.
-                        </br><div class="codeClass">
-<pre><code>
-Angular Velocity = [5, 10, 80, 100, 114, 142, 186];    
-Capacity of Type A = [201, 168, 144, 90, 78, 55, 24];
-Capacity of Type B = [10, 46, 88, 120, 145, 167, 198];
-</code></pre>
-                        </div></br>
-                        Should have something similar to this:
-                        <div class="col-12 col-xl-6">
-                            <img src="img/q1.jpg">
-                        </div></br>        
-                        </br>  
-                        
-                        
-                        <b>Question 2</b></br>
-                        A <code>4x4</code> matrix <code>A = [16 3 2 13; 5 10 11 8; 9 6 7 12; 4 15 14 1]</code>,
+                        Matrix <code>P</code> is given by <code>P = [9 6 3; 4 7 11; 2 1 8]</code>
+
+                        Matrix <code>Q</code> is defined as <code>Q = [1 0 0; 0 1 0; 0 0 1]</code>, which is an identity matrix.
 
                         <ul>
-                            <li>1. Calculate the summation of the first row.</li>
-                            <li>2. <code>B = [1 0 0 0; 0 1 0 0; 0 0 1 0; 0 0 0 1]</code> is the identity matrix. The manipulation of A by B should yield A. Check this.</li>
-                            <li>3. What dose component by component multiplication of A and B give?</li>
-                        </ul>                              
+                            <li>Calculate the summation of all elements of <code>P</code>.</li>
+                            <li>Calculate the determinant of <code>P</code>. If it's not zero, compute and display the inverse of <code>P</code>. </li>
+                            <li>The manipulation of <code>P</code> by <code>Q</code> should yield <code>P</code>. Verify this by computing <code>P * Q</code> and <code>Q * P</code>, and check if both results are equal to <code>P</code>. </li>
+                            <li>What does component by component division of <code>P</code> and <code>Q</code> give? Handle the case when there is a division by zero. </li>
+                            <li>Find the eigenvalues and eigenvectors of <code>P</code>. </li>
+                        </ul>
+                    </p>
 
-                        </br>
+                    <h5>Question 2</h5>
 
+                    <p>
+                        Consider the array <code>A = [12, 7, 15, 22, 17, 2, 27, 30, 9, 44]</code> .
+                        <ul>
+                        <li>Write a loop that prints each element of <code>A</code> if it is an even number. </li>
+                        <li>Write a loop that calculates the sum of the elements of <code>A</code>. </li>
+                        <li>Modify the loop from question 2 to exit if the sum exceeds 100 and print the index at which this happens. </li>
+                        <li>Write an if-else statement in a loop to classify and print each element in <code>A</code> as 'small' if it is less than 10, 'medium' if it is between 10 and 25, and 'large' if it is greater than 25. </li>
+                        </ul>
+                    </p>
 
-                        <b>Question 3</b></br>
-                        Using one loop to find the maximum and minimum values in an array <code>A = [8, 2, 5, 9, 4, 6, 3, 1, 6, 5]</code>. </br>
-                        </br>
-                        Note that the usage of min, max, sort, or any other relevant MATLAB command is prohibited.
-                        </br>
-                        </br>
+                    <h5>Question 3</h5>
 
-                        <b>Question 4</b></br>
+                    <p>
+                        In an experimental physics lab, students are studying the relationship between temperature and the resistance of two types of materials, Material X and Material Y. The data they collected is as follows:
+
+                        <div class="codeClass">
+<pre><code>
+Temperature = [20, 50, 100, 150, 200, 250, 300]; % in degrees Celsius
+Resistance_of_Material_X = [15, 30, 45, 60, 75, 90, 105]; % in ohms
+Resistance_of_Material_Y = [10, 20, 40, 70, 110, 160, 220]; % in ohms
+</code></pre>
+                        </div>
+                        Plot a line graph of <code>Resistance of Material X</code> and <code>Resistance of Material Y</code> in terms of <code>Temperature</code>. And also add proper labels, legend and title to the graph.
+
+                        Requirements:
+                        <ul>
+                            <li>Label the x-axis as "Temperature (°C)" and the y-axis as "Resistance (Ohms)".</li>
+                            <li>Add a legend to distinguish between the two materials.</li>
+                            <li>Add the title "Temperature vs Resistance for Material X and Y".</li>
+                            <li>Use different colors or line styles to distinguish between the two materials.</li>
+                        </ul>
+
+                        </br>Should have something similar to this:
+                        <div class="col-12 col-xl-6">
+                            <img src="img/q3.png">
+                        </div>
+                    </p>
+                        
+                    <h5>Question 4</h5>
+                        
+                    <p>
                         Linearising a nonlinear function </br>
                         To obtain a linear model of a nonlinear system, we assume the variables deviate slightly from an operating condition.</br>
                         Taylor Series: a series expansion of a function about a point</br>
@@ -113,17 +135,14 @@ Capacity of Type B = [10, 46, 88, 120, 145, 167, 198];
                         </code></div>
                         </br>
                         </br>
-                        Nonlinear function: <code>f(x) = 1 / x</code> </br>
-                        Linearise it at x<sub>0</sub> = 0.25 and x<sub>0</sub> = -0.25</br></br>
+                        Nonlinear function: <code>f(x) = x ^ 3</code> </br>
+                        Linearise it at x<sub>0</sub> = 2 and x<sub>0</sub> = -2</br></br>
                         Plot the nonlinear function and the linearised functions.</br>
                         Example:
                         </br>
                         <div class="col-12 col-xl-6">
-                            <img src="img/q4.jpg">
+                            <img src="img/q4.png">
                         </div></br>                                          
-
-                                                                        
-
                     </p>
                 
                 </div>

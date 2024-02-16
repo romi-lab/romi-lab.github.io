@@ -246,6 +246,39 @@ ans =
                         So, we can see that this command creates a row vector with the elements 1 to 10.
 
                         </div></br>
+                        On the other hand, there is a command to generate linearly spaced vectors: <code>linspace</code>. It is similar to the colon operator (:), but gives direct control over the number of points. For example, 
+
+                        </br><div class="codeClass"><code>linspace(0, 2*pi)</code></div>
+                        <div class="codeAns">
+<pre><code>
+ans =
+
+ Columns 1 through 8:
+
+        0   0.0635   0.1269   0.1904   0.2539   0.3173   0.3808   0.4443
+ ...
+ ...
+ Columns 97 through 100:
+
+   6.0928   6.1563   6.2197   6.2832
+</code></pre>
+
+                        </div></br>
+                        generates a row vector of 100 points linearly spaced between and including <code>0</code> and <code>2*pi</code>. 
+                        
+                        </br><div class="codeClass"><code>linspace(0, 2*pi, 2)</code></div>
+                        <div class="codeAns">
+<pre><code>
+ans =
+
+        0   0.8976   1.7952   2.6928   3.5904   4.4880   5.3856   6.2832
+</code></pre>
+
+                        </div></br>
+                        generates a row vector of 8 points linearly spaced between and including <code>0</code> and <code>2*pi</code>. This is useful when we want to divide an interval into a number of subintervals of the same length. 
+
+                        <!-- </div></br> -->
+                    </br></br>
                         Need help? Use <code>help</code> command!
                         </br><div class="codeClass"><code>help colon</code></div>
                         <div class="codeAns">
