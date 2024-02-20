@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,157 +9,192 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body>
-<div class="wrapper">
-    <nav id="sidebar">
+    <div class="wrapper">
+        <nav id="sidebar">
 
-        <ul class="list-unstyled components">
-            <p>Menu</p>
+            <ul class="list-unstyled components">
+                <p>Menu</p>
 
-            <li>
-                <a href="BasicSyntax.html">Basic Syntax</a>
-            </li>
-            <li>
-                <a href="MatrixArithmetic.html">Matrix Arithmetic</a>
-            </li>      
-            <li>
-                <a href="BuiltInFunctions.html">Built-in Functions</a>
-            </li>         
-            <li>
-                <a href="PlottingData.html">Plotting Data</a>
-            </li>                          
-            <li>
-                <a href="LinearAlgebra.html">Linear Algebra</a>
-            </li>  
-            <li>
-                <a href="LoopConditions.html">Loops & Conditions</a>
-            </li>              
-            <li>
-                <a href="LabReport.html">Lab Report</a>
-            </li>                       
+                <li>
+                    <a href="BasicSyntax.html">Basic Syntax</a>
+                </li>
+                <li>
+                    <a href="MatrixArithmetic.html">Matrix Arithmetic</a>
+                </li>
+                <li>
+                    <a href="BuiltInFunctions.html">Built-in Functions</a>
+                </li>
+                <li>
+                    <a href="PlottingData.html">Plotting Data</a>
+                </li>
+                <li>
+                    <a href="LinearAlgebra.html">Linear Algebra</a>
+                </li>
+                <li>
+                    <a href="LoopConditions.html">Loops & Conditions</a>
+                </li>
+                <li>
+                    <a href="LabReport.html">Lab Report</a>
+                </li>
 
-        </ul>
-    </nav>		
-	<div class="container-fluid">	
-        <div class="row header top">
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
-                        <i class="fa fa-bars"></i>
-                        <!-- <span>Menu</span> -->
-                    </button>
-                    <div class="col-10 col-xl-auto h2Div" onclick="location.href='index.html';">
-                        <h2>Introduction to Simulation: Beginner</h2>               
-                    </div>
+            </ul>
+        </nav>
+        <div class="container-fluid">
+            <div class="row header top">
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fa fa-bars"></i>
+                    <!-- <span>Menu</span> -->
+                </button>
+                <div class="col-10 col-xl-auto h2Div" onclick="location.href='index.html';">
+                    <h2>Introduction to Simulation: Beginner</h2>
+                </div>
 
-        </div>  
-        </br>	
-        <div class="row justify-content-md-center editor">
-            <div class="col-12 col-xl-8 mainContent">
+            </div>
+            </br>
+            <div class="row justify-content-md-center editor">
+                <div class="col-12 col-xl-8 mainContent">
                     <h4>
                         Lab Report
-                    </h4> 
-                        Individual Report</br>
-                        Due date: 25 Feb 2024, 11:59</br> 
-                        Include: Code, figures, and anything you think it is important :)</br> 
-                        Submit: PDF file only to Blackboard  </br>
-                        email: fangyuan.wang@connect.polyu.hk (WANG Fangyuan)
+                    </h4>
+                    Individual Report</br>
+                    Due date: 2 Mar 2024 (SAT), 11:59</br>
+                    Include: Code, figures, and anything you think it is important :)</br>
+                    Submit: PDF file only to Blackboard </br>
+                    email: fangyuan.wang@connect.polyu.hk (WANG Fangyuan)
                     <hr>
 
                     <h5>Question 1</h5>
 
                     <p>
-                        Matrix <code>P</code> is given by <code>P = [9 6 3; 4 7 11; 2 1 8]</code>
+                        Matrix <code>P</code> is given by <code>P = [1 2 3 4; 5 6 7 8; 9 10 11 12]</code>, write matlab
+                        code to calculates the following:
 
-                        Matrix <code>Q</code> is defined as <code>Q = [1 0 0; 0 1 0; 0 0 1]</code>, which is an identity matrix.
-
-                        <ul>
-                            <li>Calculate the summation of all elements of <code>P</code>.</li>
-                            <li>Calculate the determinant of <code>P</code>. If it's not zero, compute and display the inverse of <code>P</code>. </li>
-                            <li>The manipulation of <code>P</code> by <code>Q</code> should yield <code>P</code>. Verify this by computing <code>P * Q</code> and <code>Q * P</code>, and check if both results are equal to <code>P</code>. </li>
-                            <li>What does component by component division of <code>P</code> and <code>Q</code> give? Handle the case when there is a division by zero. </li>
-                            <li>Find the eigenvalues and eigenvectors of <code>P</code>. </li>
-                        </ul>
+                    <ul>
+                        <li>Extract the 1st and 3rd row of matrix <code>P</code> and store them in <code>A</code> and
+                            <code>B</code>, respectively.
+                        </li>
+                        <li>Compute the element-by-element multiplication of <code>A</code> and <code>B</code>.</li>
+                        <li>Compute the inner products of <code>A</code> and <code>B</code>.</li>
+                        <li>Given a linear equation <code>Px=b</code>, where x is a vector of variables we want to
+                            solve, and <code>b = [1 0 -1]</code>. Compute <code>x</code> to solve this linear equation.
+                        </li>
+                    </ul>
                     </p>
 
                     <h5>Question 2</h5>
 
                     <p>
-                        Consider the array <code>A = [12, 7, 15, 22, 17, 2, 27, 30, 9, 44]</code> .
-                        <ul>
+                        Consider the vector <code>A = [12, 7, 15, 22, 17, 2, 27, 30, 9, 44]</code> .
+                    <ul>
                         <li>Write a loop that prints each element of <code>A</code> if it is an even number. </li>
-                        <li>Write a loop that calculates the sum of the elements of <code>A</code>. </li>
-                        <li>Modify the loop from question 2 to exit if the sum exceeds 100 and print the index at which this happens. </li>
-                        <li>Write an if-else statement in a loop to classify and print each element in <code>A</code> as 'small' if it is less than 10, 'medium' if it is between 10 and 25, and 'large' if it is greater than 25. </li>
-                        </ul>
+                        <li>Write a loop that calculates the sum of the elements in <code>A</code>. </li>
+                        <li>Modify the loop you write above to exit if the sum exceeds 100 and print the index at which
+                            this happens. </li>
+                        <li>Write an if-else statement in a loop to classify and print each element in <code>A</code> as
+                            'small' if it is less than 10, 'medium' if it is between 10 and 25, and 'large' if it is
+                            greater than 25. </li>
+                    </ul>
                     </p>
 
                     <h5>Question 3</h5>
 
                     <p>
-                        In an experimental physics lab, students are studying the relationship between temperature and the resistance of two types of materials, Material X and Material Y. The data they collected is as follows:
+                        In an experimental physics lab, students are studying the relationship between temperature and
+                        the resistance of two types of materials, Material X and Material Y. The data they collected is
+                        as follows:
 
-                        <div class="codeClass">
-<pre><code>
+                    <div class="codeClass">
+                        <pre><code>
 Temperature = [20, 50, 100, 150, 200, 250, 300]; % in degrees Celsius
 Resistance_of_Material_X = [15, 30, 45, 60, 75, 90, 105]; % in ohms
 Resistance_of_Material_Y = [10, 20, 40, 70, 110, 160, 220]; % in ohms
 </code></pre>
-                        </div>
-                        Plot a line graph of <code>Resistance of Material X</code> and <code>Resistance of Material Y</code> in terms of <code>Temperature</code>. And also add proper labels, legend and title to the graph.
+                    </div>
+                    Plot a line graph of <code>Resistance of Material X</code> and <code>Resistance of Material Y</code>
+                    in terms of <code>Temperature</code>. And also add proper labels, legend and title to the graph.
 
-                        Requirements:
-                        <ul>
-                            <li>Label the x-axis as "Temperature (°C)" and the y-axis as "Resistance (Ohms)".</li>
-                            <li>Add a legend to distinguish between the two materials.</li>
-                            <li>Add the title "Temperature vs Resistance for Material X and Y".</li>
-                            <li>Use different colors or line styles to distinguish between the two materials.</li>
-                        </ul>
+                    Requirements:
+                    <ul>
+                        <li>Label the x-axis as "Temperature (°C)" and the y-axis as "Resistance (Ohms)".</li>
+                        <li>Add a legend to distinguish between the two materials.</li>
+                        <li>Add the title "Temperature vs Resistance for Material X and Y".</li>
+                        <li>Use different colors or line styles to distinguish between the two materials.</li>
+                    </ul>
 
-                        </br>Should have something similar to this:
-                        <div class="col-12 col-xl-6">
-                            <img src="img/q3.png">
-                        </div>
+                    </br>Should have something similar to this:
+                    <div class="col-12 col-xl-6">
+                        <img src="img/q3.png">
+                    </div>
                     </p>
-                        
+
                     <h5>Question 4</h5>
-                        
+
                     <p>
                         Linearising a nonlinear function </br>
-                        To obtain a linear model of a nonlinear system, we assume the variables deviate slightly from an operating condition.</br>
+                        To obtain a linear model of a nonlinear system, we assume the variables deviate slightly from an
+                        operating condition.</br>
                         Taylor Series: a series expansion of a function about a point</br>
                         Taylor Series: linear approximation</br>
                         The linear approximation of the system (function) can be obtained using the tangent line.</br>
-                        <div class="codeClass"><code>
+                    <div class="codeClass"><code>
                         f(x) <span>&asymp;</span> f(x<sub>0</sub>) + f'(x<sub>0</sub>)(x - x<sub>0</sub>)
                         </code></div>
-                        </br>
-                        </br>
-                        Nonlinear function: <code>f(x) = x ^ 3</code> </br>
-                        Linearise it at x<sub>0</sub> = 2 and x<sub>0</sub> = -2</br></br>
-                        Plot the nonlinear function and the linearised functions.</br>
-                        Example:
-                        </br>
-                        <div class="col-12 col-xl-6">
-                            <img src="img/q4.png">
-                        </div></br>                                          
+                    </br>
+                    </br>
+                    Nonlinear function: <code>f(x) = x ^ 3</code> </br>
+                    Linearise it at x<sub>0</sub> = 2 and x<sub>0</sub> = -2</br></br>
+                    Plot the nonlinear function and the linearised functions.</br>
+                    Example:
+                    </br>
+                    <div class="col-12 col-xl-6">
+                        <img src="img/q4.png">
+                    </div></br>
                     </p>
-                
+
+                    <!-- <h5>Question 5</h5>
+                    <p>
+                        Evaluate the function <code>y = sin(x<sup>2</sup>)</code> for <code>x</code> from 0 to 10 in
+                        steps of 0.1. Plot the function.
+                    <ul>
+                        <li>Add labels (<code>x, y</code>).</li>
+                        <li>Add a title (<code>y = sin(x<sup>2</sup></code>).</li>
+                    </ul>
+                    <br>
+                    Example:
+                    </br>
+                    <div class="col-12 col-xl-6">
+                        <img src="img/q5.png">
+                    </div></br>
+                    </p> -->
+
+                    <h5>Question 5</h5>
+                    <p>
+                        Function <code>f(x,y)</code> with two variables defined below.
+                    <div class="col-12 col-xl-2">
+                        <img src="img/q6.png" style="width: 100%; height: 100%">
+                    </div>
+                    Write Matlab code to compute results of <code>f(x,y)</code> for <code>(x,y)</code> are <code>(-1, -2)</code>, <code>(-1, 2)</code>, <code>(1, -2)</code>, and <code>(1, 2)</code>.
+                    </p>
+
                 </div>
 
-        </div> 
-        <div class="row">
-            <div class="col col-md-2 prev">
-                <p> <a href="LoopConditions.html"> &#10094; Back </a></p>
-            </div> 
-        </div>                              
-        <div class="backToTop">
-            <p> <a href="#top">Back to Top</a></p>
-        </div>               	
-	</div>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="js/code.js"></script>
+            </div>
+            <div class="row">
+                <div class="col col-md-2 prev">
+                    <p> <a href="LoopConditions.html"> &#10094; Back </a></p>
+                </div>
+            </div>
+            <div class="backToTop">
+                <p> <a href="#top">Back to Top</a></p>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/code.js"></script>
 </body>
+
 </html>
