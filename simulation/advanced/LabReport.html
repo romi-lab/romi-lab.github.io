@@ -66,12 +66,75 @@
                     Lab Report
                 </h4>
                 Individual Report</br>
-                Due date: Satday, 03 March, 2024, 23:59</br>
+                Due date: Saturday, 23 March, 2024, 23:59</br>
                 Include: Code, figures, and anything you think it is important :)</br>
                 If you have any questions, please contact me by email: fangyuan.wang@connect.polyu.hk (Fangyuan Wang)</br>
                 <hr>
+
                 <h5>
-                    Question 1 (25 Pts.)
+                    Question 1 (10 Pts.)
+                </h5>
+                Write a function that calculates the Fibonacci sequence up to a specified number of terms. 
+                The function should take an input parameter <code>n</code> and return an array containing the Fibonacci sequence
+                 up to the nth term.
+                <br>
+                Please use your function to calculate the results of the following cases:
+                <br>
+                <ul>
+                    <li><code>n = 1</code></li>
+                    <li><code>n = 8</code></li>
+                    <li><code>n = 14</code></li>
+                </ul>
+                Examples:
+                <ul>
+                    <li><code>n = 6</code>, results is <code>0, 1, 1, 2, 3, 5</code></li>
+                </ul>
+
+                <h5>
+                    Question 2 (10 Pts.)
+                </h5>
+                The Game of Life is a cellular automaton devised by the British mathematician John Horton Conway in 1970. 
+                It is the best-known example of a cellular automaton. 
+                <br>
+                This game uses an m x n grid of cells, and each cell begins with one of two states: 
+                alive (noted by a 1) or dead (noted by a 0). Each cell then interacts with the eight cells that surround
+                it (these can be horizontal, vertical, or diagonal) based on these four rules:
+                <br>
+                <ul>
+                    <li>Any live cell with fewer than two live neighbors dies, as if caused by underpopulation.</li>
+                    <li>Any live cell with two or three live neighbors lives on to the next generation.</li>
+                    <li>Any live cell with more than three live neighbors dies, as if by overpopulation.</li>
+                    <li>Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.</li>
+                </ul>
+
+                The next state is created by applying the above rules simultaneously to every cell in the current state, 
+                where births and deaths occur simultaneously. Write a function to compute the next state of the following states.
+
+                <div class="col-12 col-xl-10">
+                    <pre>
+                        <img src="pic/q5.png" width="200" height="200">
+                    </pre>
+                </div>
+
+                Note that you can take the border of the grid as dead cells.
+                <br>
+
+                Examples:
+
+                <div class="col-12 col-xl-10">
+                    <pre>
+                        <img src="pic/grid1.jpg" width="400" height="200">
+                    </pre>
+                </div>
+
+                <div class="col-12 col-xl-10">
+                    <pre>
+                        <img src="pic/grid2.jpg" width="250" height="125">
+                    </pre>
+                </div>
+
+                <h5>
+                    Question 3 (25 Pts.)
                 </h5>
                 Given the following dynamic system $4\ddot{x}+5\dot{x}+2x=9u$, for $u$ as the input, with initial conditions
                 $x(0)=0$ and $\dot x(0)=0$. Manually calculate the transfer function and represent
@@ -79,9 +142,9 @@
                 by Matlab/Octave and write down the complete form (i.e. the function) in your lab report.
                 </br></br>
                 <h5>
-                    Question 2 (25 Pts.)
+                    Question 4 (25 Pts.)
                 </h5>
-                Compute the total transfer function $c/r$ of the following system, compute the poles, draw the pole-zero map and the root locus
+                Compute the total transfer function $C/R$ of the following system, compute the poles, draw the pole-zero map and the root locus
                 using Matlab/Octave.
                 </br></br>
                 <div class="col-12 col-xl-10">
@@ -90,7 +153,7 @@
                     </pre>
                 </div>
                 <h5>
-                    Question 3 (25 Pts.)
+                    Question 5 (25 Pts.)
                 </h5>
                 Consider the following negative feedback system,
                 </br></br>
@@ -107,13 +170,13 @@
                 and $H=2$. Using matlab/octave, calculate the transfer function $C/R$, the unit step response, the impulse response, and the time response
                 with a cosine wave input of period 5s with amplitude 1 of the closed-loop system.
                 </br></br>
-                Hint: the syntax of generating square wave in Matlab is
+                Hint: the syntax of generating cosine wave in Matlab is
                 <div class="codeClass">
                     <code><pre>
                         f = cos(T);
                     </pre></code>
                 </div>
-                For example, to generate a square wave of period 1s with amplitude 1, we can use the following scripts.
+                For example, to generate a cosine wave of period 1s with amplitude 1, we can use the following scripts.
                 <div class="codeClass">
                     <code><pre>
                         t = 0:0.001:10;
@@ -130,7 +193,7 @@
                     </pre>
                 </div>
                 <h5>
-                    Question 4 (25 Pts.)
+                    Question 6 (25 Pts.)
                 </h5>
                 Consider the following mass-damper-spring system,
                  </br></br>
@@ -139,7 +202,7 @@
                         <img src="pic/lr4.png" width="300" height="150">
                     </pre>
                 </div>
-                Suppose we have $m=1$, $c=2$, $k=3$, $\dot x(0)=0$ and $x(0)=0$, use the ODE solver to create
+                Suppose we have $m=14$, $c=2$, $k=3$, $\dot x(0)=0$ and $x(0)=0$, use the ODE solver to create
                 a simulation to show the response of $x$ under a constant force $F=4$.
                 </br></br>
                 Hint: For a second-order system $\ddot{x}+b\dot{x}+cx=u$, denote
