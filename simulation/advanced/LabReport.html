@@ -71,7 +71,7 @@
                 If you have any questions, please contact me by email: fangyuan.wang@connect.polyu.hk (Fangyuan Wang)</br>
                 <hr>
 
-                <h5>
+                <!-- <h5>
                     Question 1 (5 Pts.)
                 </h5>
                 Write a function that calculates the Fibonacci sequence up to a specified number of terms. 
@@ -88,53 +88,11 @@
                 Examples:
                 <ul>
                     <li><code>n = 6</code>, results is <code>0, 1, 1, 2, 3, 5</code></li>
-                </ul>
+                </ul> -->
+
 
                 <h5>
-                    Question 2 (15 Pts.)
-                </h5>
-                The Game of Life is a cellular automaton devised by the British mathematician John Horton Conway in 1970. 
-                It is the best-known example of a cellular automaton. 
-                <br>
-                This game uses an m x n grid of cells, and each cell begins with one of two states: 
-                alive (noted by a 1) or dead (noted by a 0). Each cell then interacts with the eight cells that surround
-                it (these can be horizontal, vertical, or diagonal) based on these four rules:
-                <br>
-                <ul>
-                    <li>Any live cell with fewer than two live neighbors dies, as if caused by underpopulation.</li>
-                    <li>Any live cell with two or three live neighbors lives on to the next generation.</li>
-                    <li>Any live cell with more than three live neighbors dies, as if by overpopulation.</li>
-                    <li>Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.</li>
-                </ul>
-
-                The next state is created by applying the above rules simultaneously to every cell in the current state, 
-                where births and deaths occur simultaneously. Write a function to compute the next state of the following states.
-
-                <div class="col-12 col-xl-10">
-                    <pre>
-                        <img src="pic/q5.png" width="200" height="200">
-                    </pre>
-                </div>
-
-                Note that you can take the border of the grid as dead cells.
-                <br>
-
-                Examples:
-
-                <div class="col-12 col-xl-10">
-                    <pre>
-                        <img src="pic/grid1.jpg" width="400" height="200">
-                    </pre>
-                </div>
-
-                <div class="col-12 col-xl-10">
-                    <pre>
-                        <img src="pic/grid2.jpg" width="250" height="125">
-                    </pre>
-                </div>
-
-                <h5>
-                    Question 3 (20 Pts.)
+                    Question 1 (20 Pts.)
                 </h5>
                 Given the following dynamic system $4\ddot{x}+5\dot{x}+2x=9u$, for $u$ as the input, with initial conditions
                 $x(0)=0$ and $\dot x(0)=0$. Manually calculate the transfer function and represent
@@ -142,7 +100,7 @@
                 by Matlab/Octave and write down the complete form (i.e. the function) in your lab report.
                 </br></br>
                 <h5>
-                    Question 4 (20 Pts.)
+                    Question 2 (20 Pts.)
                 </h5>
                 Compute the total transfer function $C/R$ of the following system, compute the poles, draw the pole-zero map and the root locus
                 using Matlab/Octave.
@@ -153,7 +111,7 @@
                     </pre>
                 </div>
                 <h5>
-                    Question 5 (20 Pts.)
+                    Question 3 (20 Pts.)
                 </h5>
                 Consider the following negative feedback system,
                 </br></br>
@@ -193,7 +151,7 @@
                     </pre>
                 </div>
                 <h5>
-                    Question 6 (20 Pts.)
+                    Question 4 (20 Pts.)
                 </h5>
                 Consider the following mass-damper-spring system,
                  </br></br>
@@ -223,6 +181,61 @@
                 drive the system to track a step input $r = - 2$.
                 <br>
                 *Requirement: You should attach the code of the simulation and the response of the system in your report.-->
+
+                <h5>
+                    Question 5 (20 Pts.)
+                </h5>
+                The <a href="https://en.wikipedia.org/wiki/The_Game_of_Life" style="text-decoration: underline;">Game of Life</a>
+                is a board game originally created in 1860 by Milton Bradley.
+                It is the best-known example of a cellular automaton. 
+                <br>
+                This game uses an <code>m x n</code> grid of cells, and each cell begins with one of two states: 
+                alive (noted by a 1) or dead (noted by a 0). Each cell then interacts with the eight cells that surround
+                it (these can be horizontal, vertical, or diagonal) based on these four rules:
+                <br>
+                <br>
+                <div>
+                    <pre>
+                        <img src="pic/gol.png" width="800">
+                    </pre>
+                </div>
+                <!-- <ul>
+                    <li>Any live cell with $< 2$ live neighbors dies, as if caused by underpopulation.</li>
+                    <li>Any live cell with $2$ or $3$ live neighbors lives on to the next generation.</li>
+                    <li>Any live cell with $> 3$ live neighbors dies, as if by overpopulation.</li>
+                    <li>Any dead cell with $= 3$ live neighbors becomes a live cell, as if by reproduction.</li>
+                </ul> -->
+                <!-- <ul>
+                    <li>Any live cell with fewer than two live neighbors dies, as if caused by underpopulation.</li>
+                    <li>Any live cell with two or three live neighbors lives on to the next generation.</li>
+                    <li>Any live cell with more than three live neighbors dies, as if by overpopulation.</li>
+                    <li>Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.</li>
+                </ul> -->
+                The next state is created by applying the above rules simultaneously to every cell in the current state, 
+                where births and deaths occur simultaneously. Write a function to compute the next state of the following states.
+
+                <div class="col-12 col-xl-10">
+                    <pre>
+                        <img src="pic/q5.png" width="200" height="200">
+                    </pre>
+                </div>
+
+                Note that you can take the border of the grid as dead cells.
+                <br>
+
+                Examples:
+
+                <div class="col-12 col-xl-10">
+                    <pre>
+                        <img src="pic/grid1.jpg" width="400" height="200">
+                    </pre>
+                </div>
+
+                <div class="col-12 col-xl-10">
+                    <pre>
+                        <img src="pic/grid2.jpg" width="250" height="125">
+                    </pre>
+                </div>
             </div>
 
         </div>
