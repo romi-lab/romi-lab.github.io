@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Perceptual Robotics</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/jpg" href="img/favicon.jpg?">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner"></div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid position-relative p-0">
+        <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
+            <a href="index.html" class="navbar-brand p-0">
+                <img class="logo" id="logo1" src="img/logo2.png" alt="Image">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="index.html" class="nav-item nav-link">Home</a>
+                    <a href="environment.html" class="nav-item nav-link">Environment</a>
+                    <a href="cv.html" class="nav-item nav-link">Computer Vision</a>
+                    <a href="control.html" class="nav-item nav-link active">Motion Control</a>
+                    <a href="challenges.html" class="nav-item nav-link">Challenges</a>
+
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid bg-primary py-5 bg-header-tutorial" style="margin-bottom: 90px;">
+            <div class="row py-5">
+                <div class="col-12 pt-lg-5 mt-lg-5 text-center">
+                    <h1 class="display-4 text-white animated zoomIn">Sensor-based Motion Control</h1>
+                    <h5 class="text-white">Instruction</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Guidelines Start -->
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 1000px;">
+                <!-- <h5 class="fw-bold yellow_text text-uppercase">Sensor-based Motion Control</h5> -->
+                <h1 class="mb-0 grey_text">Tutorial</h1>
+            </div>
+            <h5 class="fw-bold yellow_text text-uppercase">Servomotor Control</h5><hr/>
+            Following the instruction, you will learn how to open an RGB camera, how to read and save a picture, and how a specific color is selected and extracted.<br/>
+            Open <b>“Motor”</b> folder <br/><br/>
+            
+            Practice 1:
+            <ul>
+                <li><span>Run </span><strong><span>&quot;servoMotorControl.py&quot;</span></strong></li>
+                <li><span>Input an angle (0-180) for the motor, then observe the motion of the robot.</span></li>
+                <li><span>Press &quot;q&quot; to quit.</span></li>
+            </ul>
+            
+            Practice 2:
+            <ul>
+                <li>Run <b>3DOF.py</b></li>
+                <li>
+                    Press a key to execute the corresponding action:
+                    <ul>
+                        <li><span>&#39;w&#39;: forward</span></li>
+                        <li><span>&#39;s&#39;:  backward</span></li>
+                        <li><span>&#39;a&#39;: left</span></li>
+                        <li><span>&#39;d&#39;: right</span></li>
+                        <li><span>&#39;j&#39;:  look down</span></li>
+                        <li><span>&#39;k&#39;: look up</span></li>
+                        <li><span>&#39;l&#39;:  input an angle to move along a line (51.85-90)</span></li>
+                        <li><span>&#39;p&#39;: control the end effector to move to a certain coordinate</span></li>
+                    </ul>
+                </li>
+                <li>
+                    <p><span>Press &quot;q&quot; to quit.</span></p>
+                </li>
+
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/la9pEhw-40Q?si=0Aj9Z1ee6eZLlbsJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+            </ul>
+            <br/><br/>
+
+           
+            
+
+            <h5 class="fw-bold yellow_text text-uppercase">Visual tracking</h5><hr/>
+            In this section, you will learn the basic knowledge about camera calibration, and calibrate two cameras by yourself. <br/><br/>
+
+            Open “<b>Aruco</b>” folder<br/><br/>
+
+            <ol>
+                <ol>
+                    <li>Run "ArucoTracking.py"</li>
+                    <li>Slowly move the Aruco code to observe the motion of the end effector.</li>
+                    <br/>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/C74oxzyAeV4?si=OFN6OE1T3uUnrLKv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </ol>
+                <br/>
+            </ol>
+            <br/><br/>
+
+
+            <h5 class="fw-bold yellow_text text-uppercase">Proximity Based Control</h5><hr/>
+            In this section, you will learn how to use the feedback data from a proximity sensor to control the robot.<br/><br/>
+
+            Proximity sensors detect the presence of nearby objects without any physical contact. The type of proximity sensor installed on the Mingo platform is a laser rangefinder, also known as a laser telemeter, which uses a laser beam to determine the distance to an object. <br/><br/>
+            <div class="col-lg-1 col-md-12 center">
+                <img class="img-responsive center" src="img/lab2_1.png" alt="" referrerpolicy="no-referrer">
+            </div>
+
+
+            <ol>
+                <li>Check if the proximity sensor is connected to the “USB-TTL” connector. If not, connect them according to the following instructions.</li>
+                <br/>
+                <div class="col-lg-6 col-md-12 center">
+                        <img class="img-responsive center" src="img/lab2_2.png" alt="" >
+                </div>
+                <br/>
+                For the proximity sensor, it uses 4 ports to transfer data. From right to left in Figure (a), we denote them by “GND”, “VDD”, “RXD”, and “TXD” (Connected to the black, red, yellow, and white lines in Figure (a)). <br/><br/>
+                For the “USB to TTL connector”, it also uses 4 ports to receive data. From up to down in Figure (b), we denote them by “VCC”, “TXD”, “RXD”, and “GND” (Connected to the orange, yellow, green and blue lines in Figure (b)). <br/><br/>
+                Connect the proximity sensor and the “USB to TTL connector” ports according to the following correspondence table.<br/><br/>
+                <div class="col-lg center">
+                    <table class="tg"><thead>
+                      <tr>
+                        <th class="tg-k5c1">Proximity Sensor</th>
+                        <th class="tg-k5c1">USB to TTL Connector</th>
+                      </tr></thead>
+                    <tbody>
+                      <tr>
+                        <td class="tg-baqh">White</td>
+                        <td class="tg-baqh">RXD</td>
+                      </tr>
+                      <tr>
+                        <td class="tg-baqh">Yellow</td>
+                        <td class="tg-baqh">TXD</td>
+                      </tr>
+                      <tr>
+                        <td class="tg-baqh">Red</td>
+                        <td class="tg-baqh">5V</td>
+                      </tr>
+                      <tr>
+                        <td class="tg-baqh">Black</td>
+                        <td class="tg-baqh">GND</td>
+                      </tr>
+                    </tbody>
+                    </table>
+                </div>
+
+
+                <li>Open the “proximity” folder and run “proximity_uart.py” to test the performance of the proximity sensor.</li>
+                <li>Put an object in the front of the proximity sensor, see the printed change of the distance.</li>
+                <li>Run “motor_proximity.py”, put an object in the front of the proximity sensor, and vary its position. </li>
+                <br/>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/1_HURHHNpLM?si=1eEfgC514Ch_Ys7z" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </ol>
+
+            <br/><br/>
+
+            <h5 class="fw-bold yellow_text text-uppercase">IMU Based Control</h5><hr/>
+            In this section, you will learn how to use the feedback data from an IMU sensor to control the robot.<br/><br/>
+            IMU measures a body's specific force, angular rate, and sometimes the orientation of the body using a combination of accelerometers, gyroscopes, and sometimes magnetometers. The IMU output the rotation angles of the Mingo’s configuration. <br/><br/>
+
+
+            <ol>
+                <li>Disconnect the proximity sensor and the TTL-USB connector. Connect the IMU to the TTL-USB connector according to the following instructions.</li>
+                <br/>
+                <div class="col-lg-3 col-md-12">
+                    <img class="img-responsive center" src="img/lab2_3.png" alt="">
+                </div>
+                <br/>
+                IMU uses 4 ports to transfer data. From up to down in the Figure, we denote them by “VCC”, “RXD”, “TXD”, and “GND”.<br/>
+                Connect IMU and the “USB to TTL connector” ports according to the following correspondence table.<br/><br/>
+
+                <div class="col-lg center">
+                    <table class="tg"><thead>
+                      <tr>
+                        <th class="tg-k5c1">Proximity Sensor</th>
+                        <th class="tg-k5c1">USB to TTL Connector</th>
+                      </tr></thead>
+                    <tbody>
+                      <tr>
+                        <td class="tg-baqh">White</td>
+                        <td class="tg-baqh">RXD</td>
+                      </tr>
+                      <tr>
+                        <td class="tg-baqh">Yellow</td>
+                        <td class="tg-baqh">TXD</td>
+                      </tr>
+                      <tr>
+                        <td class="tg-baqh">Red</td>
+                        <td class="tg-baqh">5V</td>
+                      </tr>
+                      <tr>
+                        <td class="tg-baqh">Black</td>
+                        <td class="tg-baqh">GND</td>
+                      </tr>
+                    </tbody>
+                    </table>
+                </div>
+                <br/>
+                <br/>
+                <li>Open the “IMU” folder and run “IMU.py” to test the performance of the IMU. Try to rotate the platform in three directions and check the change of the printed result.</li>
+                <li>Run “IMUControl.py”, try to rotate the platform in three directions. </li>
+                <br/>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/ZYXLpKUYYKA?si=JLn-D3E5a3VpI_Dk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+                <br/><br/>
+                
+            
+            </ol>
+            <br/><br/>
+
+
+            <h5 class="fw-bold yellow_text text-uppercase">Challenging Questions </h5><hr/>
+            <ol>
+                <li>Based on the code of "3DOF.py", create a new code script to move the joint based on the below sequence:</li>
+                <ol>
+                    <li>Joint 0: (); Joint 1: (); Joint 2: ();</li>
+                    <li>Joint 0: (); Joint 1: (); Joint 2: ();</li>
+                    <li>Joint 0: (); Joint 1: (); Joint 2: ();</li>
+                    <li>Joint 0: (); Joint 1: (); Joint 2: ();</li>
+                </ol>
+
+                <br/>
+                <li>Please try to write an algorithm which automatically regulates the distance between the end-effector and an object in the front of it to 17 cm.</li>
+                <br/>
+
+                <li>Combine what you have learnt in these lab sessions with the control theory from the lecture, make the end-effector of the robot keeps tracking on a colored object (e.g. a green ball). <br/>
+                    In other words, the end-effector should follows the object's motion and keeps the object's center at the center of the image frame.<br/><br/>
+                    Demonstration/Expected Results:
+                </li><br/>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/dti30lpS2oM?si=DUPiGUAoG2xjuv_F" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+            </ol>
+ 
+            <br/>
+            <br/><br/>
+            
+
+        </div>
+    </div>
+    <!-- Guidelines End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg yellow_bg text-white btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
