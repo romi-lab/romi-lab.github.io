@@ -91,7 +91,7 @@
             Open “<b>OpenCVBasic</b>” folder<br/><br/>
 
             <ol>
-                <li>Open Camera</li>
+                <li class="li-color">Open Camera</li>
                 <ol>
                     <li>Connect two cameras to the Raspberry Pi through USB 3.0 ports</li>
                     <li>Run “openCamera.py”</li>
@@ -101,7 +101,7 @@
                     <li>Press “q” to exit</li>
                 </ol>
                 <br/>
-                <li>Save images</li>
+                <li class="li-color">Save images</li>
                 <ol>
                     <li>Run “capture.py”</li>
                     <li>Press “c” to capture an image</li>
@@ -109,7 +109,7 @@
                     <li>Check the captured image “pic.png” in the same folder</li>
                 </ol>
                 <br/>
-                <li>Read & write images</li>
+                <li class="li-color">Read & write images</li>
                 <ol>
                     <li>Run “ReadAndWrite_img.py”</li>
                     <li>Check difference between two images</li>
@@ -125,11 +125,14 @@
             Open “<b>OpenCVBasic</b>” folder<br/><br/>
 
             <ol>
-                <li>HSV Color Space</li>
+                <li class="li-color">HSV Color Space</li>
                 <br/>
                 <div class="row">
                     <div class="col-lg-5 col-md-12 textJusitfy">
-                        In this section, we will develop a basic intuition of HSV color space. HSV (hue, saturation, value) is an alternative representation of the RGB color model, designed in the 1970s by computer graphics researchers to more closely align with the way human vision perceives color-making attributes. In this model, colors of each hue are arranged in a radial slice, around a central axis of neutral colors which ranges from black at the bottom to white at the top. The HSV representation models the way paints of different colors mix together, with the saturation dimension resembling various tints of brightly colored paint, and the value dimension resembling the mixture of those paints with varying amounts of black or white paint.
+                        In this section, we will develop a basic intuition of HSV color space. <br/><br/>
+                        HSV (hue, saturation, value) is an alternative representation of the RGB color model, designed in the 1970s by computer graphics researchers to more closely align with the way human vision perceives color-making attributes. <br/><br/>
+                        In this model, colors of each hue are arranged in a radial slice, around a central axis of neutral colors which ranges from black at the bottom to white at the top. <br/><br/>
+                        The HSV representation models the way paints of different colors mix together, with the saturation dimension resembling various tints of brightly colored paint, and the value dimension resembling the mixture of those paints with varying amounts of black or white paint.
                     </div>
                     <div class="col-lg col-md-12">
                             <img class="img-responsive center" src="img/6.png" alt="">
@@ -142,9 +145,9 @@
                     <li>Try different combinations of “H”, “S”, “Vs” value</li>
                     <li>Press “q” to exit the program.</li>
                 </ol>
-                <br/>
-                <li>Color Extraction</li>
-                In this section, we will learn how to extract green color from the video input from the RGB camera<br/>
+                <br/><br/>
+                <li class="li-color">Color Extraction</li><br/>
+                In this section, we will learn how to extract green color from the video input from the RGB camera<br/><br/>
                 <ol>
                     <li>Run “colorExtraction.py” in the terminal. Put a green ball in the front of the camera. You should see three windows “original”, “mask” and “res” as shown below.</li>
                     <br/>
@@ -156,7 +159,7 @@
                 </ol>
                 <br/><br/>
 
-                <li>Create a contour</li>
+                <li class="li-color">Create a contour</li><br/>
                 From the previos <a href="https://romi-lab.github.io/python_opencv/index.html">lab session</a>, we have already learnt how to create a contour. <br/>
                 <br/>
                 The next step is to locate the contours and represent them visually with <code>_, contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)</code> .<br/><br/>
@@ -195,8 +198,8 @@
             Open “<b>StereoCallibration</b>” folder<br/><br/>
 
             <ol>
-                <li>Camera distortion</li>
-                <br/>
+                <li class="li-color">Camera distortion</li><br/>
+                
                 <div class="row">
                     <div class="col-lg-8 col-md-12 textJusitfy">
                        Today’s cheap pinhole cameras introduces a lot of distortion to images. <br/><br/>
@@ -229,9 +232,11 @@
                     <script
                     type="math/tex">\text { Distortion coefficients }=\left(k_{1}, k_{2}, p_{1}, p_{2}, k_{3}\right)</script>
                 </p>
-                <p><span>For stereo applications, these distortions need to be corrected first. To find all these parameters, what we have to do is to provide some sample images of a well-defined pattern (e.g., chess board). We find some specific points in it (square corners in chess board). We know its coordinates in real world space and we know its coordinates in image. With these data, some mathematical problem is solved in background to get the distortion coefficients. That is the summary of the whole story. For better results, we need </span><strong><span>at least 20 test patterns.</span></strong><span> In addition to this, we need to find a few more information, like intrinsic parameters of a camera.</span></p>
+                <p><span>For stereo applications, these distortions need to be corrected first. To find all these parameters, what we have to do is to provide some sample images of a well-defined pattern (e.g., chess board). We find some specific points in it (square corners in chess board). We know its coordinates in real world space and we know its coordinates in image. With these data, some mathematical problem is solved in background to get the distortion coefficients. That is the summary of the whole story. <br/><br/>
+                For better results, we need </span><strong><span>at least 20 test patterns.</span></strong><span> <br/><br/>
+                In addition to this, we need to find a few more information, like intrinsic parameters of a camera.</span></p>
                 <p>&nbsp;</p>
-                <li>Capture images of calibration board</li>
+                <li class="li-color">Capture images of calibration board</li><br/>
                 <ol start=''>
                     <li><span>Run “capture_two(ste).py”</span></li>
                     <li><span>Place the calibration chess board in the front of two cameras. Make sure two cameras can both see the board completely. </span></li>
@@ -239,8 +244,8 @@
                     <li><span>Change the position and orientation of the chess board, repeat step (2)-(4</span><strong><span>) </span><u><span>at least 20 times</span></u></strong><span> to capture enough images for calibration</span></li>
                     <li><span>Press “q” to exit</span></li>
                 </ol>
-                <br/>
-                <li>Calculate and record distortion and camera intrinsic parameters</li>
+                <br/><br/>
+                <li class="li-color">Calculate and record distortion and camera intrinsic parameters</li><br/>
                 <ol start=''>
                     <li>Run “stereo_callibration.py”</li>
                     <li>Record the printed results, including </li>
@@ -252,6 +257,9 @@
                         </ul>
                     </li>
                 </ol>
+                <br/><br/>
+                ** If it is not working well, switch the camera id: 
+                <code>cv2.VideoCapture(0)</code> to <code>cv2.VideoCapture(2)</code> and <code>cv2.VideoCapture(2)</code> to <code>cv2.VideoCapture(0)</code>.**
 
             <br/>
             
@@ -262,10 +270,11 @@
 
             <h5 class="fw-bold yellow_text text-uppercase">Disparity Map</h5><hr/>
             In this section, you will learn how to create a depth map from stereo images.  <br/><br/>
+            
 
             <p><span>Open </span><strong><span>“DisparityMap</span></strong><span>” folder</span></p>
             <ol>
-                <li>Background knowledge of disparity map</li>
+                <li class="li-color">Background knowledge of disparity map</li><br/>
                 <p><span>If we have two images of same scene, we can get depth information from that in an intuitive way. Below is an image and some simple mathematical formulas which prove that intuition.</span></p>
                 <p><img src="./img/9.png" referrerpolicy="no-referrer" alt="disparitymap"></p>
                 <p><span>The above diagram contains equivalent triangles. Writing their equivalent equations will yield us following result:</span></p>
@@ -277,7 +286,8 @@
                 <p><span>So it finds corresponding matches between two images. We have already seen how epiline constraint make this operation faster and accurate. Once it finds matches, it finds the disparity. Let&#39;s see how we can do it with OpenCV.</span></p>
                 <p>&nbsp;</p>
 
-                <li>Disparity map with OpenCV</li>
+                <li class="li-color">Disparity map with OpenCV</li><br/>
+                ** This code only works with Python 2 ** <br/><br/>
                 <ol start=''>
                     <li><span>Run “capture_two(dis).py”.</span></li>
                     <li><span>Press “c” to capture and save images.</span></li>
@@ -332,6 +342,7 @@
             <h5 class="fw-bold yellow_text text-uppercase">Rectification</h5><hr/>
             <ol>
                 <li> Copy all the images captured in the previous Camera Calibration practice done above (<em><span>/StereoCallibration/320X240_twoeyes_calibration</span></em>) into the image folder of (<em><span>/Rectified/320X240_twoeyes</span></em>)</li>
+                <br/>
                 <div class="col-lg-12 col-md-12">
                     <img class="img-responsive center" src="img/16.png" alt="">
                 </div>

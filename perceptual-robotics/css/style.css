@@ -103,6 +103,11 @@ h6,
 .tg-2 .tg-m9r4{background-color:#ffffc7;text-align:left;vertical-align:top}
 .tg-2 .tg-0lax{text-align:left;vertical-align:top}
 
+.li-color{
+    color: #FBB116;
+    font-weight: bold;
+    font-size-adjust: 0.56;
+}
 
 /*** Button ***/
 .btn {
