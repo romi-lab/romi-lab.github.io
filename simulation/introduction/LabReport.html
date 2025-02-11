@@ -70,12 +70,12 @@
                     <h5>Question 1</h5>
 
                     <p>
-                        Look at the following sudoku problem and use FOR loop and IF-ELSE to calculate the remaining four blanks.(Hint:
+                        Look at the following sudoku problem and use <code>for</code> loop and <code>if - else</code> to calculate the remaining four blanks.(Hint:
                         Firstly, check which four numbers left in the nine-square grid in the lower left corner, then calculate the sum 
-                        of the first two columns and the last two rows)
+                        of the first two columns and the last two rows.)
 
                         <div class="col-12 col-xl-6">
-                        <img src="img/q3.png">
+                        <img src="img/lab_q1.png">
                         </div>
 
                     </p>
@@ -83,96 +83,45 @@
                     <h5>Question 2</h5>
 
                     <p>
-                        Consider the vector <code>A = [12, 7, 15, 22, 17, 2, 27, 30, 9, 44]</code> .
-                    <ul>
-                        <li>Write a loop that prints each element of <code>A</code> if it is an even number. </li>
-                        <li>Write a loop that calculates the sum of the elements in <code>A</code>. </li>
-                        <li>Modify the loop you write above to exit if the sum exceeds 100 and print the index at which
-                            this happens. </li>
-                        <li>Write if-else statement in a loop to do the following for each element in A: if the element is less than 10, print "small"; if the element is between 10 and 25, print "medium"; if it's greater than 25, print "large".
-                        </li>
-                    </ul>
+                        Use the <code>plot</code> function to draw the solution of the maze and use the <code>scatter</code> function to mark the 
+                        starting and the ending points of the solution with different colors. (You do not need to draw the maze.)
+
+                        <div class="col-12 col-xl-6">
+                        <img src="img/lab_q2.png">
+                        </div>
                     </p>
 
                     <h5>Question 3</h5>
 
                     <p>
-                        In an experimental physics lab, students are studying the relationship between temperature and
-                        the resistance of two types of materials, Material X and Material Y. The data they collected is
-                        as follows:
-
-                    <div class="codeClass">
-                        <pre><code>
-Temperature = [20, 50, 100, 150, 200, 250, 300]; % in degrees Celsius
-Resistance_of_Material_X = [15, 30, 45, 60, 75, 90, 105]; % in ohms
-Resistance_of_Material_Y = [10, 20, 40, 70, 110, 160, 220]; % in ohms
-</code></pre>
-                    </div>
-                    Plot a line graph of <code>Resistance of Material X</code> and <code>Resistance of Material Y</code>
-                    in terms of <code>Temperature</code>. And also add proper labels, legend and title to the graph.
-
-                    Requirements:
-                    <ul>
-                        <li>Label the x-axis as "Temperature (°C)" and the y-axis as "Resistance (Ohms)".</li>
-                        <li>Add a legend to distinguish between the two materials.</li>
-                        <li>Add the title "Temperature vs Resistance for Material X and Y".</li>
-                        <li>Use different colors or line styles to distinguish between the two materials.</li>
-                    </ul>
-
-                    </br>Should have something similar to this:
-                    <div class="col-12 col-xl-6">
-                        <img src="img/q3.png">
-                    </div>
+                        "2021.12.02" is what we call “Perfect Symmetrical Day”, if you miss it, you will have to wait another 9 years.
+                        Please write a program using MATRIX TRANSPOSE to test whether a 6-digit number is perfect symmetrical. 
+                        (You only need to test several numbers, you can set the numbers by yourself，
+                        but make sure to include both symmetric and asymmetric numbers.)
                     </p>
 
                     <h5>Question 4</h5>
 
                     <p>
-                        Linearising a nonlinear function </br>
-                        To obtain a linear model of a nonlinear system, we assume the variables deviate slightly from an
-                        operating condition.</br>
-                        Taylor Series: a series expansion of a function about a point</br>
-                        Taylor Series: linear approximation</br>
-                        The linear approximation of the system (function) can be obtained using the tangent line.</br>
+                        Assume this is the way Professor David gives you final score 
+                        <div class="col-12 col-xl-6">
+                        <img src="img/lab_q4.png">
+                        </div>
+                        Please write a function in matlab to model it, and test
+                    <ul>
+                        <li>What will be your final score if you obtain E = 80, A = 92, S = 80 and C = 4.
+                        <li>If you only obtain E = 22, A = 30 and S = 0, how many award bonus do you need
+                            to help you pass this course.
+                    </ul>
+
                     <div class="codeClass"><code>
                         f(x) <span>&asymp;</span> f(x<sub>0</sub>) + f'(x<sub>0</sub>)(x - x<sub>0</sub>)
                         </code></div>
-                    </br>
-                    </br>
-                    Nonlinear function: <code>f(x) = x<sup>3</sup></code> </br>
-                    Linearise it at x<sub>0</sub> = 2 and x<sub>0</sub> = -2</br></br>
-                    Plot the nonlinear function and the linearised functions.</br>
-                    Example:
-                    </br>
-                    <div class="col-12 col-xl-6">
-                        <img src="img/q4.png">
-                    </div></br>
                     </p>
 
-                    <!-- <h5>Question 5</h5>
-                    <p>
-                        Evaluate the function <code>y = sin(x<sup>2</sup>)</code> for <code>x</code> from 0 to 10 in
-                        steps of 0.1. Plot the function.
-                    <ul>
-                        <li>Add labels (<code>x, y</code>).</li>
-                        <li>Add a title (<code>y = sin(x<sup>2</sup></code>).</li>
-                    </ul>
-                    <br>
-                    Example:
-                    </br>
-                    <div class="col-12 col-xl-6">
-                        <img src="img/q5.png">
-                    </div></br>
-                    </p> -->
+                    
 
-                    <h5>Question 5</h5>
-                    <p>
-                        The definition of function f(x,y) with two variables is as follows:
-                    <div class="col-12 col-xl-2">
-                        <img src="img/q6.png" style="width: 100%; height: 100%">
-                    </div>
-                    Write Matlab code to compute the result of the function <code>f</code> when <code>(x,y)</code> is given as follows: <code>(-1, -2)</code>, <code>(-1, 2)</code>, <code>(1, -2)</code> and <code>(1, 2)</code>.
-                    </p>
+                    
 
                 </div>
 
