@@ -68,7 +68,7 @@
                 Individual Report</br>
                 Due date: Saturday, 23 March, 2024, 23:59</br>
                 Include: Code, figures, and anything you think it is important :)</br>
-                If you have any questions, please contact me by email: fangyuan.wang@connect.polyu.hk (Fangyuan Wang)</br>
+                If you have any questions, please contact me by email: ningg.han@connect.polyu.hk (Han Ning)</br>
                 <hr>
 
                 <!-- <h5>
@@ -92,84 +92,50 @@
 
 
                 <h5>
-                    Question 1 (20 Pts.)
+                    Question 1 (25 Pts.)
                 </h5>
-                Given the following dynamic system $4\ddot{x}+5\dot{x}+2x=9u$, for $u$ as the input, with initial conditions
-                $x(0)=0$ and $\dot x(0)=0$. Manually calculate the transfer function and represent
-                it in Matlab/Ocatve. Calculate the Laplace transformation's partial fraction decomposition (i.e. [r, p, k])
-                by Matlab/Octave and write down the complete form (i.e. the function) in your lab report.
+                The open-loop zero-pole distribution diagram of a system is as follows, ○represents zero and X denotes pole. 
+                Try to roughly draw the corresponding root locus. (Hint: Estimate the values of zero and pole with your eyes).
                 </br></br>
-                <h5>
-                    Question 2 (20 Pts.)
-                </h5>
-                Compute the total transfer function $C/R$ of the following system, compute the poles, draw the pole-zero map and the root locus
-                using Matlab/Octave.
-                </br></br>
-                <div class="col-12 col-xl-10">
+                  <div class="col-12 col-xl-10">
                     <pre>
-                        <img src="pic/lr111.png" width="450" height="200">
+                        <img src="pic/lab2_p1" width="450" height="200">
                     </pre>
                 </div>
                 <h5>
-                    Question 3 (20 Pts.)
+                    Question 2 (25 Pts.)
                 </h5>
-                Consider the following negative feedback system,
+                For the following system, you can choose the correction system $G(s)$ from $Ks$, $Ks^2$, $K s^2 /s+20$, please the root locus
+                of the corrected systems for each correction system, and then decide which one you will choose and explain the reason.
                 </br></br>
                 <div class="col-12 col-xl-10">
                     <pre>
-                        <img src="pic/lr4.jpg" width="450" height="200">
-                    </pre>
-                </div>
-                where
-                </br></br>
-                <!-- $$G(s)=\frac{5(s + 20)}{s(s + 4.5883)(s^2 + 3.4118s + 16.346)}$$ -->
-                $$G(s) = \frac{5s + 8}{s^4 + 4s^3 + 6s^2 + 3s + 3} $$
-                </br>
-                and $H=2$. Using matlab/octave, calculate the transfer function $C/R$, the unit step response, the impulse response, and the time response
-                with a cosine wave input of period 5s with amplitude 1 of the closed-loop system.
-                </br></br>
-                Hint: the syntax of generating cosine wave in Matlab is
-                <div class="codeClass">
-                    <code><pre>
-                        f = cos(T);
-                    </pre></code>
-                </div>
-                For example, to generate a cosine wave of period 1s with amplitude 1, we can use the following scripts.
-                <div class="codeClass">
-                    <code><pre>
-                        t = 0:0.001:10;
-                        f = cos(2*pi*t);
-                        plot(t,f);
-                    </pre></code>
-                </div>
-                Note that if you are using Octave, you need to add "pkg load signal;" at the beginning of the script.
-                Run the scripts, we can get the figure of the cosine wave;
-                </br></br>
-                <div class="col-12 col-xl-10">
-                    <pre>
-                        <img src="pic/lr22.png" width="400" height="300">
+                        <img src="pic/lab2_p2" width="450" height="200">
                     </pre>
                 </div>
                 <h5>
-                    Question 4 (20 Pts.)
+                    Question 3 (25 Pts.)
                 </h5>
-                Consider the following mass-damper-spring system,
-                 </br></br>
+                Simulate the system in the following picture and try different values of PID parameters and decide the best group of parameters, 
+                then plot the response curve of the system.
+                </br></br>
                 <div class="col-12 col-xl-10">
                     <pre>
-                        <img src="pic/lr4.png" width="300" height="150">
+                        <img src="pic/lab2_p3" width="450" height="200">
                     </pre>
                 </div>
-                Suppose we have $m=14$, $c=2$, $k=3$, $\dot x(0)=0$ and $x(0)=0$, use the ODE solver to create
-                a simulation to show the response of $x$ under a constant force $F=4$.
+               
+                <h5>
+                    Question 4 (25 Pts.)
+                </h5>
+                This is the definition of Fibonacci numbers. Please write a function which can calculate the nth Fibonacci number according
+                to the definition and test it with n = 3, 9 and 15. The shorter your code is, the more score you will obtain.
                 </br></br>
-                Hint: For a second-order system $\ddot{x}+b\dot{x}+cx=u$, denote
-                $x_1=x, x_2=\dot{x}$, then the system can be rewritten as
-                </br></br>
-                $$\left\{\begin{aligned}
-                    & \dot x_1=x_2\\
-                    & \dot x_2 = -bx_2-cx_1+u
-                \end{aligned}\right.$$
+                <div class="col-12 col-xl-10">
+                    <pre>
+                        <img src="pic/lab2_p4" width="450" height="200">
+                    </pre>
+                </div>
                 <!--<h5>
                     Question 5 (20 Pts.)
                 </h5>
@@ -182,23 +148,7 @@
                 <br>
                 *Requirement: You should attach the code of the simulation and the response of the system in your report.-->
 
-                <h5>
-                    Question 5 (20 Pts.)
-                </h5>
-                The <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life" style="text-decoration: underline;">Game of Life</a>,
-                also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970.
-                It is the best-known example of a cellular automaton. 
-                <br>
-                This game uses an <code>m x n</code> grid of cells, and each cell begins with one of two states: 
-                alive (noted by a 1) or dead (noted by a 0). Each cell then interacts with the eight cells that surround
-                it (these can be horizontal, vertical, or diagonal) based on these four rules:
-                <br>
-                <br>
-                <div>
-                    <pre>
-                        <img src="pic/gol.png" width="800">
-                    </pre>
-                </div>
+               
                 <!-- <ul>
                     <li>Any live cell with $< 2$ live neighbors dies, as if caused by underpopulation.</li>
                     <li>Any live cell with $2$ or $3$ live neighbors lives on to the next generation.</li>
@@ -211,33 +161,6 @@
                     <li>Any live cell with more than three live neighbors dies, as if by overpopulation.</li>
                     <li>Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.</li>
                 </ul> -->
-                The next state is created by applying the above rules simultaneously to every cell in the current state, 
-                where births and deaths occur simultaneously. Write a function to compute the next state of the following states.
-
-                <div class="col-12 col-xl-10">
-                    <pre>
-                        <img src="pic/q5.png" width="200" height="200">
-                    </pre>
-                </div>
-
-                Note that you can take the border of the grid as dead cells.
-                <br>
-
-                Examples:
-
-                <div class="col-12 col-xl-10">
-                    <pre>
-                        <img src="pic/grid1.jpg" width="400" height="200">
-                    </pre>
-                </div>
-
-                <div class="col-12 col-xl-10">
-                    <pre>
-                        <img src="pic/grid2.jpg" width="250" height="125">
-                    </pre>
-                </div>
-            </div>
-
         </div>
         <div class="row">
             <div class="col col-md-2 prev">
