@@ -21,123 +21,124 @@
 </head>
 
 <body>
-<div class="wrapper">
-    <nav id="sidebar">
+    <script type="text/javascript" src="js/control.js"></script>
+    <div class="wrapper">
+        <nav id="sidebar">
 
-        <ul class="list-unstyled components">
-            <p>Menu</p>
+            <ul class="list-unstyled components">
+                <p>Menu</p>
 
-            <li>
-                <a href="Functions.html">Functions</a>
-            </li>
-            <li>
-                <a href="SystemModeling.html">Systems Modeling</a>
-            </li>
-            <li>
-                <a href="SystemAnalysis.html">System Analysis</a>
-            </li>
-            <li>
-                <a href="Simulation.html">Simulation</a>
-            </li>
-            <li>
-                <a href="Control.html">Control</a>
-            </li>
-            <li>
-                <a href="LabReport.html">Lab Report</a>
-            </li>
+                <li>
+                    <a href="Functions.html">Functions</a>
+                </li>
+                <li>
+                    <a href="SystemModeling.html">Systems Modeling</a>
+                </li>
+                <li>
+                    <a href="SystemAnalysis.html">System Analysis</a>
+                </li>
+                <li>
+                    <a href="Simulation.html">Simulation</a>
+                </li>
+                <li>
+                    <a href="Control.html">Control</a>
+                </li>
+                <li>
+                    <a href="LabReport.html">Lab Report</a>
+                </li>
 
-        </ul>
-    </nav>
-    <div class="container-fluid">
-        <div class="row header top">
-            <button type="button" id="sidebarCollapse" class="btn btn-info">
-                <i class="fa fa-bars"></i>
-                <!-- <span>Menu</span> -->
-            </button>
-            <div class="col-10 col-xl-auto h2Div" onclick="location.href='index.html';">
-                <h2>Advanced Matlab/Octave Tutorial -- Lab Report</h2>
+            </ul>
+        </nav>
+        <div class="container-fluid">
+            <div class="row header top">
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fa fa-bars"></i>
+                    <!-- <span>Menu</span> -->
+                </button>
+                <div class="col-10 col-xl-auto h2Div" onclick="location.href='index.html';">
+                    <h2>Advanced Matlab/Octave Tutorial -- Lab Report</h2>
+                </div>
+
             </div>
+            </br>
+            <div class="row justify-content-md-center editor">
+                <div class="col-12 col-xl-8 mainContent holdon">
+                    <h4>
+                        Lab Report
+                    </h4>
+                    </br>
+                    -- Coming soon -- </br>
+                </div>
+                <div class="col-12 col-xl-8 mainContent questions">
+                    <h4>
+                        Lab Report
+                    </h4>
+                    Individual Report</br>
+                    Due date: 23 March 2025 (Saturday), 23:59</br>
+                    Include: Code, figures, and anything you think it is important :)</br>
+                    If you have any questions, please contact me by email: ningg.han@connect.polyu.hk (Han Ning)</br>
+                    <hr>
 
-        </div>
-        </br>
-        <div class="row justify-content-md-center editor">
-            <div class="col-12 col-xl-8 mainContent holdon">
-                <h4>
-                    Lab Report
-                </h4>
-                </br>
-                -- Coming soon -- </br>
+
+
+                    <h5>
+                        Question 1 (25 Pts.)
+                    </h5>
+                    The open-loop zero-pole distribution diagram of a system is as follows, ○ represents zero and X denotes pole. 
+                    Try to roughly draw the corresponding root locus. (Hint: Estimate the values of zero and pole with your eyes).
+                    </br></br>
+                      <div class="col-12 col-xl-10">
+                        <pre>
+                            <img src="pic/lab2_p1.png">
+                        </pre>
+                    </div>
+                    <h5>
+                        Question 2 (25 Pts.)
+                    </h5>
+                    For the following system, you can choose the correction system $G(s)$ from $Ks$, $Ks^2$, $K s^2 /s+20$, please the root locus
+                    of the corrected systems for each correction system, and then decide which one you will choose and explain the reason.
+                    </br></br>
+                    <div class="col-12 col-xl-10">
+                        <pre>
+                            <img src="pic/lab2_p2.png">
+                        </pre>
+                    </div>
+                    <h5>
+                        Question 3 (25 Pts.)
+                    </h5>
+                    Simulate the system in the following picture and try different values of PID parameters and decide the best group of parameters, 
+                    then plot the response curve of the system.
+                    </br></br>
+                    <div class="col-12 col-xl-10">
+                        <pre>
+                            <img src="pic/lab2_p3.png" >
+                        </pre>
+                    </div>
+                   
+                    <h5>
+                        Question 4 (25 Pts.)
+                    </h5>
+                    This is the definition of Fibonacci numbers. Please write a function which can calculate the nth Fibonacci number according
+                    to the definition and test it with n = 3, 9 and 15. The shorter your code is, the more score you will obtain. (Only the methods mentioned in the class are allowed to be used).
+                    </br></br>
+                    <div class="col-12 col-xl-10">
+                        <pre>
+                            <img src="pic/lab2_p4.png" >
+                        </pre>
+                    </div>
+               </div>
             </div>
-            <div class="col-12 col-xl-8 mainContent questions">
-                <h4>
-                    Lab Report
-                </h4>
-                Individual Report</br>
-                Due date: 23 March 2025 (Saturday), 23:59</br>
-                Include: Code, figures, and anything you think it is important :)</br>
-                If you have any questions, please contact me by email: ningg.han@connect.polyu.hk (Han Ning)</br>
-                <hr>
-
-
-
-                <h5>
-                    Question 1 (25 Pts.)
-                </h5>
-                The open-loop zero-pole distribution diagram of a system is as follows, ○ represents zero and X denotes pole. 
-                Try to roughly draw the corresponding root locus. (Hint: Estimate the values of zero and pole with your eyes).
-                </br></br>
-                  <div class="col-12 col-xl-10">
-                    <pre>
-                        <img src="pic/lab2_p1.png">
-                    </pre>
+            <div class="row">
+                <div class="col col-md-2 prev">
+                    <p><a href="Control.html"> &#10094; Back </a></p>
                 </div>
-                <h5>
-                    Question 2 (25 Pts.)
-                </h5>
-                For the following system, you can choose the correction system $G(s)$ from $Ks$, $Ks^2$, $K s^2 /s+20$, please the root locus
-                of the corrected systems for each correction system, and then decide which one you will choose and explain the reason.
-                </br></br>
-                <div class="col-12 col-xl-10">
-                    <pre>
-                        <img src="pic/lab2_p2.png">
-                    </pre>
-                </div>
-                <h5>
-                    Question 3 (25 Pts.)
-                </h5>
-                Simulate the system in the following picture and try different values of PID parameters and decide the best group of parameters, 
-                then plot the response curve of the system.
-                </br></br>
-                <div class="col-12 col-xl-10">
-                    <pre>
-                        <img src="pic/lab2_p3.png" >
-                    </pre>
-                </div>
-               
-                <h5>
-                    Question 4 (25 Pts.)
-                </h5>
-                This is the definition of Fibonacci numbers. Please write a function which can calculate the nth Fibonacci number according
-                to the definition and test it with n = 3, 9 and 15. The shorter your code is, the more score you will obtain. (Only the methods mentioned in the class are allowed to be used).
-                </br></br>
-                <div class="col-12 col-xl-10">
-                    <pre>
-                        <img src="pic/lab2_p4.png" >
-                    </pre>
-                </div>
-           </div>
-        </div>
-        <div class="row">
-            <div class="col col-md-2 prev">
-                <p><a href="Control.html"> &#10094; Back </a></p>
             </div>
-        </div>
-        <div class="backToTop">
-            <p><a href="#top">Back to Top</a></p>
+            <div class="backToTop">
+                <p><a href="#top">Back to Top</a></p>
+            </div>
         </div>
     </div>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="js/code.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/code.js"></script>
 </body>
 </html>
