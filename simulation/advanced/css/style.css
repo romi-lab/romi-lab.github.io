@@ -148,7 +148,9 @@ pre{
 .holdon{
 	margin-bottom: 30%;
 }
-
+.questions{
+	display: none;
+}
 .backToTop{
 	display: flex;
 	align-items: center;
