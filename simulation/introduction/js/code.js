@@ -9,7 +9,7 @@ $(document).ready(function () {
 window.setInterval(function() {
 
   var current = new Date();
-  var expiry = new Date("February 15, 2025 21:30:00")
+  var expiry = new Date("February 15, 2025 21:40:00")
 
   if (current.getTime() < expiry.getTime()) {
     $('.questions').hide();
