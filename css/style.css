@@ -165,7 +165,8 @@ a {
 	margin-bottom: 5%;
 }
 .romi_icon_bar{
-	height: 7.5vh;
+	height: 5.8vh;
+	margin-top: -0.5vh;
 }
 .card{
 	border: 3px solid #F3F3F3;
@@ -279,10 +280,12 @@ a {
 		/*height: 43vh;*/
 	}
 
+
 	.romi_icon_bar{
 		text-align: center;
 		margin: auto;
-		height: 7.5vh;
+		height: 8.5vh;
+		margin-top: -0.5vh;
 	}
 	#romi_icon{
 		visibility: hidden;
@@ -295,8 +298,8 @@ a {
 		height: auto;
 		margin-left: -1.8vw;
 		margin-top: -2vh;
-		padding-top: 1vh;
-		padding-bottom: 1.5vh;
+		padding-top: 2.5vh;
+		padding-bottom: 2.5vh;
 	}
 
 	#romi_contact{
@@ -367,8 +370,12 @@ a {
 
 	body 						{ font-size:175%; }
 	.romi_icon_bar{
-		height: 9vh;
+		height: 5.8vh;
+		margin-top: -1vh;
 	}	
+	#romi_icon{
+		height: 6.5vh;
+	}
 	#intro h2{
 		font-size: 150%;
 	}
