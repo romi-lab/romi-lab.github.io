@@ -68,6 +68,17 @@
     .info-block p {
       margin-bottom: 8px;
     }
+    .bonus-note {
+      background-color: #e8f5e9; /* Light green background */
+      border-left: 5px solid #4CAF50; /* Green border */
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 5px;
+    }
+    .bonus-note p {
+      margin-bottom: 0;
+      color: #1b5e20; /* Darker green text */
+    }
   </style>
 </head>
 
@@ -165,7 +176,7 @@
               
               <div class="info-block">
                 <p><strong>Report Type:</strong> Individual Report</p>
-                <p><strong>Due date:</strong> 23 Oct 2025</p>
+                <p><strong>Due date:</strong> 16 Oct 2025</p>
                 <p><strong>Requirements:</strong> Include Code, figures</p>
                 <p><strong>Submission:</strong> PDF file only to Blackboard</p>
                 <p><strong>Q&A:</strong> Contact at the Bottom of this web page</p>
@@ -180,20 +191,79 @@
               </ul>
               <p>For the Analysis (Question 5), you will provide written answers based on the results you generated.</p>
               
+
               <h2>Question 1: Image Filtering and its Effect on Edge Detection</h2>
-              <p><em>[Specific content will be announced after class]</em></p>
+              <h4>Tasks:</h4>
+              <ul>
+                <li><strong>Image Capture:</strong> Take a photograph of an object or a scene that contains clear edges and some texture (e.g., a book cover, a keyboard, the veins of a leaf).</li>
+                <li><strong>Apply Filters:</strong>
+                  <ul>
+                    <li>Apply the following three filters to the image: Gaussian Blur, Median Blur, and Bilateral Filter. You will need to experiment to find suitable parameters (e.g., kernel size, sigma values) for each.</li>
+                    <li>Display the original image and the three filtered images side-by-side for comparison.</li>
+                  </ul>
+                </li>
+                <li><strong>Edge Detection:</strong>
+                  <ul>
+                    <li>Apply the Canny edge detector to the original image and to each of the three filtered images.</li>
+                    <li>Display the four resulting edge maps side-by-side.</li>
+                  </ul>
+                </li>
+              </ul>
 
               <h2>Question 2: Object Segmentation using HSV Color Space</h2>
-              <p><em>[Specific content will be announced after class]</em></p>
+              <h4>Tasks:</h4>
+              <ul>
+                <li><strong>Image Capture:</strong> Place a brightly colored object against a background that is not a single solid color (e.g., a red apple on a wooden desk, a blue bottle cap on a carpet). Take a photograph of this scene.</li>
+                <li><strong>Color Segmentation:</strong>
+                  <ul>
+                    <li>Convert the captured image from the BGR/RGB color space to the HSV color space.</li>
+                    <li>Determine the approximate range of Hue, Saturation, and Value for the object you wish to segment. This will require some experimentation.</li>
+                    <li>Use the <code>cv2.inRange()</code> function to create a binary mask that isolates the pixels within your defined color range.</li>
+                    <li>Apply this mask to the original image using <code>cv2.bitwise_and()</code> to segment the object from the background.</li>
+                  </ul>
+                </li>
+              </ul>
 
               <h2>Question 3: Circle Detection with Hough Transform</h2>
-              <p><em>[Specific content will be announced after class]</em></p>
+              <h4>Tasks:</h4>
+              <ul>
+                <li><strong>Image Capture:</strong> Take a photograph that includes several circular or near-circular objects (e.g., coins, bottle caps, buttons).</li>
+                <li><strong>Circle Detection:</strong>
+                  <ul>
+                    <li>Load the image, convert it to grayscale, and apply a gentle blur (e.g., Gaussian) to reduce noise.</li>
+                    <li>Use the <code>cv2.HoughCircles()</code> function to detect circles in the image.</li>
+                    <li>You must experiment with and tune the function's parameters (such as param1, param2, minDist, etc.) to correctly identify most of the circles in your image.</li>
+                    <li>Draw the detected circles on the original image and display the result.</li>
+                  </ul>
+                </li>
+              </ul>
 
               <h2>Question 4: Panorama Stitching</h2>
-              <p><em>[Specific content will be announced after class]</em></p>
+              <h4>Tasks:</h4>
+              <ul>
+                <li><strong>Image Capture:</strong> Choose a scene (e.g., your desk, the view from a window) and capture <strong>2 or more</strong> images while rotating your camera. Ensure there is significant overlap (approximately 30-50%) between adjacent images.</li>
+                <li><strong>Image Stitching:</strong>
+                  <ul>
+                    <li>Following the workflow from the lab tutorial, use a feature detector like SIFT to find keypoints and descriptors in your images.</li>
+                    <li>Use BFMatcher to match the features between adjacent images.</li>
+                    <li>Compute the homography matrix between each pair of images using <code>cv2.findHomography()</code> with the RANSAC algorithm.</li>
+                    <li>Use <code>cv2.warpPerspective()</code> to transform one image and stitch it together with the other.</li>
+                  </ul>
+                </li>
+              </ul>
+              <div class="bonus-note">
+                <p><strong>Bonus Opportunity:</strong> To encourage creativity, the most creative and original panorama image will get a <strong>bonus of 5 marks</strong>. Feel free to use 2, 3, or even more images to create your masterpiece.</p>
+              </div>
 
               <h2>Question 5: Analysis and Discussion</h2>
-              <p><em>[Specific content will be announced after class]</em></p>
+              <p>Based on the results from your work in the previous questions, provide clear and concise answers to the following.</p>
+              <h4>On Filtering and Edges (from Question 1):</h4>
+              <p>Compare the results of the three filters you applied. Explain why the bilateral filter was more effective at preserving edges while reducing noise compared to the others.</p>
+              
+              <h4>On Color Segmentation (from Question 2):</h4>
+              <p>What are the main advantages of using the HSV color space for color-based segmentation compared to the RGB color space?</p>
+              <p>Describe the challenges you faced while determining the correct HSV threshold values. For instance, how did the lighting in your photo affect the required ranges for Saturation (S) and Value (V)?</p>
+
             </div>
           </div>
         </div>
