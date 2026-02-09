@@ -23,36 +23,10 @@
 <body>
 <div class="wrapper">
     <nav id="sidebar">
-
-        <ul class="list-unstyled components">
-            <p>Menu</p>
-
-            <li>
-                <a href="BasicSyntax.html">Basic Syntax</a>
-            </li>
-            <li>
-                <a href="MatrixArithmetic.html">Matrix Arithmetic</a>
-            </li>      
-            <li>
-                <a href="BuiltInFunctions.html">Built-in Functions</a>
-            </li>         
-            <li>
-                <a href="PlottingData.html">Plotting Data</a>
-            </li>                          
-            <li>
-                <a href="LinearAlgebra.html">Linear Algebra</a>
-            </li>  
-            <li>
-                <a href="LoopConditions.html">Loops & Conditions</a>
-            </li>              
-            <li>
-                <a href="LabReport.html">Lab Report</a>
-            </li>     
-        </ul>
     </nav>		
 	<div class="container-fluid">	
         <div class="row header">
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info" aria-label="Toggle menu">
                         <i class="fa fa-bars"></i>
                         <!-- <span>Menu</span> -->
                     </button>
@@ -60,18 +34,19 @@
                         <h2>Introduction to Simulation: Beginner</h2>               
                     </div>
 
-        </div>  
+		</div>
         </br>	
         <div class="row justify-content-md-center editor">
-            <div class="col-12 col-xl-8 mainContent">
-                In this lab session, we are going to learn some basic matlab coding.</br>
-                Setup: Matlab or Octave (<a href="https://octave-online.net/"><u>web</u></a> or software version)
-                </br><hr>
-                If you are ready, let's begin.</br></br>
-                <div class="btn startBtn">
-                    <button id="run-btn" onclick="location.href='BasicSyntax.html';"> Start </button>
-                </div>            
-            </div> 	
+            <div class="col-12 col-lg-9 col-xl-7 mainContent text-center lab-card">
+                <p class="lead mb-2">In this lab session, we are going to learn some basic matlab coding.</p>
+                <p class="mb-3">Setup: Matlab or Octave (<a href="https://octave-online.net/"><u>web</u></a> or software version)</p>
+                <hr>
+                <p class="mb-4">If you are ready, let's begin.</p>
+                <div class="cta-group">
+                    <button id="run-btn" class="action-btn primary" onclick="location.href='https://colab.research.google.com/drive/1fJTaQp-iWdAYGAV3vMc3ZJCfxldg7lgc?usp=sharing';">Start</button>
+                    <button class="action-btn secondary" onclick="location.href='https://wllevy.github.io/projects/project-ta/';">Lab Report</button>
+                </div>
+            </div>
         </div>
         </br></br>
 	

@@ -1,7 +1,22 @@
+:root {
+	--ink: #0b0f1a;
+	--ink-soft: #151a2b;
+	--paper: #f7f7fb;
+	--accent: #ff8b2c;
+	--accent-dark: #e57112;
+	--accent-2: #2a7cff;
+	--accent-2-dark: #1f62d1;
+	--line: rgba(15, 20, 40, 0.12);
+}
+
 body{
 	margin:0px;
 	font-family: "Raleway", sans-serif;
 	height: 100%;
+	background: radial-gradient(1200px 600px at 15% -10%, #fff0dc 0%, rgba(255, 240, 220, 0) 60%),
+			radial-gradient(900px 500px at 90% 10%, #e6efff 0%, rgba(230, 239, 255, 0) 55%),
+			var(--paper);
+	color: var(--ink);
 }
 .container{
 	height: 100%;
@@ -31,9 +46,9 @@ a, a:hover, a:focus {
 }
 
 #sidebar {
-    background: black;
-    color: #fff;
-    transition: all 0.3s;
+	background: #000;
+	color: #fff;
+	transition: all 0.3s;
 }
 
 #sidebar .sidebar-header {
@@ -75,10 +90,16 @@ a, a:hover, a:focus {
 	border-color:#111;
 	height: 6vh;
 }
+
+#sidebarCollapse.btn-info{
+	background: #0f1428;
+	border-color: #0f1428;
+	box-shadow: 0 8px 18px rgba(10, 15, 30, 0.25);
+}
 .header{
-/*	height: 6vh;*/
 	height: auto;
-	background: #111;
+	background: linear-gradient(90deg, #0f1428 0%, #12172c 60%, #0c1224 100%);
+	box-shadow: 0 10px 30px rgba(10, 15, 30, 0.22);
 }
 
 .btn button{
@@ -97,16 +118,49 @@ a, a:hover, a:focus {
 	text-decoration:none;
 	display:inline-block;	
 }
-.startBtn{
-	display: inline;
+
+.cta-group{
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
 	align-items: center;
 	justify-content: center;
 }
+
+.action-btn{
+	min-width: 220px;
+	height: 48px;
+	padding: 0 26px;
+	border-radius: 999px;
+	font-weight: 700;
+	letter-spacing: 0.2px;
+	border: 2px solid transparent;
+	transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+
+.action-btn.primary{
+	background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+	color: #fff;
+	box-shadow: 0 12px 25px rgba(229, 113, 18, 0.28);
+}
+
+.action-btn.secondary{
+	background: #fff;
+	color: var(--accent-2-dark);
+	border-color: var(--accent-2);
+	box-shadow: 0 10px 18px rgba(33, 91, 197, 0.18);
+}
+
+.action-btn:hover{
+	transform: translateY(-2px);
+}
+
+.action-btn:active{
+	transform: translateY(0);
+}
+
 #run-btn{
-	background: #04DA0E;
-	justify-content: center;
-	padding-left: 5vw;
-	padding-right: 5vw;
+	background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
 }
 .h2Div{
 	color:white;
@@ -122,6 +176,14 @@ a, a:hover, a:focus {
 
 .mainContent{
 	width: 100%;
+}
+
+.lab-card{
+	background: rgba(255, 255, 255, 0.9);
+	border: 1px solid var(--line);
+	border-radius: 18px;
+	padding: 26px 24px;
+	box-shadow: 0 24px 60px rgba(12, 18, 36, 0.12);
 }
 
 code{
@@ -190,13 +252,12 @@ pre{
 	.btn-info{
 		height: 15vw;
 	}  
-	#run-btn{
-		background: #04DA0E;
-		justify-content: center;
+	.cta-group{
+		width: 100%;
+	}
+	.action-btn{
 		width:80%;
-		margin-left: 5%;
-		margin-right: 10%;
-	}	  	
+	}	  
 	.header{
 		height: auto;
 	}    
