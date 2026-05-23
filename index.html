@@ -1,1119 +1,223 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi-Agent System Analysis Platform</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { font-family: 'Arial', sans-serif; user-select: none; background-color: #f1f5f9; }
-        canvas { image-rendering: auto; }
-        /* Ultra-clean custom narrow scrollbars for small viewports */
-        ::-webkit-scrollbar { width: 5px; height: 5px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
-        /* Mobile-responsive heights: stats 5%, field 50%, bottom 40% */
-        @media (max-width: 767px), (max-aspect-ratio: 87/100) {
-            #mobile-stats-row    { display: flex !important; }
-            #canvas-container    { flex: none !important; height: 48vh !important; min-height: 0 !important; }
-            #mobile-bottom-area  { flex: none !important; height: 36vh !important; min-height: 0 !important; overflow-y: auto !important; overflow-x: hidden !important; }
-            #mobile-heatmap-row  { flex: none !important; height: 16vh !important; min-height: 120px !important; }
-            #mobile-lineplot-row { flex: none !important; height: 20vh !important; min-height: 160px !important; }
-            /* Sliders: shorter width so right side stays scrollable */
-            #sidebarDeck input[type=range] { width: 68% !important; touch-action: pan-y; }
-        }
-    </style>
+<html>
+<html lang="en" class="wf-tabletgothic-n3-active wf-tabletgothiccondensed-n9-active wf-tabletgothiccondensed-n2-active wf-tabletgothic-n4-active wf-active"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<title>The Robotics and Machine Intelligence Laboratory</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+	<link rel="stylesheet" media="screen" href="css/style.css">
+	<link rel="stylesheet" media="screen" href="css/gallery.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="romi-Lab">
+	<meta name="description" content="Teaching Resources prepared by the romi-lab.">
+	<meta name="robots" content="all">
+	<link rel="shortcut icon" type="image/jpg" href="image/romi.jpg?">
+
 </head>
-<body class="overflow-hidden flex h-screen w-screen text-[#1e1e1e] p-2 gap-2 select-none relative">
 
-    <div class="flex-1 flex flex-col h-full gap-2 min-w-0 min-h-0 relative">
-        
-        <!-- Mobile stats row (hidden on desktop, shown via CSS on mobile) -->
-        <div id="mobile-stats-row" class="hidden shrink-0 w-full bg-white border border-slate-200 rounded-lg px-2 py-1 items-center gap-1" style="min-height:0;height:6vh;max-height:45px;">
-            <!-- Menu button lives here on mobile -->
-            <button id="sidebarToggleBtn" class="hidden shrink-0 bg-[#3498db] hover:bg-[#2980b9] text-white p-1.5 rounded-lg shadow transition-all focus:outline-none flex items-center justify-center">
-                <svg id="toggleIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-            </button>
-            <div class="w-px h-4 bg-slate-200 shrink-0"></div>
-            <div class="flex-1 flex items-center justify-around gap-1 text-center min-w-0">
-                <div class="min-w-0 flex flex-col justify-center leading-none"><div class="text-[8px] text-slate-400 font-bold uppercase leading-none">Mobility</div><span id="hud-mobility" class="font-mono text-xs font-black text-[#c18c5d]">0.00</span></div>
-                <div class="w-px h-4 bg-slate-200 shrink-0"></div>
-                <div class="min-w-0 flex flex-col justify-center leading-none"><div class="text-[8px] text-slate-400 font-bold uppercase leading-none">Packing</div><span id="hud-packing" class="font-mono text-xs font-black text-slate-800">0.00</span></div>
-                <div class="w-px h-4 bg-slate-200 shrink-0"></div>
-                <div class="min-w-0 flex flex-col justify-center leading-none"><div class="text-[8px] text-slate-400 font-bold uppercase leading-none">Entropy (%)</div><span id="hud-chaos" class="font-mono text-xs font-black text-[#7209b7]">0.0%</span></div>
-                <div class="w-px h-4 bg-slate-200 shrink-0"></div>
-                <div class="min-w-0 flex flex-col justify-center leading-none"><div class="text-[8px] text-slate-400 font-bold uppercase leading-none">Fluidity</div><span id="hud-fluidity" class="font-mono text-xs font-black text-[#00afb9]">0.00</span></div>
-            </div>
-        </div>
-
-        <div class="flex-[3.5] min-h-0 w-full relative flex items-center justify-center bg-white border border-slate-200 rounded-lg shadow-xs overflow-hidden cursor-pointer" id="canvas-container">
-            <canvas id="coverageCanvas" class="absolute border border-slate-300 pointer-events-none rounded-sm hidden"></canvas>
-            <canvas id="simulationCanvas" class="absolute border border-slate-300 bg-transparent rounded-sm hidden"></canvas>
-            
-            <div id="launchOverlay" class="absolute inset-0 bg-white/95 backdrop-blur-xs flex items-center justify-center z-30 rounded-lg">
-                <button id="launchBtn" class="bg-[#2ecc71] hover:bg-[#27ae60] text-white font-bold text-xl px-10 py-4 rounded-lg shadow-md tracking-wide transition dynamic-colors">
-                    LAUNCH SIMULATION
-                </button>
-            </div>
-        </div>
-
-        <div id="mobile-bottom-area" class="flex-[1.5] min-h-0 w-full flex flex-col md:flex-row gap-2 overflow-y-auto md:overflow-hidden">
-            
-            <div id="mobile-heatmap-row" class="w-full md:w-[45%] min-w-[200px] h-[140px] md:h-full bg-slate-50 border border-slate-200 rounded-lg p-2 flex flex-col shrink-0 min-h-0">
-                <div class="flex items-center mb-1 shrink-0 gap-2">
-                    <div class="flex-1 flex justify-between items-center">
-                        <span class="font-bold text-[10px] uppercase tracking-wider text-slate-500">Live Density</span>
-                        <span class="font-bold text-[10px] uppercase tracking-wider text-slate-500">Live Coverage</span>
-                    </div>
-                    <button id="mobilePauseBtn" class="md:hidden ml-1 px-2.5 py-0.5 bg-[#3498db] text-white rounded font-bold text-[10px] uppercase tracking-wider shadow-2xs transition-colors active:bg-[#2980b9] shrink-0">
-                        Pause
-                    </button>
-                </div>
-                <div class="flex-1 min-h-0 w-full flex gap-2">
-                    <div class="flex-1 h-full bg-white border border-slate-100 rounded overflow-hidden relative flex items-center justify-center">
-                        <canvas id="miniHeatmapCanvas" class="border border-slate-200 shadow-3xs rounded-sm"></canvas>
-                    </div>
-                    <div class="flex-1 h-full bg-white border border-slate-100 rounded overflow-hidden relative flex items-center justify-center">
-                        <canvas id="miniCoverageCanvas" class="border border-slate-200 shadow-3xs rounded-sm"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <div id="mobile-lineplot-row" class="flex-1 w-full h-[160px] md:h-full bg-slate-50 border border-slate-200 rounded-lg p-2 flex flex-col min-h-0 relative">
-                <div class="flex justify-between items-center mb-1 shrink-0">
-                    <div class="flex items-center gap-3 text-[9px] sm:text-xs font-semibold">
-                        <div class="flex items-center gap-1"><div class="w-4 h-1 bg-[#c18c5d]"></div>Mobility</div>
-                        <div class="flex items-center gap-1"><div class="w-4 h-1 bg-[#7209b7]"></div>Entropy (%)</div>
-                        <div class="flex items-center gap-1"><div class="w-4 h-1 bg-[#00afb9]"></div>Fluidity</div>
-                    </div>
-                    <div class="flex gap-1 text-[9px]">
-                        <button id="zoomOutBtn" class="px-1.5 py-0.5 bg-white hover:bg-slate-200 border border-slate-300 rounded font-medium">Fit All</button>
-                        <button id="zoomInBtn" class="px-1.5 py-0.5 bg-white hover:bg-slate-200 border border-slate-300 rounded font-medium">Zoom +</button>
-                        <button id="zoomResetBtn" class="px-1.5 py-0.5 bg-white hover:bg-slate-200 border border-slate-300 rounded font-medium">Live ▶</button>
-                    </div>
-                </div>
-                <div class="flex-1 relative min-h-0 w-full">
-                    <canvas id="plotCanvas" class="w-full h-full"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="sidebarDeck" class="w-[260px] sm:w-[300px] md:w-[340px] lg:w-[360px] h-full border border-slate-200 bg-slate-100 rounded-lg flex flex-col p-3 shrink-0 min-h-0 overflow-hidden transition-transform duration-300">
-        
-        <div class="shrink-0 border-b border-slate-300 pb-4 mb-3 pt-5 md:pt-0">
-            <h2 class="hidden md:block font-black text-xs sm:text-sm text-center tracking-wider text-slate-700 uppercase mb-3">
-                Multi-Agent System Analysis Platform
-            </h2>
-            <div class="hidden md:flex flex-col gap-2 border-t border-slate-100 pt-3 mt-auto shrink-0">
-                <button id="pauseBtn" class="w-full bg-[#3498db] hover:bg-[#2980b9] text-white font-bold text-sm py-2 rounded shadow-xs tracking-wide transition dynamic-colors">
-                    Pause Simulation
-                </button>
-                </div>
-        </div>
-
-        <div class="flex-[2.2] min-h-0 overflow-y-auto pr-1 border-b border-slate-200 pb-2 mb-2" style="scrollbar-width: thin;">
-            <div id="sliders-box" class="space-y-3"></div>
-            <div id="checkboxes-box" class="space-y-2 mt-4 pt-3 border-t border-slate-300"></div>
-
-            <!-- Agent Appearance -->
-            <div class="mt-4 pt-3 border-t border-slate-300">
-                <div class="font-bold text-[10px] uppercase tracking-wider text-slate-500 mb-2">Agent Appearance</div>
-                <div class="grid grid-cols-4 gap-1 mb-2" id="agent-preset-grid">
-                    <!-- filled by JS -->
-                </div>                
-                <button id="useUploadedBtn" class="hidden w-full mb-2 text-[10px] font-bold uppercase tracking-wider bg-white border border-slate-200 rounded px-2 py-1.5 hover:bg-slate-50 transition text-slate-600">
-                Use Uploaded Image
-                </button>
-                <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Upload Custom</label>
-                <label class="flex items-center gap-2 cursor-pointer bg-white border border-slate-200 rounded px-2 py-1.5 hover:bg-slate-50 transition">
-                    <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
-                    <span id="uploadLabel" class="text-[10px] text-slate-500 font-semibold truncate">Choose image…</span>
-                    <input type="file" id="agentImageUpload" accept="image/*" class="hidden">
-                </label>
-                <button id="resetAgentBtn" class="mt-1.5 w-full text-[10px] font-bold uppercase tracking-wider text-slate-400 hover:text-slate-600 transition text-left px-1">↩ Reset to rectangle</button>
-            </div>
-        </div>
-
-        <div id="desktopDashboard" class="flex-1 min-h-0 bg-white border border-slate-200 rounded-md p-1.5 flex flex-col shadow-3xs overflow-y-auto overflow-x-hidden">
-            <div class="flex items-center gap-1 border-b border-slate-100 pb-2 mb-2 shrink-0">
-              <h3 class="font-bold text-[10px] sm:text-xs tracking-wider text-slate-500 uppercase">
-                Live Analytics Dashboard
-              </h3>
-            <button type="button"
-            onclick="toggleMobileHint()" 
-            class="text-[8px] md:text-xs text-slate-400 border border-slate-400 rounded-full w-4 h-4 flex items-center justify-center font-serif italic cursor-help shrink-0">
-            i
-            </button>           
-            </div> 
-
-            <!-- Mobile Dropdown Hint (Hidden by default) -->
-            <div id="dashboard-hint" class="hidden mt-2 p-3 bg-slate-50 border border-slate-100 rounded text-[11px] text-slate-600 leading-relaxed space-y-2">
-                <p><strong>Mobility:</strong> Measures the average linear speed of all agents compared to their maximum possible cruise velocity.</p>
-                <p><strong>Packing:</strong> Tracks the total physical space occupied by both moving agents and obstacles relative to the entire field area.</p>
-                <p><strong>Entropy (%):</strong> Quantifies behavioral unpredictability based on the statistical distribution of agents across different operational modes.</p>
-                <p><strong>Fluidity:</strong> Evaluates traffic efficiency by weighing smooth cruising forward positively against structural delays like avoiding, backing, or stopping.</p>
-            </div>              
-            <div class="grid grid-cols-4 md:grid-cols-2 gap-1.5 md:gap-2 text-xs border-b border-slate-100 pb-2 md:pb-2.5 mb-1.5 md:mb-2 shrink-0 basis-[30%]">
-                <div class="bg-slate-50 border border-slate-100 p-1 md:p-2 p-2 rounded flex flex-col items-center justify-center min-h-[40px] md:min-h-0">
-                    <span class="text-[8px] md:text-xs tracking-wider text-[#999999] font-bold leading-none mb-0.5">Mobility</p></span>
-                    <strong id="m-mobility" class="font-black font-mono text-xs md:text-xl text-[#c18c5d] leading-none">0.00</strong>
-                </div>
-                
-                <div class="bg-slate-50 border border-slate-100 p-1 md:p-2 rounded flex flex-col items-center justify-center min-h-[40px] md:min-h-0">
-                    <span class="text-[8px] md:text-xs tracking-wider text-[#999999] font-bold leading-none mb-0.5">Packing</span>
-                    <strong id="m-packing" class="font-black font-mono text-xs md:text-xl text-slate-800 leading-none">0.00</strong>
-                </div>                
-                <div class="bg-slate-50 border border-slate-100 p-1 md:p-2 rounded flex flex-col items-center justify-center min-h-[40px] md:min-h-0">
-                    <span class="text-[8px] md:text-xs tracking-wider text-[#999999] font-bold leading-none mb-0.5">Entropy(%)</span>
-                    <strong id="m-chaos" class="font-black font-mono text-xs md:text-xl text-[#7209b7] leading-none">0.0%</strong>
-                </div>
-                
-                <div class="bg-slate-50 border border-slate-100 p-1 md:p-2 rounded flex flex-col items-center justify-center min-h-[40px] md:min-h-0">
-                    <span class="text-[8px] md:text-xs tracking-wider text-[#999999] font-bold leading-none mb-0.5">Fluidity</span>
-                    <strong id="m-fluidity" class="font-black font-mono text-xs md:text-xl text-[#00afb9] leading-none">0.00</strong>
-                </div>
-            </div>
-
-        <h4 class="font-bold text-[10px] sm:text-xs tracking-wider text-slate-500 uppercase mb-1.5 shrink-0">Mode Distribution</h4>
-        <div class="grid grid-cols-4 md:grid-cols-2 gap-1.5 basis-[70%] min-h-0 auto-rows-fr" id="distribution-metrics-container"></div>
-        </div>
-    </div>
-
-    <script>
-        // Update your top configuration layout parameters
-        const config = {
-            NUM_AGENTS: 13,
-            FIELD_SIZE_X_CM: 1200.0,
-            FIELD_SIZE_Y_CM: 1000.0,
-            W_LENGTH_CM: 95.0,
-            W_WIDTH_CM: 62.0,
-            
-            // 1. Unified standard number variable name
-            LINEAR_SPEED: 2.0, 
-            
-            // 2. FIXED GETTERS: Corrected to execute dynamically using standard syntax
-            get V_NOMINAL() { return this.LINEAR_SPEED; },
-            get V_ORBIT() { return this.LINEAR_SPEED * 0.75; }, 
-            
-            R_PLAN: 120.0,
-            R_STOP: 75.0,
-            NUM_OBSTACLES: 0,
-            MAX_OMEGA: 0.01,
-            LIDAR_MAX_RANGE: 220.0,
-            K_P: 0.08,
-            RENDER_SCALE: 1.0 
-        };
-
-        const render_toggles = {
-            SHOW_HEATMAP: true,
-            SHOW_CIRCLES: true,
-            SHOW_LIDAR_LINES: true,
-            SHOW_TANGENT_VEC: true,
-            SHOW_COVERAGE: true
-        };
-
-        // const STATE_COLORS = {
-        //     CRUISE: '#2ecc71',
-        //     AVOID: '#3498db',
-        //     REVERSE: '#f39c12',
-        //     STOPPED: '#e74c3c'
-        // };
-        const STATE_COLORS = {
-            CRUISE: '#2ecc71',
-            AVOID: '#3498db',
-            REVERSE: '#ffba08',
-            STOPPED: '#b6465f'
-        };        
-
-        let paused = false;
-        let waiting_to_start = true;
-        let agents = [];
-        let obstacles = [];
-        
-        let history_chaos = [];
-        let history_fluidity = [];
-        let history_mobility = [];
-        let max_history_len = 450;
-        let plot_zoom_points = 450;   // how many data points to show in the window (fewer = zoomed in)
-        let plot_scroll_offset = 0;   // how many points from the end we've scrolled back (0 = live/latest)
-        let plot_fit_all = false;     // when true, always show ALL history data
-
-        let wall_bounds = { w: 0, h: 0 };
-        let sidebarOpen = false;
-        let isMobileMode = false;
-
-        let coverageMatrix = null;
-        let agentImage = null; // null = draw rectangle; HTMLImageElement = draw image
-
-        const simCanvas = document.getElementById('simulationCanvas');
-        const simCtx = simCanvas.getContext('2d');
-        const coverageCanvas = document.getElementById('coverageCanvas');
-        const coverageCtx = coverageCanvas.getContext('2d');
-        const miniCanvas = document.getElementById('miniHeatmapCanvas');
-        const miniCtx = miniCanvas.getContext('2d');
-        
-        // ADDED: Selector hooks for mini coverage preview
-        const miniCoverageCanvas = document.getElementById('miniCoverageCanvas');
-        const miniCoverageCtx = miniCoverageCanvas.getContext('2d');
-
-        const plotCanvas = document.getElementById('plotCanvas');
-        const plotCtx = plotCanvas.getContext('2d');
-        const canvasContainer = document.getElementById('canvas-container');
-        
-        const sidebarDeck = document.getElementById('sidebarDeck');
-        const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
-        const toggleIcon = document.getElementById('toggleIcon');
-
-
-function toggleMobileHint() {
-  const hintBox = document.getElementById('dashboard-hint');
-  hintBox.classList.toggle('hidden');
-}
-        
-        function evaluateScreenProfile() {
-            const w = window.innerWidth;
-            const h = window.innerHeight;
-            
-            if (w < 768 || h / w > 1.15) {
-                if (!isMobileMode) {
-                    isMobileMode = true;
-                    sidebarOpen = false;
-                    sidebarToggleBtn.classList.remove('hidden');
-                    
-                    sidebarDeck.classList.add('fixed', 'right-0', 'top-0', 'z-40', 'shadow-2xl', 'translate-x-full', 'rounded-l-xl', 'rounded-r-none');
-                    sidebarDeck.classList.remove('shrink-0');
-                }
-                
-                if (sidebarOpen) {
-                    sidebarDeck.classList.remove('translate-x-full');
-                    toggleIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>`;
-                } else {
-                    sidebarDeck.classList.add('translate-x-full');
-                    toggleIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path>`;
-                }
-            } else {
-                isMobileMode = false;
-                sidebarToggleBtn.classList.add('hidden');
-                sidebarDeck.classList.remove('fixed', 'right-0', 'top-0', 'z-40', 'shadow-2xl', 'translate-x-full', 'rounded-l-xl', 'rounded-r-none');
-                sidebarDeck.classList.add('shrink-0');
-            }
-        }
-
-        function resizeAllPlatformCanvases() {
-            evaluateScreenProfile();
-
-            const availableW = canvasContainer.clientWidth - 16;
-            const availableH = canvasContainer.clientHeight - 16;
-            const scaleX = availableW / config.FIELD_SIZE_X_CM;
-            const scaleY = availableH / config.FIELD_SIZE_Y_CM;
-            
-            const renderScale = Math.min(scaleX, scaleY);
-            config.RENDER_SCALE = renderScale;
-
-            wall_bounds.w = config.FIELD_SIZE_X_CM * renderScale;
-            wall_bounds.h = config.FIELD_SIZE_Y_CM * renderScale;
-            
-            simCanvas.width = wall_bounds.w;
-            simCanvas.height = wall_bounds.h;
-            simCanvas.classList.remove('hidden');
-
-            coverageCanvas.width = wall_bounds.w;
-            coverageCanvas.height = wall_bounds.h;
-            if (render_toggles.SHOW_COVERAGE) coverageCanvas.classList.remove('hidden');
-
-            const miniParent = miniCanvas.parentElement;
-            const mScaleX = miniParent.clientWidth / config.FIELD_SIZE_X_CM;
-            const mScaleY = miniParent.clientHeight / config.FIELD_SIZE_Y_CM;
-            const mRenderScale = Math.min(mScaleX, mScaleY);
-
-            miniCanvas.width = config.FIELD_SIZE_X_CM * mRenderScale;
-            miniCanvas.height = config.FIELD_SIZE_Y_CM * mRenderScale;
-
-            // ADDED: Auto resize bounds for mini coverage canvas mirroring the parent grid shape
-            miniCoverageCanvas.width = config.FIELD_SIZE_X_CM * mRenderScale;
-            miniCoverageCanvas.height = config.FIELD_SIZE_Y_CM * mRenderScale;
-
-            const plotParent = plotCanvas.parentElement;
-            plotCanvas.width = plotParent.clientWidth;
-            plotCanvas.height = plotParent.clientHeight;
-        }
-
-        class StaticObstacle {
-            constructor(x_cm, y_cm, radius_cm) {
-                this.x_cm = x_cm; this.y_cm = y_cm; this.radius_cm = radius_cm;
-            }
-            draw(ctx) {
-                const cx = this.x_cm * config.RENDER_SCALE;
-                const cy = this.y_cm * config.RENDER_SCALE;
-                const rPx = this.radius_cm * config.RENDER_SCALE;
-                ctx.beginPath(); ctx.arc(cx, cy, rPx, 0, 2 * Math.PI);
-                ctx.fillStyle = '#646e78'; ctx.fill();
-                ctx.lineWidth = 1; ctx.strokeStyle = '#32373c'; ctx.stroke();
-            }
-        }
-
-        class WheelchairAgent {
-            constructor(id, x_cm, y_cm) {
-                this.id = id; this.x_cm = x_cm; this.y_cm = y_cm;
-                this.theta = Math.random() * 2 * Math.PI;
-                this.v_dir = 1.0; this.current_mode = "CRUISE";
-                this.orbit_side = 1; this.v_des_actual = null;
-                this.closest_obs_pt_cm = null; this.stop_timer = 0;
-                this.last_linear_v_cm = 0.0;
-            }
-
-            readWideLidar() {
-                const maxRangeCm = config.LIDAR_MAX_RANGE;
-                let D1 = maxRangeCm, D2 = maxRangeCm, D3 = maxRangeCm;
-                let pt_1_cm = null, pt_2_cm = null;
-                const myPos = [this.x_cm, this.y_cm];
-
-                const walls = [
-                    [[0, 0], [config.FIELD_SIZE_X_CM, 0]],
-                    [[config.FIELD_SIZE_X_CM, 0], [config.FIELD_SIZE_X_CM, config.FIELD_SIZE_Y_CM]],
-                    [[config.FIELD_SIZE_X_CM, config.FIELD_SIZE_Y_CM], [0, config.FIELD_SIZE_Y_CM]],
-                    [[0, config.FIELD_SIZE_Y_CM], [0, 0]]
-                ];
-
-                walls.forEach(w => {
-                    const [p1, p2] = w; const steps = 30;
-                    for(let i=0; i<=steps; i++) {
-                        const t = i / steps;
-                        const pt = [p1[0] + t * (p2[0] - p1[0]), p1[1] + t * (p2[1] - p1[1])];
-                        const res = this._processObstaclePoint(myPos, pt, D1, D2, D3, pt_1_cm, pt_2_cm, maxRangeCm);
-                        D1 = res.D1; D2 = res.D2; D3 = res.D3; pt_1_cm = res.pt_1; pt_2_cm = res.pt_2;
-                    }
-                });
-
-                obstacles.forEach(obs => {
-                    const toObs = [obs.x_cm - this.x_cm, obs.y_cm - this.y_cm];
-                    const distToCenter = Math.hypot(toObs[0], toObs[1]);
-                    if (distToCenter > 0) {
-                        const closestSurfacePt = [obs.x_cm - (toObs[0]/distToCenter)*obs.radius_cm, obs.y_cm - (toObs[1]/distToCenter)*obs.radius_cm];
-                        const res = this._processObstaclePoint(myPos, closestSurfacePt, D1, D2, D3, pt_1_cm, pt_2_cm, maxRangeCm);
-                        D1 = res.D1; D2 = res.D2; D3 = res.D3; pt_1_cm = res.pt_1; pt_2_cm = res.pt_2;
-                    }
-                });
-
-                agents.forEach(other => {
-                    if (other.id === this.id) return;
-                    const toOther = [other.x_cm - this.x_cm, other.y_cm - this.y_cm];
-                    const distToCenter = Math.hypot(toOther[0], toOther[1]);
-                    if (distToCenter > 0) {
-                        const lenCm = config.W_LENGTH_CM;
-                        const closestSurfacePt = [other.x_cm - (toOther[0]/distToCenter)*(lenCm/2), other.y_cm - (toOther[1]/distToCenter)*(lenCm/2)];
-                        const res = this._processObstaclePoint(myPos, closestSurfacePt, D1, D2, D3, pt_1_cm, pt_2_cm, maxRangeCm);
-                        D1 = res.D1; D2 = res.D2; D3 = res.D3; pt_1_cm = res.pt_1; pt_2_cm = res.pt_2;
-                    }
-                });
-
-                this.closest_obs_pt_cm = D1 < D2 ? pt_1_cm : pt_2_cm;
-                return [D1, D2, D3];
-            }
-
-            _processObstaclePoint(myPos, pt, D1, D2, D3, pt_1, pt_2, maxRange) {
-                const toPt = [pt[0] - myPos[0], pt[1] - myPos[1]];
-                const dist = Math.hypot(toPt[0], toPt[1]);
-                if (dist > maxRange) return { D1, D2, D3, pt_1, pt_2 };
-
-                const globalAngle = Math.atan2(toPt[1], toPt[0]);
-                let localAngle = (globalAngle - this.theta + Math.PI) % (2 * Math.PI) - Math.PI;
-                if (localAngle < -Math.PI) localAngle += 2 * Math.PI;
-
-                if (localAngle >= -Math.PI / 2 && localAngle < 0) {
-                    if (dist < D2) { D2 = dist; pt_2 = pt; }
-                } else if (localAngle >= 0 && localAngle <= Math.PI / 2) {
-                    if (dist < D1) { D1 = dist; pt_1 = pt; }
-                } else { if (dist < D3) D3 = dist; }
-                return { D1, D2, D3, pt_1, pt_2 };
-            }
-
-            stepAlgorithm(dists) {
-                const [D1, D2, D3] = dists;
-                this.v_des_actual = null;
-                const D_front_min = Math.min(D1, D2);
-
-                let v_target = 0.0; let omega_target = 0.0;
-                const rStop = config.R_STOP; const rPlan = config.R_PLAN;
-
-                if (this.v_dir > 0) {
-                    if ((this.current_mode === "STOPPED" && this.stop_timer >= 60) || (this.current_mode !== "STOPPED")) {
-                        if (D_front_min <= rStop) {
-                            this.current_mode = "STOPPED"; v_target = 0.0; omega_target = 0.0; this.stop_timer++;
-                            if (this.stop_timer >= 60) { this.v_dir = -1.0; this.stop_timer = 0; }
-                        } else if (D_front_min > rStop && D_front_min <= rPlan) {
-                            this.current_mode = "AVOID"; this.stop_timer = 0;
-                            this.orbit_side = D2 < D1 ? 1 : -1;
-                            v_target = config.V_ORBIT;
-                            const forwardDir = [Math.cos(this.theta), Math.sin(this.theta)];
-                            this.v_des_actual = this.orbit_side === 1 ? [-forwardDir[1], forwardDir[0]] : [forwardDir[1], -forwardDir[0]];
-                            
-                            const thetaDes = Math.atan2(this.v_des_actual[1], this.v_des_actual[0]);
-                            let thetaErr = (thetaDes - this.theta + Math.PI) % (2 * Math.PI) - Math.PI;
-                            if (thetaErr < -Math.PI) thetaErr += 2 * Math.PI;
-                            omega_target = config.K_P * thetaErr;
-                        } else {
-                            this.current_mode = "CRUISE"; this.stop_timer = 0;
-                            v_target = config.V_NOMINAL; omega_target = 0.0;
-                        }
-                    }
-                } else {
-                    if (D3 <= rStop) {
-                        this.current_mode = "STOPPED"; v_target = 0.0; omega_target = 0.0;
-                        if (D1 > rStop && D2 > rStop) { this.v_dir = 1.0; this.theta += (Math.random() - 0.5); }
-                    } else { this.current_mode = "REVERSE"; v_target = D3 <= rPlan ? -config.V_NOMINAL * 0.5 : -config.V_NOMINAL; omega_target = 0.0; }
-                }
-                this.stop_timer++;
-                this._applyKinematics(v_target, omega_target);
-            }
-
-            _applyKinematics(v_target, omega_target) {
-                const omega = Math.max(-config.MAX_OMEGA, Math.min(config.MAX_OMEGA, omega_target));
-                const trackWidth = config.W_WIDTH_CM;
-                const v_L = v_target - (omega * trackWidth) / 2.0;
-                const v_R = v_target + (omega * trackWidth) / 2.0;
-                const v_actual = (v_R + v_L) / 2.0;
-
-                this.theta += (v_R - v_L) / trackWidth;
-                this.x_cm += v_actual * Math.cos(this.theta);
-                this.y_cm += v_actual * Math.sin(this.theta);
-                this.last_linear_v_cm = v_actual;
-            }
-
-            enforceRigidBounds() {
-                const rSys = config.W_LENGTH_CM / 2;
-                this.x_cm = Math.max(rSys, Math.min(config.FIELD_SIZE_X_CM - rSys, this.x_cm));
-                this.y_cm = Math.max(rSys, Math.min(config.FIELD_SIZE_Y_CM - rSys, this.y_cm));
-
-                obstacles.forEach(obs => {
-                    const dist = Math.hypot(this.x_cm - obs.x_cm, this.y_cm - obs.y_cm);
-                    const minDist = rSys + obs.radius_cm;
-                    if (dist < minDist) {
-                        const overlap = minDist - dist;
-                        this.x_cm += ((this.x_cm - obs.x_cm) / (dist > 0 ? dist : 1)) * overlap;
-                        this.y_cm += ((this.y_cm - obs.y_cm) / (dist > 0 ? dist : 1)) * overlap;
-                    }
-                });
-
-                agents.forEach(other => {
-                    if (other.id === this.id) return;
-                    const dist = Math.hypot(this.x_cm - other.x_cm, this.y_cm - other.y_cm);
-                    const minDist = config.W_LENGTH_CM;
-                    if (dist < minDist) {
-                        const overlap = minDist - dist;
-                        this.x_cm += ((this.x_cm - other.x_cm) / (dist > 0 ? dist : 1)) * overlap * 0.5;
-                        this.y_cm += ((this.y_cm - other.y_cm) / (dist > 0 ? dist : 1)) * overlap * 0.5;
-                    }
-                });
-            }
-
-            draw(ctx) {
-                const cx = this.x_cm * config.RENDER_SCALE;
-                const cy = this.y_cm * config.RENDER_SCALE;
-                const rPlanPx = config.R_PLAN * config.RENDER_SCALE;
-                const rStopPx = config.R_STOP * config.RENDER_SCALE;
-
-                if (render_toggles.SHOW_CIRCLES) {
-                    ctx.lineWidth = 2.0; ctx.strokeStyle = '#CCCCCC';
-                    ctx.beginPath(); ctx.arc(cx, cy, rPlanPx, 0, 2*Math.PI); ctx.stroke();
-                    // When using custom image, fill stop circle with mode color so state is still visible
-                    if (agentImage) {
-                        ctx.fillStyle = STATE_COLORS[this.current_mode] + '55';
-                        ctx.beginPath(); ctx.arc(cx, cy, rStopPx, 0, 2*Math.PI); ctx.fill();
-                        ctx.strokeStyle = STATE_COLORS[this.current_mode];
-                    } else {
-                        ctx.strokeStyle = '#FCB6B6';
-                    }
-                    ctx.beginPath(); ctx.arc(cx, cy, rStopPx, 0, 2*Math.PI); ctx.stroke();
-                }
-
-                if (render_toggles.SHOW_LIDAR_LINES) {
-                    ctx.lineWidth = 2.0; ctx.strokeStyle = '#CCCCCC';
-                    [this.theta + Math.PI/2, this.theta - Math.PI/2, this.theta].forEach(h => {
-                        ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + Math.cos(h)*rPlanPx, cy + Math.sin(h)*rPlanPx); ctx.stroke();
-                    });
-                }
-
-                if (render_toggles.SHOW_TANGENT_VEC && this.current_mode === "AVOID" && this.v_des_actual && this.closest_obs_pt_cm) {
-                    const obsDist = Math.hypot(this.x_cm - this.closest_obs_pt_cm[0], this.y_cm - this.closest_obs_pt_cm[1]);
-                    const denom = (config.R_PLAN - config.R_STOP) || 1.0;
-                    const proximityScale = Math.max(0.0, Math.min(1.0, (config.R_PLAN - obsDist) / denom));
-                    
-                    const vecLenCm = 25.0 + (proximityScale * 50.0);
-                    const vecLenPx = vecLenCm * config.RENDER_SCALE;
-
-                    const endX = cx + this.v_des_actual[0] * vecLenPx;
-                    const endY = cy + this.v_des_actual[1] * vecLenPx;
-                    
-                    ctx.lineWidth = Math.max(1.5, 2.5 * config.RENDER_SCALE); ctx.strokeStyle = '#f39c12';
-                    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(endX, endY); ctx.stroke();
-
-                    ctx.fillStyle = '#f39c12'; ctx.beginPath();
-                    ctx.arc(endX, endY, Math.max(2, 4 * config.RENDER_SCALE), 0, 2 * Math.PI); ctx.fill();
-                }
-
-                ctx.save(); ctx.translate(cx, cy); ctx.rotate(this.theta);
-                
-                if (agentImage) {
-                    const rX = Math.max(1.5, config.W_LENGTH_CM * config.RENDER_SCALE) / 2;
-                    const rY = Math.max(1.5, config.W_WIDTH_CM * config.RENDER_SCALE) / 2;
-                    ctx.rotate(Math.PI / 2); // rotate +90° so image "up" faces forward (matches block's front line)
-                    ctx.drawImage(agentImage, -rY, -rX, rY * 2, rX * 2);
-                } else {
-                    ctx.fillStyle = STATE_COLORS[this.current_mode];
-                    ctx.lineWidth = Math.max(2.0, 1.2 * config.RENDER_SCALE); ctx.strokeStyle = '#ffffff';
-                    const rX = Math.max(1.5, config.W_LENGTH_CM * config.RENDER_SCALE) / 2;
-                    const rY = Math.max(1.5, config.W_WIDTH_CM * config.RENDER_SCALE) / 2;
-                    ctx.beginPath(); ctx.roundRect(-rX, -rY, rX*2, rY*2, Math.max(1, 2 * config.RENDER_SCALE));
-                    ctx.fill(); ctx.stroke();
-                    ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(rX, 0); ctx.stroke();
-                }
-                
-                ctx.restore();
-            }
-        }
-
-        function generateEnvironment() {
-            resizeAllPlatformCanvases();
-            obstacles = []; agents = [];
-            const obsRadiusCm = 25; const agentLenCm = config.W_LENGTH_CM;
-            
-            const step = 20;
-            const gridW = Math.max(1, Math.floor(config.FIELD_SIZE_X_CM / step));
-            const gridH = Math.max(1, Math.floor(config.FIELD_SIZE_Y_CM / step));
-
-            // Verify it creates independent sets per cell:
-            coverageMatrix = Array.from({ length: gridH }, () => 
-                Array.from({ length: gridW }, () => new Set())
-            );
-
-            for (let i = 0; i < config.NUM_OBSTACLES; i++) {
-                let attempts = 0;
-                while (attempts < 100) {
-                    const ox = Math.random() * (config.FIELD_SIZE_X_CM - obsRadiusCm * 2 - 40) + obsRadiusCm + 20;
-                    const oy = Math.random() * (config.FIELD_SIZE_Y_CM - obsRadiusCm * 2 - 40) + obsRadiusCm + 20;
-                    if (!obstacles.some(o => Math.hypot(ox - o.x_cm, oy - o.y_cm) < (obsRadiusCm * 3))) {
-                        obstacles.push(new StaticObstacle(ox, oy, obsRadiusCm)); break;
-                    }
-                    attempts++;
-                }
-            }
-
-            for (let i = 0; i < config.NUM_AGENTS; i++) {
-                let attempts = 0;
-                while (attempts < 200) {
-                    const ax = Math.random() * (config.FIELD_SIZE_X_CM - agentLenCm * 2) + agentLenCm;
-                    const ay = Math.random() * (config.FIELD_SIZE_Y_CM - agentLenCm * 2) + agentLenCm;
-                    if (!obstacles.some(o => Math.hypot(ax - o.x_cm, ay - o.y_cm) < (obsRadiusCm + agentLenCm)) &&
-                        !agents.some(a => Math.hypot(ax - a.x_cm, ay - a.y_cm) < (agentLenCm * 1.1))) {
-                        agents.push(new WheelchairAgent(i, ax, ay)); break;
-                    }
-                    attempts++;
-                }
-            }
-        }
-
-        function updateCoverageAccumulation() {
-            if (!coverageMatrix || agents.length === 0) return;
-            const step = 20;
-            const gridW = coverageMatrix[0].length;
-            const gridH = coverageMatrix.length;
-            const agentRadiusCm = config.W_LENGTH_CM / 2;
-            const sigma = agentRadiusCm / step;
-
-            agents.forEach(a => {
-                const axL = a.x_cm / step;
-                const ayL = a.y_cm / step;
-                const rCells = Math.ceil(2 * sigma);
-                const minX = Math.max(0, Math.floor(axL - rCells));
-                const maxX = Math.min(gridW, Math.floor(axL + rCells + 1));
-                const minY = Math.max(0, Math.floor(ayL - rCells));
-                const maxY = Math.min(gridH, Math.floor(ayL + rCells + 1)); // <-- Double-check this line for typos
-
-                for (let y = minY; y < maxY; y++) {
-                    for (let x = minX; x < maxX; x++) {
-                        const distCm = Math.hypot((x + 0.5) * step - a.x_cm, (y + 0.5) * step - a.y_cm);
-                        if (distCm <= agentRadiusCm) {
-                            // CHANGE THIS LINE: Store the agent's unique ID
-                            coverageMatrix[y][x].add(a.id);
-                        }
-                    }
-                }
-            });
-        }
-
-        function drawCoverageHeatmap() {
-            if (!coverageMatrix) return;
-            const gridH = coverageMatrix.length;
-            const gridW = coverageMatrix[0].length;
-            
-            const temp = document.createElement('canvas'); temp.width = gridW; temp.height = gridH;
-            const tempCtx = temp.getContext('2d'); const imgData = tempCtx.createImageData(gridW, gridH);
-            const data = imgData.data;
-
-            for (let y = 0; y < gridH; y++) {
-                for (let x = 0; x < gridW; x++) {
-                    // 1. Check the set size safely
-                    const uniqueVisitors = coverageMatrix[y][x] ? coverageMatrix[y][x].size : 0; 
-                    
-                    if (uniqueVisitors > 0) {
-                        let idx = (y * gridW + x) * 4;
-                        
-                        // 2. Normalize against total active agents
-                        let val = (uniqueVisitors - 1) / Math.max(1, config.NUM_AGENTS - 1);
-                        val = Math.max(0.0, Math.min(1.0, val)); 
-
-                        // 3. Jet Map Calculations (Blue -> Green -> Red)
-                        const r_four = 4.0 * val;
-                        let r = Math.max(0, Math.min(255, Math.floor(255 * Math.min(r_four - 1.5, -r_four + 4.5))));
-                        let g = Math.max(0, Math.min(255, Math.floor(255 * Math.min(r_four - 0.5, -r_four + 3.5))));
-                        let b = Math.max(0, Math.min(255, Math.floor(255 * Math.min(r_four + 0.5, -r_four + 2.5))));
-
-                        imgData.data[idx]     = r;
-                        imgData.data[idx + 1] = g;
-                        imgData.data[idx + 2] = b;
-                        imgData.data[idx + 3] = Math.floor(70 + val * 120); // Alpha transparency opacity
-                    }
-                }
-            }
-            tempCtx.putImageData(imgData, 0, 0);
-            
-            // Render on primary main field background
-            coverageCtx.clearRect(0, 0, wall_bounds.w, wall_bounds.h);
-            coverageCtx.drawImage(temp, 0, 0, wall_bounds.w, wall_bounds.h);
-
-            // ADDED: Cleanly render onto the live thumbnail box
-            miniCoverageCtx.clearRect(0, 0, miniCoverageCanvas.width, miniCoverageCanvas.height);
-            miniCoverageCtx.drawImage(temp, 0, 0, miniCoverageCanvas.width, miniCoverageCanvas.height);
-        }
-
-        function computeHeatmapSurface(ctxTarget, targetW, targetH) {
-            if (config.FIELD_SIZE_X_CM <= 0 || config.FIELD_SIZE_Y_CM <= 0 || agents.length === 0) return;
-            const step = 20;
-            const gridW = Math.max(1, Math.floor(config.FIELD_SIZE_X_CM / step)), gridH = Math.max(1, Math.floor(config.FIELD_SIZE_Y_CM / step));
-            const matrix = Array.from({ length: gridH }, () => new Float32Array(gridW));
-            const sigma = 90.0 / step, twoSigmaSq = 2.0 * (sigma * sigma);
-
-            agents.forEach(a => {
-                const axL = a.x_cm / step, ayL = a.y_cm / step, rCells = Math.floor(3 * sigma);
-                const minX = Math.max(0, Math.floor(axL - rCells)), maxX = Math.min(gridW, Math.floor(axL + rCells + 1));
-                const minY = Math.max(0, Math.floor(ayL - rCells)), maxY = Math.min(gridH, Math.floor(ayL + rCells + 1));
-
-                for (let y = minY; y < maxY; y++) {
-                    for (let x = minX; x < maxX; x++) {
-                        matrix[y][x] += Math.exp(-(Math.pow(x - axL, 2) + Math.pow(y - ayL, 2)) / twoSigmaSq);
-                    }
-                }
-            });
-
-            const temp = document.createElement('canvas'); temp.width = gridW; temp.height = gridH;
-            const tempCtx = temp.getContext('2d'); const imgData = tempCtx.createImageData(gridW, gridH);
-            const data = imgData.data;
-
-            for (let y = 0; y < gridH; y++) {
-                for (let x = 0; x < gridW; x++) {
-                    let val = Math.max(0, Math.min(1.0, matrix[y][x] / 2.2)), idx = (y * gridW + x) * 4;
-                    let r = 0, g = 0, b = 0;
-                    if (val < 0.3) { b = 255; g = Math.floor((val / 0.3) * 220); }
-                    else if (val < 0.7) { b = Math.floor((1.0 - (val - 0.3) / 0.4) * 255); g = 240; r = Math.floor(((val - 0.3) / 0.4) * 255); }
-                    else { r = 255; g = Math.floor((1.0 - (val - 0.7) / 0.3) * 140); }
-                    data[idx] = r; data[idx + 1] = g; data[idx + 2] = b; data[idx + 3] = Math.floor(15 + val * 155);
-                }
-            }
-            tempCtx.putImageData(imgData, 0, 0);
-            ctxTarget.clearRect(0, 0, targetW, targetH); ctxTarget.drawImage(temp, 0, 0, targetW, targetH);
-        }
-
-        function calculateRealtimeMetrics() {
-            const N = agents.length;
-            if (N === 0) return { mobility: 0, packing: 0, entropy: 0, chaos: 0, fluidity: 0, counts: { CRUISE:0, AVOID:0, REVERSE:0, STOPPED:0 }};
-            const mobility = config.V_NOMINAL > 0 ? (agents.reduce((acc, a) => acc + Math.abs(a.last_linear_v_cm), 0)) / (N * config.V_NOMINAL) : 0;
-            const packing = (config.FIELD_SIZE_X_CM * config.FIELD_SIZE_Y_CM) > 0 ? ((N * Math.PI * Math.pow(config.R_PLAN, 2)) + obstacles.reduce((acc, o) => acc + (Math.PI * o.radius_cm * o.radius_cm), 0)) / (config.FIELD_SIZE_X_CM * config.FIELD_SIZE_Y_CM) : 0;
-            const counts = { CRUISE: 0, AVOID: 0, REVERSE: 0, STOPPED: 0 }; agents.forEach(a => counts[a.current_mode]++);
-            let entropy = 0.0; Object.keys(counts).forEach(m => { const p = counts[m] / N; if (p > 0) entropy -= p * Math.log2(p); });
-
-            return { mobility, packing, entropy, chaos: (entropy / 2.0) * 100.0, fluidity: (1.0 * (counts.CRUISE/N)) + (0.5 * (counts.AVOID/N)) - (0.5 * (counts.REVERSE/N)) - (1.0 * (counts.STOPPED/N)), counts };
-        }
-
-        function drawLivePlots() {
-            const width = plotCanvas.clientWidth; const height = plotCanvas.clientHeight;
-            if(plotCanvas.width !== width || plotCanvas.height !== height) { plotCanvas.width = width; plotCanvas.height = height; }
-            plotCtx.clearRect(0, 0, width, height);
-            const totalLen = history_chaos.length; if (totalLen < 2) return;
-
-            const paddingLeft = 65, paddingRight = 15, paddingTop = 12, paddingBottom = 24;
-            const plotW = width - (paddingLeft + paddingRight), plotH = height - (paddingTop + paddingBottom);
-
-            // Clamp zoom and scroll
-            const visiblePoints = plot_fit_all ? totalLen : Math.max(30, Math.min(totalLen, plot_zoom_points));
-            const maxScrollBack = plot_fit_all ? 0 : Math.max(0, totalLen - visiblePoints);
-            if (plot_fit_all) plot_scroll_offset = 0;
-            plot_scroll_offset = Math.max(0, Math.min(plot_scroll_offset, maxScrollBack));
-            const sliceEnd = totalLen - plot_scroll_offset;
-            const sliceStart = Math.max(0, sliceEnd - visiblePoints);
-            const stepW = plotW / Math.max(1, visiblePoints);
-
-            plotCtx.fillStyle = '#94a3b8'; plotCtx.font = '9px monospace'; plotCtx.textAlign = 'left'; plotCtx.textBaseline = 'middle';
-            plotCtx.fillText('100% / +1.00', 5, paddingTop); plotCtx.fillText('50% /  0.00', 5, paddingTop + plotH / 2); plotCtx.fillText('0% / -1.00', 5, paddingTop + plotH);
-
-            plotCtx.beginPath(); plotCtx.strokeStyle = '#e2e8f0'; plotCtx.lineWidth = 1;
-            plotCtx.moveTo(paddingLeft, paddingTop); plotCtx.lineTo(width - paddingRight, paddingTop);
-            plotCtx.moveTo(paddingLeft, paddingTop + plotH / 2); plotCtx.lineTo(width - paddingRight, paddingTop + plotH / 2); 
-            plotCtx.stroke();
-
-            const renderLine = (historyArray, maxVal, color, isSigned = false) => {
-                plotCtx.beginPath(); plotCtx.lineWidth = 1.8; plotCtx.strokeStyle = color;
-                for (let i = sliceStart; i < sliceEnd; i++) {
-                    const cx = paddingLeft + (i - sliceStart) * stepW;
-                    let norm = isSigned ? (historyArray[i] + 1.0) / 2.0 : historyArray[i] / maxVal;
-                    const cy = (height - paddingBottom) - (norm * plotH);
-                    if (i === sliceStart) plotCtx.moveTo(cx, cy); else plotCtx.lineTo(cx, cy);
-                }
-                plotCtx.stroke();
-            };
-            renderLine(history_chaos, 100.0, '#7209b7'); renderLine(history_fluidity, 1.0, '#00afb9', true); renderLine(history_mobility, 1.0, '#c18c5d');
-
-            // Scroll indicator bar when not at latest
-            if (plot_scroll_offset > 0 && maxScrollBack > 0) {
-                const barW = plotW * (visiblePoints / totalLen);
-                const barX = paddingLeft + (plotW - barW) * (1 - plot_scroll_offset / maxScrollBack);
-                plotCtx.fillStyle = '#3498db44';
-                plotCtx.fillRect(barX, paddingTop, barW, 3);
-            }
-
-            plotCtx.beginPath(); plotCtx.strokeStyle = '#cbd5e1'; plotCtx.moveTo(paddingLeft, height - paddingBottom); plotCtx.lineTo(width - paddingRight, height - paddingBottom); plotCtx.stroke();
-            plotCtx.textAlign = 'center'; plotCtx.textBaseline = 'top';
-            const numTicks = 5;
-            for (let i = 0; i < numTicks; i++) {
-                const ratio = i / (numTicks - 1); const x = paddingLeft + ratio * plotW;
-                plotCtx.beginPath(); plotCtx.strokeStyle = '#cbd5e1'; plotCtx.moveTo(x, height - paddingBottom); plotCtx.lineTo(x, height - paddingBottom + 4); plotCtx.stroke();
-                plotCtx.fillStyle = '#94a3b8';
-                // plotCtx.fillText((((sliceStart + ratio * (sliceEnd - sliceStart - 1)))).toFixed(1) + 'f', x, height - paddingBottom + 6);
-            }
-        }
-
-        function updateDashboardDOM(metrics) {
-            // Updated to mirror the top HUD configuration format rules
-            document.getElementById('m-chaos').innerText = metrics.chaos.toFixed(1) + '%';
-            document.getElementById('m-fluidity').innerText = metrics.fluidity.toFixed(2);
-            document.getElementById('m-mobility').innerText = metrics.mobility.toFixed(2);
-            document.getElementById('m-packing').innerText = metrics.packing.toFixed(3);
-
-            document.getElementById('hud-chaos').innerText = metrics.chaos.toFixed(1) + '%';
-            document.getElementById('hud-fluidity').innerText = metrics.fluidity.toFixed(2);
-            document.getElementById('hud-mobility').innerText = metrics.mobility.toFixed(2);
-            document.getElementById('hud-packing').innerText = metrics.packing.toFixed(3);
-
-            const container = document.getElementById('distribution-metrics-container');
-            container.innerHTML = '';
-            const total = agents.length || 1;
-            const labels = [{ key: "CRUISE", text: "Cruise" }, { key: "AVOID", text: "Avoid" }, { key: "REVERSE", text: "Back" }, { key: "STOPPED", text: "Stop" }];
-
-            labels.forEach(item => {
-                const count = metrics.counts[item.key], pct = (count / total) * 100, color = STATE_COLORS[item.key];
-                const card = document.createElement('div');
-                // Mobile: flex-col (name above values). Desktop (md): flex-row (name left, values right)
-                card.className = "rounded border flex flex-col md:flex-row md:items-center md:justify-between px-1.5 md:px-3 py-1 md:py-0 min-w-0 min-h-0  overflow-y-auto";
-                card.style.borderColor = color + '66';
-                card.style.backgroundColor = color + '18';
-                card.innerHTML = `
-                    <span class="font-bold text-[9px] md:text-lg text-center tracking-wide leading-none truncate" style="color:${color}">${item.text}</span>
-                    <span class="font-mono font-black text-xl md:text-2xl text-center leading-none shrink-0 mt-0.5 md:mt-0" style="color:${color}">${count}
-                    <span class="flex-col text-[12px] md:text-sm text-center font-semibold text-slate-400 ml-0.5" style="color:#696969">  ${pct.toFixed(0)}%</span></span>
-                `;
-                container.appendChild(card);
-            });
-        }      
-
-
-        function mainLoop() {
-            if (waiting_to_start) return;
-            if (!paused) {
-                agents.forEach(a => { a.stepAlgorithm(a.readWideLidar()); a.enforceRigidBounds(); });
-                updateCoverageAccumulation();
-                const metrics = calculateRealtimeMetrics();
-                history_chaos.push(metrics.chaos); history_fluidity.push(metrics.fluidity); history_mobility.push(metrics.mobility);
-                if (history_chaos.length > 3000) { history_chaos.shift(); history_fluidity.shift(); history_mobility.shift(); }
-                updateDashboardDOM(metrics);
-            }
-
-            // Draw underlying track coverages
-            if (render_toggles.SHOW_COVERAGE) { 
-                drawCoverageHeatmap(); 
-            } else{
-                coverageCtx.clearRect(0, 0, wall_bounds.w, wall_bounds.h);
-            }
-
-            drawCoverageHeatmap();
-            // coverageCtx.clearRect(0, 0, wall_bounds.w, wall_bounds.h);        
-
-            // Draw primary simulation actors/heatmaps
-            simCtx.clearRect(0, 0, wall_bounds.w, wall_bounds.h);
-            if (render_toggles.SHOW_HEATMAP) { computeHeatmapSurface(simCtx, wall_bounds.w, wall_bounds.h); }
-            obstacles.forEach(o => o.draw(simCtx)); agents.forEach(a => a.draw(simCtx));
-            
-            computeHeatmapSurface(miniCtx, miniCanvas.width, miniCanvas.height);
-            drawLivePlots();
-
-            requestAnimationFrame(mainLoop);
-        }
-
-        function createControlsUI() {
-            // Updated dictionary setup removing dual parameters for a unified Linear Speed setting
-            const slidersDef = [
-                { id: "NUM_AGENTS", label: "Agent Count", min: 1, max: 100, step: 1, isInt: true, unit: "" },
-                { id: "FIELD_SIZE_X_CM", label: "Field Width", min: 200, max: 4000, step: 1, isInt: true, unit: "cm" },
-                { id: "FIELD_SIZE_Y_CM", label: "Field Height", min: 200, max: 4000, step: 1, isInt: true, unit: "cm" },
-                { id: "W_LENGTH_CM", label: "Agent Length", min: 20, max: 200, step: 1, isInt: true, unit: "cm" },
-                { id: "W_WIDTH_CM", label: "Agent Width", min: 20, max: 200, step: 1, isInt: true, unit: "cm" },
-                { id: "LINEAR_SPEED", label: "Linear Speed", min: 0.5, max: 10.0, step: 0.5, isInt: false, unit: "" },
-                { id: "MAX_OMEGA", label: "Max Turning Speed", min: 0.001, max: 10.0, step: 0.001, isInt: false, unit: "" },
-                { id: "R_PLAN", label: "Evasion Radius Threshold", min: 50, max: 200, step: 1, isInt: true, unit: "" },
-                { id: "R_STOP", label: "Stop Radius", min: 20, max: 150, step: 1, isInt: true, unit: "" },
-                { id: "NUM_OBSTACLES", label: "Obstacles", min: 0, max: 20, step: 1, isInt: true, unit: "" }
-                
-            ];
-
-            const slidersBox = document.getElementById('sliders-box'); slidersBox.innerHTML = '';
-            slidersDef.forEach(s => {
-                const div = document.createElement('div'); div.className = "flex flex-col space-y-1 mb-2.5"; // Tightened layout to prevent cutoff
-                const formatVal = (v) => s.isInt ? parseInt(v) : parseFloat(v).toFixed(s.id==="MAX_OMEGA"?3:2);
-                div.innerHTML = `
-                    <div class="flex justify-between text-xs font-bold text-slate-600 tracking-wide">
-                        <span>${s.label}</span><span id="val-${s.id}" class="font-mono text-slate-800">${formatVal(config[s.id])} ${s.unit}</span>
-                    </div>
-                    <input type="range" id="range-${s.id}" min="${s.min}" max="${s.max}" step="${s.step}" value="${config[s.id]}" class="w-full h-1.5 bg-slate-200 rounded appearance-none cursor-pointer accent-[#3498db]">
-                `;
-                slidersBox.appendChild(div);
-
-                document.getElementById(`range-${s.id}`).addEventListener('input', (e) => {
-                    const parsedVal = s.isInt ? parseInt(e.target.value) : parseFloat(e.target.value);
-                    config[s.id] = parsedVal; document.getElementById(`val-${s.id}`).innerText = `${formatVal(parsedVal)} ${s.unit}`;
-                    if (["NUM_AGENTS", "FIELD_SIZE_X_CM", "FIELD_SIZE_Y_CM", "W_LENGTH_CM", "W_WIDTH_CM", "NUM_OBSTACLES"].includes(s.id)) {
-                        generateEnvironment(); if (!waiting_to_start) { history_chaos = []; history_fluidity = []; history_mobility = []; }
-                    }
-                });
-            });
-
-            const checkDef = [{ id: "SHOW_HEATMAP", label: "Density Heatmap" }, { id: "SHOW_COVERAGE", label: "Agent Path Coverage" }, { id: "SHOW_CIRCLES", label: "Detection Regions" }, { id: "SHOW_LIDAR_LINES", label: "LiDAR Detection Limit" }, { id: "SHOW_TANGENT_VEC", label: "Evasion Distance" }];
-            const checkBoxContainer = document.getElementById('checkboxes-box'); checkBoxContainer.innerHTML = '';
-            checkDef.forEach(c => {
-                const labelEl = document.createElement('label'); labelEl.className = "flex items-center gap-3 text-xs sm:text-[13px] font-bold text-slate-600 cursor-pointer select-none py-1 hover:text-slate-800 transition-colors"; // Slightly trimmed padding
-                labelEl.innerHTML = `<input type="checkbox" id="check-${c.id}" ${render_toggles[c.id]?'checked':''} class="w-4 h-4 border-slate-300 rounded accent-[#2ecc71]"><span>${c.label}</span>`;
-                checkBoxContainer.appendChild(labelEl);
-                document.getElementById(`check-${c.id}`).addEventListener('change', (e) => { 
-                    render_toggles[c.id] = e.target.checked; 
-                    if (c.id === "SHOW_COVERAGE") {
-                        if (e.target.checked) coverageCanvas.classList.remove('hidden');
-                        else coverageCanvas.classList.add('hidden');
-                    }
-                });
-            });
-
-            // Agent appearance presets
-            const presets = [
-                { label: '🦄', name: 'Unicorn', reset: false },
-                { label: '🐛', name: 'Insect',  reset: false },
-                { label: '🐜', name: 'Ant',     reset: false },
-                { label: '🚗', name: 'Car',     reset: false },
-                { label: '🤖', name: 'Robot',   reset: false },
-                { label: '🐢', name: 'Turtle',  reset: false },
-                { label: '😊', name: 'Smiley',  reset: false },
-                { label: '⬜', name: 'Block',   reset: true  },
-            ];
-            const presetGrid = document.getElementById('agent-preset-grid');
-            presetGrid.innerHTML = '';
-
-            function setAgentEmoji(emoji) {
-                const size = 64;
-                const offscreen = document.createElement('canvas');
-                offscreen.width = size; offscreen.height = size;
-                const oc = offscreen.getContext('2d');
-                oc.font = `${size * 0.85}px serif`;
-                oc.textAlign = 'center'; oc.textBaseline = 'middle';
-                oc.clearRect(0, 0, size, size);
-                oc.fillText(emoji, size / 2, size / 2);
-                const img = new Image();
-                img.onload = () => { agentImage = img; };
-                img.src = offscreen.toDataURL();
-            }
-
-            presets.forEach(p => {
-                const btn = document.createElement('button');
-                btn.className = "flex flex-col items-center justify-center bg-white border border-slate-200 rounded p-1 hover:bg-slate-100 active:bg-slate-200 transition text-center";
-                btn.title = p.name;
-                btn.innerHTML = `<span class="text-lg leading-none">${p.label}</span><span class="text-[8px] text-slate-400 leading-none mt-0.5 truncate w-full">${p.name}</span>`;
-                btn.addEventListener('click', () => {
-                    if (p.reset) { agentImage = null; }
-                    else { setAgentEmoji(p.label); }
-                });
-                presetGrid.appendChild(btn);
-            });
-
-            // Upload handler
-            let uploadedAgentImage = null;
-
-            document.getElementById('agentImageUpload').addEventListener('click', (e) => {
-                // Allows selecting the same file repeatedly without needing double click
-                e.target.value = '';
-            });
-
-            document.getElementById('agentImageUpload').addEventListener('change', (e) => {
-                const file = e.target.files[0];
-                if (!file) return;
-
-                document.getElementById('uploadLabel').textContent = file.name;
-
-                const reader = new FileReader();
-
-                reader.onload = (ev) => {
-                    const originalImg = new Image();
-
-                    originalImg.onload = () => {
-
-                        const size = Math.max(originalImg.width, originalImg.height);
-
-                        const squareCanvas = document.createElement('canvas');
-                        squareCanvas.width = size;
-                        squareCanvas.height = size;
-
-                        const ctx = squareCanvas.getContext('2d');
-
-                        ctx.clearRect(0, 0, size, size);
-
-                        const offsetX = (size - originalImg.width) / 2;
-                        const offsetY = (size - originalImg.height) / 2;
-
-                        ctx.drawImage(
-                            originalImg,
-                            offsetX,
-                            offsetY,
-                            originalImg.width,
-                            originalImg.height
-                        );
-
-                        const finalImg = new Image();
-
-                        finalImg.onload = () => {
-                            uploadedAgentImage = finalImg;
-                            agentImage = finalImg;
-
-                            document.getElementById('useUploadedBtn').classList.remove('hidden');
-                        };
-
-                        finalImg.src = squareCanvas.toDataURL();
-                    };
-
-                    originalImg.src = ev.target.result;
-                };
-
-                reader.readAsDataURL(file);
-            });
-
-            document.getElementById('useUploadedBtn').addEventListener('click', () => {
-                if (uploadedAgentImage) {
-                    agentImage = uploadedAgentImage;
-                }
-            });
-
-            document.getElementById('resetAgentBtn').addEventListener('click', () => {
-                agentImage = null;
-                uploadedAgentImage = null;
-
-                document.getElementById('uploadLabel').textContent = 'Choose image…';
-                document.getElementById('agentImageUpload').value = '';
-
-                document.getElementById('useUploadedBtn').classList.add('hidden');
-            });
-        }
-
-        document.getElementById('launchBtn').addEventListener('click', () => {
-            document.getElementById('launchOverlay').remove(); waiting_to_start = false; generateEnvironment(); mainLoop();
-        });
-
-        const pauseBtn = document.getElementById('pauseBtn');
-        const mobilePauseBtn = document.getElementById('mobilePauseBtn');
-
-        function toggleSimulationPause() {
-            paused = !paused;
-            
-            // Sync Text and Styles for Desktop Button
-            pauseBtn.innerText = paused ? "Resume Simulation" : "Pause Simulation";
-            pauseBtn.style.backgroundColor = paused ? "#2980b9" : "#3498db";
-            
-            // Sync Text for Mobile Header Button
-            mobilePauseBtn.innerText = paused ? "Resume" : "Pause";
-            mobilePauseBtn.style.backgroundColor = paused ? "#2980b9" : "#3498db";
-        }
-        // Add matching click listeners to both elements
-        pauseBtn.addEventListener('click', toggleSimulationPause);
-        mobilePauseBtn.addEventListener('click', toggleSimulationPause);
-
-        // pauseBtn.addEventListener('click', () => {
-        //     paused = !paused; pauseBtn.innerText = paused ? "Resume Simulation" : "Pause Simulation";
-        //     pauseBtn.style.backgroundColor = paused ? "#2980b9" : "#3498db";
-        // });
-
-        sidebarToggleBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Avoid instantly triggering the background close event
-            sidebarOpen = !sidebarOpen; evaluateScreenProfile();
-        });
-
-        // Click on the main simulation field container to automatically close the panel if open in mobile layout
-        canvasContainer.addEventListener('click', () => {
-            if (isMobileMode && sidebarOpen) {
-                sidebarOpen = false;
-                evaluateScreenProfile();
-            }
-        });
-
-        document.getElementById('zoomOutBtn').addEventListener('click', () => { plot_fit_all = true; plot_scroll_offset = 0; }); // Fit All
-        document.getElementById('zoomInBtn').addEventListener('click', () => { plot_fit_all = false; plot_zoom_points = Math.max(30, Math.floor(plot_zoom_points * 0.5)); }); // Zoom In
-        document.getElementById('zoomResetBtn').addEventListener('click', () => { plot_fit_all = false; plot_zoom_points = 450; plot_scroll_offset = 0; }); // Live
-
-        // Mouse wheel scroll on plot canvas
-        plotCanvas.addEventListener('wheel', (e) => {
-            e.preventDefault();
-            const delta = Math.sign(e.deltaY);
-            if (e.ctrlKey || e.metaKey) {
-                plot_fit_all = false;
-                plot_zoom_points = Math.max(30, Math.min(history_chaos.length || 450, Math.round(plot_zoom_points * (delta > 0 ? 1.25 : 0.8))));
-            } else {
-                plot_fit_all = false;
-                const scrollStep = Math.max(1, Math.floor(plot_zoom_points * 0.1));
-                plot_scroll_offset = Math.max(0, plot_scroll_offset + delta * scrollStep);
-            }
-        }, { passive: false });
-
-        // Touch drag scroll on plot canvas
-        let _touchStartX = null;
-        plotCanvas.addEventListener('touchstart', (e) => { _touchStartX = e.touches[0].clientX; }, { passive: true });
-        plotCanvas.addEventListener('touchmove', (e) => {
-            if (_touchStartX === null) return;
-            const dx = e.touches[0].clientX - _touchStartX;
-            _touchStartX = e.touches[0].clientX;
-            const scrollStep = Math.max(1, Math.floor(plot_zoom_points / (plotCanvas.clientWidth || 300)));
-            plot_scroll_offset = Math.max(0, plot_scroll_offset - Math.round(dx * scrollStep));
-        }, { passive: true });
-
-        createControlsUI(); evaluateScreenProfile();
-        updateDashboardDOM({
-            mobility: 0,
-            packing: 0,
-            entropy: 0,
-            chaos: 0,
-            fluidity: 0,
-            counts: {
-                CRUISE: 0,
-                AVOID: 0,
-                REVERSE: 0,
-                STOPPED: 0
-            }
-        });        
-        window.addEventListener('resize', () => { if (!waiting_to_start) resizeAllPlatformCanvases(); else evaluateScreenProfile(); });
-    </script>
+<body>
+	<div class="container-fluid">
+	<div class ="row" id="nav">
+		<div class="col" id="romi_icon">
+			<a href="https://www.romi-lab.org/"><img class="romi_icon_bar" src="image/romi_full.png"></a>
+		</div>		
+		<div class="col-sm-12 d-flex align-items-center justify-content-center" id="romi_icon_center">
+			<a href="https://www.romi-lab.org/"><img class="romi_icon_bar" src="image/romi_full.png"></a>
+		</div>			
+	</div><!--end of #nav-->	
+	</div>	
+<div id='bgImageRes' class="backgroundImg">
+	<video autoplay muted loop id="bgVideo">
+	  <source src="bg_video.mp4" type="video/mp4">
+	</video>	
+<div class="container" id="bg">
+	<div class="row" id="intro">
+		<div class="col col-sm-12" >
+			<h1>Teaching Resources</br></h1>
+
+			<h2>The Robotics and Machine Intelligence Laboratory</h2>
+
+		</div>
+	</div><!--end of #intro-->
+</div><!--end of .container-->
+</div>
+
+
+
+<div class="container" id="tutorial">
+	<div class="row">
+		<div class="col-sm-12" >
+			<h2>Tutorials</h2></br>
+			<h3>Please click the links below to access each of the demos.</h3></br>
+		</div>
+
+	</div>
+	<div class="row">
+		
+		<div class="card_wrapper col-md-4 d-flex align-items-stretch ">	
+			<div class="card">
+			  <img class="card-img-top" src="image/sim.jpg">
+			  <div class="card-body">
+			    <h4 class="card-title">Introduction to Simulation</h4>
+			    <h5 class="card-text">Learning simulation and control theory in Python.</h5>
+			    <div class="btnList mt-auto">
+				    <a href="simulation/introduction/index.html" class="btn btn-primary">Beginner</a>
+				    <a href="simulation/advanced/index.html" class="btn btn-primary">Advanced</a>
+				</div>
+			  </div>
+			</div>
+		</div>
+		<div class="card_wrapper col-md-4 d-flex align-items-stretch ">	
+			<div class="card">
+			  <img class="card-img-top" src="image/mas.png">
+			  <div class="card-body">
+			    <h4 class="card-title">Multi-Agent Simulation Analysis Platform</h4>
+			    <h5 class="card-text">Exploring mobility, entropy, and fluidity in multi-agent systems.</h5>
+			    <div class="btnList mt-auto">
+				    <a href="mas/index.html" class="btn btn-primary">Start Exploring</a>
+				</div>
+			  </div>
+			</div>
+		</div>		
+
+		<div class="card_wrapper col-md-4 d-flex align-items-stretch ">	
+			<div class="card">
+			  <img class="card-img-top" src="image/lego.jpg">
+			  <div class="card-body">
+			    <h4 class="card-title">Mass-Spring-Damper System</h4>
+			    <h5 class="card-text">Learning Mass-Spring-Damper and control theory with LEGO.</h5>
+			    <div class="btnList mt-auto">
+				    <a href="msds/index.html" class="btn btn-primary">Start Learning</a>
+				    <!-- <a href="simulation/advanced/index.html" class="btn btn-primary">Advanced</a> -->
+				</div>
+			  </div>
+			</div>
+		</div>
+		
+		<!-- 	Start of New project tutorial	 -->
+		<div class="card_wrapper col-md-4 d-flex align-items-stretch ">	
+			<div class="card">
+			  <img class="card-img-top" src="Space-elevator/img/SE2.png">
+			  <div class="card-body">
+			    <h4 class="card-title">ME31002:Mass-Spring-Damper System</h4>
+			    <h5 class="card-text">Learning Mass-Spring-Damper and control theory with LEGO.</h5>
+			    <div class="btnList mt-auto">
+				    <a href="Space-elevator/index.html" class="btn btn-primary">Start Learning</a>
+				    <!-- <a href="simulation/advanced/indexv.html" class="btn btn-primary">Advanced</a> -->
+				</div>
+			  </div>
+			</div>
+		</div>
+		<!-- 	End of New project tutorial	 -->
+
+		<!-- Add a new project tutorial-->
+		<div class="card_wrapper col-md-4 d-flex align-items-stretch ">	
+			<div class="card">
+			  <img class="card-img-top" src="image/python_opencv.png">
+			  <div class="card-body">
+			    <h4 class="card-title">Gentle Introduction to OpenCV</h4>
+			    <h5 class="card-text">Learning OpenCV for image processing in Python.</h5>
+			    <div class="btnList mt-auto">
+				    <a href="python_opencv/index.html" class="btn btn-primary">Start Learning</a>
+				</div>
+			  </div>
+			</div>
+		</div>
+
+		<!-- Add a new project tutorial-->
+		<div class="card_wrapper col-md-4 d-flex align-items-stretch ">	
+			<div class="card">
+			  <img class="card-img-top" src="image/open3d.jpg">
+			  <div class="card-body">
+			    <h4 class="card-title">Introduction to 3D point clouds processing</h4>
+			    <h5 class="card-text">Learning Open3D for basic point clouds processing methods in Python.</h5>
+			    <div class="btnList mt-auto">
+				    <a href="https://colab.research.google.com/drive/1t5Y0lHsd2IT42FNedxtbOWz9UiSE4aUF?usp=sharing" target="_blank" class="btn btn-primary">Start Learning</a>
+				</div>
+			  </div>
+			</div>
+		</div>
+
+		<div class="card_wrapper col-md-4 d-flex align-items-stretch ">	
+			<div class="card">
+			  <img class="card-img-top" src="image/virtualControlLab_crop.jpg">
+			  <div class="card-body">
+			    <h4 class="card-title">Is Everything under Control?</h4>
+			    <h5 class="card-text">Practice physics and control theory in gaming.</h5>
+			    <div class="btnList mt-auto">
+				    <a href="is-everything-under-control/index.html" class="btn btn-primary">Start Learning</a>
+				    <!-- <a href="simulation/advanced/index.html" class="btn btn-primary">Advanced</a> -->
+				</div>
+			  </div>
+			</div>
+		</div>
+
+		<div class="card_wrapper col-md-4 d-flex align-items-stretch ">
+			<div class="card">
+			  <img class="card-img-top" src="image/robot2.jpg">
+			  <div class="card-body">
+			    <h4 class="card-title">Perceptual Robotics</h5>
+			    <h5 class="card-text">Learning image processing, sensors, and robot control in Python.</h5>
+			    <div class="btnList mt-auto">
+			    	<a href="perceptual-robotics/index.html" class="btn btn-primary">Start Learning</a>
+			    	<!-- <a href="perceptual-robotics/Lab2.html" class="btn btn-primary">Advanced</a> -->
+				</div>
+			  </div>
+			</div>	
+		</div>
+
+		<div class="card_wrapper col-md-4 d-flex align-items-stretch">
+			<div class="card">
+			  <img class="card-img-top" src="image/pop.jpg">
+			  <div class="card-body">
+			    <h4 class="card-title">Digital Robotics Laboratory</h4>
+			    <h5 class="card-text">Learning system stability through online interactive simulations.</h5>
+			    <div class="btnList mt-auto">
+			    	<a href="https://romi-lab.github.io/pop2023/" class="btn btn-primary">Start Learning</a>
+				</div>
+			  </div>
+			</div>	
+		</div>			
+	</div>
+	</br>
+
+</div><!--end of .container-->
+
+
+<footer id="footer">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col col-sm-4 col-md-4">
+				<img id="romi_contact" src="image/romi_semi.png">
+			</div>
+			<div class="col-8 col-sm-8 col-md-8 link_div">
+				<h5>
+					<a href="mailto:contact@romi-lab.org" target="_blank"><u>contact@romi-lab.org</u></a>
+					
+					FG 638, PolyU, Hung Hom, HK <br/>
+					(+852) 2766 7816
+				</h5>
+			</div>
+		</div>
+		<div class="row justify-content-center">
+			<div id="copyRight">
+				<p>© 2021 romi-lab</p>
+			</div>
+		</div>
+	</div>
+
+</footer>
+
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<!-- Animation JavaScript -->
+<script src="js/animation.js"></script>
 </body>
 </html>

@@ -212,7 +212,7 @@
             SHOW_CIRCLES: true,
             SHOW_LIDAR_LINES: true,
             SHOW_TANGENT_VEC: true,
-            SHOW_COVERAGE: false
+            SHOW_COVERAGE: true
         };
 
         // const STATE_COLORS = {
@@ -791,7 +791,7 @@ function toggleMobileHint() {
                 const ratio = i / (numTicks - 1); const x = paddingLeft + ratio * plotW;
                 plotCtx.beginPath(); plotCtx.strokeStyle = '#cbd5e1'; plotCtx.moveTo(x, height - paddingBottom); plotCtx.lineTo(x, height - paddingBottom + 4); plotCtx.stroke();
                 plotCtx.fillStyle = '#94a3b8';
-                plotCtx.fillText((((sliceStart + ratio * (sliceEnd - sliceStart - 1)))).toFixed(1) + 'f', x, height - paddingBottom + 6);
+                // plotCtx.fillText((((sliceStart + ratio * (sliceEnd - sliceStart - 1)))).toFixed(1) + 'f', x, height - paddingBottom + 6);
             }
         }
 
