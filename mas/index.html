@@ -324,7 +324,12 @@
                 if (la < -Math.PI) la += 2*Math.PI;
                 if      (la >= -Math.PI/2 && la < 0)              { if (dist < D2) { D2=dist; pt_2=pt; } }
                 else if (la >= 0          && la <= Math.PI/2)     { if (dist < D1) { D1=dist; pt_1=pt; } }
-                else                                               { if (dist < D3)   D3=dist; }
+                else                                               {
+                    // This handles the rear 120 to 240 deg region (180 +/- 60 deg)
+                    if (Math.abs(la) >= (2 * Math.PI) / 3) {
+                        if (dist < D3) D3=dist; 
+                    }                    
+                }
                 return {D1,D2,D3,pt_1,pt_2};
             }
 
@@ -384,6 +389,12 @@
                         if (D1 > rStop && D2 > rStop) {
                             this.v_dir  = 1.0;
                             this.theta += (Math.random() - 0.5);
+                        } else if (D1 > rStop){
+                            this.v_dir  = 1.0;
+                            this.theta += Math.max(Math.random() - 0.5, 0);
+                        } else if (D2 > rStop){
+                            this.v_dir  = 1.0;
+                            this.theta -= Math.max(Math.random() - 0.5, 0);
                         }
 
                     } else if (D3 <= rPlan) {        // rStop < D3 <= rPlan
@@ -693,7 +704,7 @@
                 {id:"W_LENGTH_CM",       label:"Agent Length",           min:20,  max:200,  step:1,     isInt:true,  unit:"cm"},
                 {id:"W_WIDTH_CM",        label:"Agent Width",            min:20,  max:200,  step:1,     isInt:true,  unit:"cm"},
                 {id:"LINEAR_SPEED",      label:"Linear Speed",           min:0.5, max:10.0, step:0.5,   isInt:false, unit:""},
-                {id:"MAX_OMEGA",         label:"Max Turning Speed",      min:0.001,max:0.05,step:0.01,  isInt:false, unit:""},
+                {id:"MAX_OMEGA",         label:"Max Turning Speed",      min:0.001,max:0.5, step:0.01,  isInt:false, unit:""},
                 {id:"R_PLAN",            label:"Evasion Radius",         min:50,  max:200,  step:1,     isInt:true,  unit:""},
                 {id:"R_STOP",            label:"Stop Radius",            min:20,  max:150,  step:1,     isInt:true,  unit:""},
                 {id:"NUM_OBSTACLES",     label:"Obstacles",              min:0,   max:20,   step:1,     isInt:true,  unit:""}
