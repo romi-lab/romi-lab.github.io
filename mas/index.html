@@ -40,7 +40,7 @@
                 <div class="min-w-0 flex flex-col justify-center leading-none"><div class="text-[8px] text-slate-400 font-bold uppercase leading-none">Fluidity</div><span id="hud-fluidity" class="font-mono text-xs font-black text-[#00afb9]">0.00</span></div>
             </div>
         </div>
-        <div class="flex-[3.5] min-h-0 w-full relative flex items-center justify-center bg-white border border-slate-200 rounded-lg shadow-xs overflow-hidden cursor-pointer" id="canvas-container">
+        <div class="flex-[3.5] min-h-0 w-full relative flex items-center justify-center bg-white border border-slate-200 rounded-lg shadow-xs overflow-hidden cursor-default" id="canvas-container">
             <canvas id="coverageCanvas" class="absolute border border-slate-300 pointer-events-none rounded-sm hidden"></canvas>
             <canvas id="simulationCanvas" class="absolute border border-slate-300 bg-transparent rounded-sm hidden"></canvas>
             <div id="launchOverlay" class="absolute inset-0 bg-white/95 backdrop-blur-xs flex items-center justify-center z-30 rounded-lg">
@@ -397,17 +397,17 @@
                             this.theta -= Math.max(Math.random() - 0.5, 0);
                         }
 
-                    } else if (D3 <= rPlan) {        // rStop < D3 <= rPlan
-                        // Rear getting close — reverse orbit (mirrored angular vs AVOID)
-                        this.current_mode = "REVERSE";
-                        this.orbit_side = D2 < D1 ? 1 : -1;
-                        v = -config.V_ORBIT;
-                        const fwd = [Math.cos(this.theta), Math.sin(this.theta)];
-                        this.v_des_actual = this.orbit_side === 1
-                            ? [ fwd[1], -fwd[0]]     // mirrored vs forward AVOID
-                            : [-fwd[1],  fwd[0]];
-                        const err = ((Math.atan2(this.v_des_actual[1], this.v_des_actual[0]) - this.theta + Math.PI) % (2*Math.PI)) - Math.PI;
-                        w = config.K_P * err;
+                    // } else if (D3 <= rPlan) {        // rStop < D3 <= rPlan
+                    //     // Rear getting close — reverse orbit (mirrored angular vs AVOID)
+                    //     this.current_mode = "REVERSE";
+                    //     this.orbit_side = D2 < D1 ? 1 : -1;
+                    //     v = -config.V_ORBIT;
+                    //     const fwd = [Math.cos(this.theta), Math.sin(this.theta)];
+                    //     this.v_des_actual = this.orbit_side === 1
+                    //         ? [ fwd[1], -fwd[0]]     // mirrored vs forward AVOID
+                    //         : [-fwd[1],  fwd[0]];
+                    //     const err = ((Math.atan2(this.v_des_actual[1], this.v_des_actual[0]) - this.theta + Math.PI) % (2*Math.PI)) - Math.PI;
+                    //     w = config.K_P * err;
 
                     } else {
                         // Rear clear — full reverse; steer slightly away from the
