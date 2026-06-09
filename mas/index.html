@@ -414,7 +414,7 @@
                         // closer forward sensor so the arc curves away from the wall
                         this.current_mode = "REVERSE";
                         v = -config.V_NOMINAL;
-                        w = D2 < D1 ? config.MAX_OMEGA * 0.5 : -config.MAX_OMEGA * 0.5;
+                        // w = D2 < D1 ? config.MAX_OMEGA * 0.5 : -config.MAX_OMEGA * 0.5;
                         if (D_front > rPlan) {
                             this.v_dir = 1.0;        // both ends clear — resume forward
                             w = 0.0;
