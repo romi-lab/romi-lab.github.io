@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+<title id="title">Perceptual Robotics Simulation Labs</title><desc id="desc">Motor control, image processing and visual aiming in a shared simulation workbench.</desc>
+<rect width="640" height="360" fill="#102330"/>
+<g fill="none" stroke="#25404d" stroke-width="1"><path d="M0 90H640M0 180H640M0 270H640M80 0V360M160 0V360M240 0V360M320 0V360M400 0V360M480 0V360M560 0V360"/></g>
+<text x="38" y="63" fill="#f2f7fa" font-family="Arial,sans-serif" font-size="29" font-weight="600">Simulation Labs</text>
+<text x="39" y="92" fill="#9fb8c7" font-family="Arial,sans-serif" font-size="14" letter-spacing="1.3">PERCEPTUAL ROBOTICS · ME41006</text>
+<g fill="#162e3b" stroke="#36525f"><rect x="36" y="125" width="176" height="174" rx="10"/><rect x="232" y="125" width="176" height="174" rx="10"/><rect x="428" y="125" width="176" height="174" rx="10"/></g>
+<g fill="none" stroke="#67c6d4" stroke-width="3"><circle cx="124" cy="198" r="39"/><path d="M124 159v9M85 198h9M154 198h9M124 228v9M124 198l27-27"/><circle cx="124" cy="198" r="4" fill="#67c6d4"/>
+<rect x="280" y="162" width="80" height="72" rx="6"/><path d="M306 164v68M333 164v68M282 186h76M282 210h76" stroke-opacity=".4"/><rect x="308" y="188" width="23" height="20" fill="#67c6d4" stroke="none"/>
+<circle cx="516" cy="198" r="34"/><circle cx="516" cy="198" r="13"/><path d="M516 149v24M516 223v24M467 198h24M541 198h24"/></g>
+<g fill="#d9e8f0" font-family="Arial,sans-serif" font-size="17" text-anchor="middle"><text x="124" y="274">Motor</text><text x="320" y="274">Image</text><text x="516" y="274">Aim</text></g>
+</svg>
