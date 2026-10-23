@@ -52,6 +52,8 @@
     .footnote { margin:14px 0 0; color:var(--muted); font-size:13px; }
     footer { display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px 28px; padding-block:38px 30px; margin-top:20px; color:var(--muted); font-size:12px; }
     footer p { margin:0; }
+    .course-support { display:flex; flex-wrap:wrap; gap:8px 24px; margin-top:32px; padding:20px 0; border-top:1px solid #dce3e7; color:var(--muted); font-size:14px; }
+    .course-support a { color:var(--accent); overflow-wrap:anywhere; }
     @media (max-width:960px) { .hero { gap:32px; grid-template-columns:minmax(0,1fr) 290px; padding-block:48px 40px; } .labs { gap:14px; } .lab { padding:20px; } .competition { gap:28px; grid-template-columns:180px minmax(0,1fr); } }
     @media (max-width:720px) { .wrap { width:calc(100% - 36px); } .top .wrap { min-height:70px; gap:14px; } .brand img { width:112px; height:38px; } .brand span { display:none; } .hero { grid-template-columns:1fr; gap:26px; padding-block:38px 34px; } .intro { font-size:17px; } .access { padding:22px; } .labs { grid-template-columns:1fr; gap:16px; } .lab { padding:24px; } .competition { grid-template-columns:1fr; gap:20px; padding:26px; } .section-head { flex-wrap:wrap; gap:4px 14px; } footer { margin-top:10px; } }
     @media (prefers-reduced-motion:no-preference) { a { transition:background-color .15s ease; } }
@@ -109,6 +111,11 @@
       </div>
     </section>
     <p class="footnote">Practice runs do not enter the competition. Official attempts use the team's latest locked program.</p>
+    <section class="course-support" aria-label="Course support">
+      <span>Course questions</span>
+      <a href="mailto:24152026r@connect.polyu.hk">24152026r@connect.polyu.hk</a>
+      <a href="mailto:cwanli.liu@polyu.edu.hk">cwanli.liu@polyu.edu.hk</a>
+    </section>
   </main>
   <footer class="wrap"><p>Robotics and Machine Intelligence Laboratory · The Hong Kong Polytechnic University</p><p>ME41006 · Perceptual Robotics</p></footer>
 </body>
